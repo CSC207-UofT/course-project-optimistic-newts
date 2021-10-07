@@ -18,91 +18,90 @@ public class ConversationTest {
     }
 
     @Test(timeout = 50)
-    public void TestgetTitle() {
+    public void TestGetTitle() {
         assertEquals("Sample Conversation", c.getTitle());
     }
 
     @Test(timeout = 50)
-    public void TestgetLocation() {
+    public void TestGetLocation() {
         assertEquals("", c.getLocation());
     }
 
     @Test(timeout = 50)
-    public void TestgetRating() {
+    public void TestGetRating() {
         assertEquals(0, c.getRating());
     }
 
     @Test(timeout = 50)
-    public void TestgetMaxUsers() {
+    public void TestGetMaxUsers() {
         assertEquals(0, c.getMaxUsers());
     }
 
     @Test(timeout = 50)
-    public void TestgetClosingTime() {
+    public void TestGetClosingTime() {
         assertEquals("", c.getClosingTime());
     }
 
     @Test(timeout = 50)
-    public void TestgetStatus() {
+    public void TestGetStatus() {
         assertEquals("Open", c.getStatus());
     }
 
     @Test(timeout = 50)
-    public void TestgetMessages() {
+    public void TestGetMessages() {
         assertEquals(new ArrayList<Message>(), c.getMessages());
     }
 
     @Test(timeout = 50)
-    public void TestgetUsers() {
+    public void TestGetUsers() {
         assertEquals(new ArrayList<User>(), c.getUsers());
     }
 
     @Test(timeout = 50)
-    public void TestsetTitle() {
+    public void TestSetTitle() {
         c.setTitle("New Title");
         assertEquals("New Title", c.getTitle());
     }
     @Test(timeout = 50)
-    public void TestsetLocation() {
+    public void TestSetLocation() {
         c.setLocation("New Location");
         assertEquals("New Location", c.getLocation());
     }
     @Test(timeout = 50)
-    public void TestsetRating() {
+    public void TestSetRating() {
         c.setRating(5);
         assertEquals(5, c.getRating());
     }
 
     @Test(timeout = 50)
-    public void TestsetMaxUsers() {
+    public void TestSetMaxUsers() {
         c.setMaxUsers(10);
         assertEquals(10, c.getMaxUsers());
     }
 
     @Test(timeout = 50)
-    public void TestsetClosingTime() {
+    public void TestSetClosingTime() {
         c.setClosingTime("10:00");
         assertEquals("10:00", c.getClosingTime());
     }
 
     @Test(timeout = 50)
-    public void TestsetStatus() {
+    public void TestSetStatus() {
         c.setStatus("Closed");
         assertEquals("Closed", c.getStatus());
     }
 
     @Test(timeout = 50)
-    public void TestsetMessages() {
+    public void TestSetMessages() {
         ArrayList<Message> testMessageList = new ArrayList<Message>();
         c.setMessages(testMessageList);
         assertEquals(testMessageList, c.getMessages());
     }
 
     @Test(timeout = 50)
-    public void TestsetUsers() {
+    public void TestSetUsers() {
         ArrayList<User> testUserList = new ArrayList<User>();
         c.setUsers(testUserList);
         assertEquals(testUserList, c.getUsers());
     }
-    
 }
