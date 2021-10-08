@@ -103,7 +103,7 @@ public class ConversationTest {
 
     @Test(timeout = 50)
     public void TestAddMessage() {
-        Message m = new Message();
+        Message m = new Message("", "");
         c.addMessage(m);
         assertTrue(m == c.getMessages().get(c.getMessages().size() - 1));
     }
