@@ -14,8 +14,12 @@ public class ConversationTest {
 
     @Before
     public void setUp() throws Exception {
-        c = new Conversation("Sample Conversation");
+        c = new Conversation("", "SampleConversation", "", "", 0, 0, 0, "", true,
+                new ArrayList<Message>(), new ArrayList<User>());
     }
+
+    @Test(timeout = 50)
+    public void TestGetId() { assertEquals( "", c.getId()); }
 
     @Test(timeout = 50)
     public void TestGetTitle() {
@@ -23,18 +27,24 @@ public class ConversationTest {
     }
 
     @Test(timeout = 50)
+    public void TestGetTopic() { assertEquals("", c.getTopic()); }
+
+    @Test(timeout = 50)
     public void TestGetLocation() {
         assertEquals("", c.getLocation());
     }
 
     @Test(timeout = 50)
-    public void TestGetRating() {
-        assertEquals(0, c.getRating());
+    public void TestGetLocationRadius() { assertEquals(0, c.getLocationRadius());}
+
+    @Test(timeout = 50)
+    public void TestGetMinRating() {
+        assertEquals(0, c.getMinRating());
     }
 
     @Test(timeout = 50)
     public void TestGetMaxUsers() {
-        assertEquals(0, c.getMaxUsers());
+        assertEquals(0, c.getMaxSize());
     }
 
     @Test(timeout = 50)
@@ -44,7 +54,7 @@ public class ConversationTest {
 
     @Test(timeout = 50)
     public void TestGetStatus() {
-        assertEquals("Open", c.getStatus());
+        assertEquals(true, c.getIsOpen());
     }
 
     @Test(timeout = 50)
@@ -68,15 +78,15 @@ public class ConversationTest {
         assertEquals("New Location", c.getLocation());
     }
     @Test(timeout = 50)
-    public void TestSetRating() {
-        c.setRating(5);
-        assertEquals(5, c.getRating());
+    public void TestSetMinRating() {
+        c.setMinRating(5);
+        assertEquals(5, c.getMinRating());
     }
 
     @Test(timeout = 50)
     public void TestSetMaxUsers() {
-        c.setMaxUsers(10);
-        assertEquals(10, c.getMaxUsers());
+        c.setMaxSize(2);
+        assertEquals(2, c.getMaxSize());
     }
 
     @Test(timeout = 50)
@@ -87,21 +97,33 @@ public class ConversationTest {
 
     @Test(timeout = 50)
     public void TestSetStatus() {
-        c.setStatus("Closed");
-        assertEquals("Closed", c.getStatus());
+        c.setIsOpen(false);
+        assertEquals(false, c.getIsOpen());
     }
 
     @Test(timeout = 50)
-    public void TestSetMessages() {
-        ArrayList<Message> testMessageList = new ArrayList<Message>();
-        c.setMessages(testMessageList);
-        assertEquals(testMessageList, c.getMessages());
+    public void TestAddMessage() {
+        Message m = new Message();
+        c.addMessage(m);
+        assertTrue(m == c.getMessages().get(c.getMessages().size() - 1));
     }
 
     @Test(timeout = 50)
-    public void TestSetUsers() {
-        ArrayList<User> testUserList = new ArrayList<User>();
-        c.setUsers(testUserList);
-        assertEquals(testUserList, c.getUsers());
+    public void TestAddUser() {
+        User u = new User();
+        c.addUser(u);
+        assertTrue(u == c.getUsers().get(c.getUsers().size() - 1));
+    }
+
+    @Test(timeout = 50)
+    public void TestAddUserBelowMax() {
+        User u1 = new User();
+        assertTrue(c.addUser(u1));
+    }
+
+    @Test(timeout = 50)
+    public void TestAddUserAtMax() {
+        User u2 = new User();
+        assertFalse(c.addUser(u2));
     }
 }

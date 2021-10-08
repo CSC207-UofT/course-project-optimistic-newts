@@ -1,46 +1,49 @@
 package entities;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
  * A class representing a conversation
  */
 public class Conversation {
+    private String id;
     private String title;
+    private String topic;
     private String location;
-    private int rating;
-    private int maxUsers;
+    private int locationRadius;
+    private int minRating;
+    private int maxSize;
     private String closingTime;
-    private String status;
+    private boolean isOpen;
     private ArrayList<Message> messages;
     private ArrayList<User> users;
 
-    public Conversation(String conversationTitle, String conversationLocation,
-                        int conversationRating, int conversationMaxUsers,
-                        String conversationClosingTime, String conversationStatus,
-                        ArrayList<Message> conversationMessages,
-                        ArrayList<User> conversationUsers) {
-        this.title = conversationTitle;
-        this.location = conversationLocation;
-        this.rating = conversationRating;
-        this.maxUsers = conversationMaxUsers;
-        this.closingTime = conversationClosingTime;
-        this.status = conversationStatus;
-        this.messages = conversationMessages;
-        this.users = conversationUsers;
+    public Conversation(String id, String title,
+                        String topic, String location,
+                        int locationRadius,
+                        int minRating, int maxSize,
+                        String closingTime, boolean isOpen,
+                        ArrayList<Message> messages,
+                        ArrayList<User> users) {
+        this.id = id;
+        this.title = title;
+        this.topic = topic;
+        this.location = location;
+        this.locationRadius = locationRadius;
+        this.minRating = minRating;
+        this.maxSize = maxSize;
+        this.closingTime = closingTime;
+        this.isOpen = isOpen;
+        this.messages = messages;
+        this.users = users;
     }
+    
 
-    public Conversation(String conversationTitle) {
-        this.title = conversationTitle;
-        this.location = "";
-        this.rating = 0;
-        this.maxUsers = 0;
-        this.closingTime = "";
-        this.status = "Open";
-        this.messages = new ArrayList<Message>();
-        this.users = new ArrayList<User>();
-    }
+    /**
+     * Return the id of the conversation.
+     * @return a string representing the id
+     */
+    public String getId(){ return this.id; }
 
     /**
      * Return the title of the conversation.
@@ -51,6 +54,12 @@ public class Conversation {
     }
 
     /**
+     * Return the topic of the conversation.
+     * @return a string representing the topic of the conversation
+     */
+    public String getTopic() { return this.topic; }
+
+    /**
      * Return the location of the conversation.
      * @return a string representing the location
      */
@@ -59,19 +68,25 @@ public class Conversation {
     }
 
     /**
-     * Return the rating of the conversation.
-     * @return an int representing the rating of the conversation
+     * Return the radius of the location.
+     * @return an int representing the location radius
      */
-    public int getRating(){
-        return this.rating;
+    public int getLocationRadius(){ return this.locationRadius; }
+
+    /**
+     * Return the minimum rating of the conversation.
+     * @return an int representing the minimum rating of the conversation
+     */
+    public int getMinRating(){
+        return this.minRating;
     }
 
     /**
      * Return the maximum number of users in the conversation.
      * @return an int representing the max number of users
      */
-    public int getMaxUsers(){
-        return this.maxUsers;
+    public int getMaxSize(){
+        return this.maxSize;
     }
 
     /**
@@ -83,11 +98,11 @@ public class Conversation {
     }
 
     /**
-     * Return the status of the conversation.
-     * @return a string representing the status of the conversation
+     * Return if the conversation is open.
+     * @return true if the conversation is open
      */
-    public String getStatus(){
-        return this.status;
+    public boolean getIsOpen(){
+        return this.isOpen;
     }
 
     /**
@@ -120,15 +135,15 @@ public class Conversation {
 
     /**
      * Set a rating for the conversation.
-     * @param rating the rating to be set
+     * @param minRating the rating to be set
      */
-    public void setRating(int rating){ this.rating = rating; }
+    public void setMinRating(int minRating){ this.minRating = minRating; }
 
     /**
      * Set the max number of users in the conversation.
-     * @param maxUsers the max number of users to be set
+     * @param maxSize the max number of users to be set
      */
-    public void setMaxUsers(int maxUsers){ this.maxUsers = maxUsers; }
+    public void setMaxSize(int maxSize){ this.maxSize = maxSize; }
 
     /**
      * Set the closing time for the conversation.
@@ -138,19 +153,27 @@ public class Conversation {
 
     /**
      * Set the status of the conversation.
-     * @param status the status to be set
+     * @param isOpen the status to be set
      */
-    public void setStatus(String status){ this.status = status; }
+    public void setIsOpen(boolean isOpen){ this.isOpen = isOpen; }
 
     /**
-     * Set the messages in the conversation.
-     * @param messages the list of messages to be set
+     * Add a message to the conversation.
+     * @param message the message to be added
      */
-    public void setMessages(ArrayList<Message> messages){ this.messages = messages; }
+    public void addMessage(Message message){ this.messages.add(message); }
 
     /**
-     * Set the users in the conversation.
-     * @param users the list of users to be set
+     * Add a user to the conversation.
+     * @param user a user to be added
+     * @return true if the user was added
      */
-    public void setUsers(ArrayList<User> users){ this.users = users; }
+    public boolean addUser(User user){
+        if (this.users.size() < this.maxSize){
+            this.users.add(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
