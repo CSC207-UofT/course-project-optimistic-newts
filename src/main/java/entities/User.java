@@ -1,4 +1,196 @@
 package entities;
 
+import java.util.ArrayList;
+
 public class User {
+    private int id;
+    private String username;
+    private String password;
+    private Object location;
+    private ArrayList<String> interests;
+    private float rating;
+    private int numRatings;
+    private boolean loginStatus;
+    private ArrayList<User> friends;
+    private ArrayList<Conversation> conversations;
+
+    /***
+     *
+     * @param username The user's username.
+     * @param password The user's password.
+     * @param interests An ArrayList of the user's initial specified interests.
+     */
+    public User(String username,
+                String password,
+                ArrayList<String> interests,
+                int id){
+        this.username = username;
+        this.password = password;
+        this.interests = interests;
+        this.id = id;
+    }
+
+    /**
+     * Getter methods for the login status of the user
+     * @return Returns logInStatus of user.
+     */
+    public boolean getLoginStatus(){
+        return loginStatus;
+    }
+
+    /**
+     * Getter method for user's ID.
+     * @return Returns user ID.
+     */
+    public int getId(){
+        return id;
+    }
+
+    /**
+     * Getter method for user's username.
+     * @return Returns user's username.
+     */
+    public String getUsername(){
+        return username;
+    }
+
+    /**
+     * Getter method for user's password.
+     * NOTE: This is probably a bad idea to have.
+     * @return Returns user's password
+     */
+    public String getPassword(){
+        return password;
+    }
+
+    /**
+     * Getter method for user's last updated location.
+     * NOTE: Wasn't sure what type the location data would be,
+     * using type Object for now, to be changed later.
+     * @return Returns user's last updated location.
+     */
+    public Object getLocation(){
+        return location;
+    }
+
+    /**
+     * Setter method for user's location.
+     * @param location Location of user (Type to be changed)
+     */
+    public void setLocation(Object location){
+        this.location = location;
+    }
+
+    /**
+     * Getter method for ArrayList of user interest.
+     * @return Returns ArrayList of user interests.
+     */
+    public ArrayList<String> getInterests() {
+        return interests;
+    }
+
+    /**
+     * Adds supplied interest to user's interests ArrayList
+     * @param interest New interest to be added
+     */
+    public void addInterests(String interest){
+        interests.add(interest);
+    }
+
+    /**
+     * Removes specified interest from user's interests
+     * @param interest Interest to be removed
+     */
+    public void removeInterest(String interest){
+        int index = interests.indexOf(interest);
+        if (index != -1)
+            interests.remove(index);
+    }
+
+    /**
+     * Getter method which returns the user's average rating
+     * @return User's average rating
+     */
+    public float getRating() {
+        return rating/numRatings;
+    }
+
+    /**
+     * Adds rating to user's total rating and increases
+     * The number of ratings by one.
+     * @param rating Rating to be added
+     */
+    public void addRating(float rating){
+        this.rating += rating;
+        numRatings ++;
+    }
+
+    /**
+     * Sets user loginStatus to True
+     */
+    public void logIn(){
+        loginStatus = true;
+    }
+
+    /**
+     * Sets user loginStatus to false
+     */
+    public void logOut(){
+        loginStatus = false;
+    }
+
+    /**
+     * Adds specified user to user's friendslist
+     * @param friend User to be added as friend
+     */
+    public void addFriend(User friend) {
+        friends.add(friend);
+    }
+
+    /**
+     * Removes specified user from user's friendslist
+     * @param friend User to be removed
+     */
+    public void removeFriend(User friend){
+        int index = friends.indexOf(friend);
+        if (index != -1)
+            friends.remove(index);
+    }
+
+    /**
+     * Getter method which returns user's friendslist
+     * @return Returns user's friendslist which is an ArrayList of users
+     */
+    public ArrayList<User> getFriends(){
+        return friends;
+    }
+
+    /**
+     * Adds specified conversation object to user's list of active conversations
+     * @param conversation Conversation to be added
+     */
+    public void addConversation(Conversation conversation){
+        conversations.add(conversation);
+    }
+
+    /**
+     * Removes specified conversation from user's list
+     * of active conversations.
+     * @param conversation Conversation to be removed
+     */
+    public void removeConversation(Conversation conversation){
+        int index = conversations.indexOf(conversation);
+        if(index != -1)
+            conversations.remove(conversation);
+    }
+
+    /**
+     * Returns list of user's active conversations.
+     * @return ArrayList of user's active conversations.
+     */
+    public ArrayList<Conversation> getConversations(){
+        return conversations;
+    }
+
 }
+
