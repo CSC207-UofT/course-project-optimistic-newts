@@ -1,7 +1,9 @@
 package entities;
 
+import entities.User;
+
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
@@ -19,7 +21,7 @@ public class UserTest {
         u = new User("test_user", "password123", interests, 1);
     }
     @Test
-    void isLoggedIn() {
+    public void isLoggedIn() {
         assertTrue(false);
     }
 
@@ -29,28 +31,28 @@ public class UserTest {
     }
 
     @Test
-    void testGetUsername() {assertEquals(u.getUsername(), "test_user");}
+    public void testGetUsername() {assertEquals(u.getUsername(), "test_user");}
 
     @Test
-    void testGetPassword() {assertEquals(u.getPassword(), "password_123");}
+    public void testGetPassword() {assertEquals(u.getPassword(), "password123");}
 
     @Test
-    void testGetLocation() {
+    public void testGetLocation() {
         assertTrue(false);
     }
 
     @Test
-    void testGetInterests() {
+    public void testGetInterests() {
         assertTrue(false);
     }
 
     @Test
-    void addInterests() {
+    public void addInterests() {
         assertTrue(false);
     }
 
     @Test
-    void removeInterest() {
+    public void removeInterest() {
         assertTrue(false);
     }
 
