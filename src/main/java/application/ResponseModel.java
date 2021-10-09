@@ -2,7 +2,6 @@ package application;
 
 /**
  * A data structure representing a response passed through an OutputBoundary Interface.
- *
  */
 public class ResponseModel {
     private final String data;
