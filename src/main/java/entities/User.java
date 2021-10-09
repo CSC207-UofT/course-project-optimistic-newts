@@ -32,7 +32,7 @@ public class User {
 
     /**
      * Getter methods for the login status of the user
-     * @return Returns logInStatus of user.
+     * @return Returns loginStatus of user.
      */
     public boolean getLoginStatus(){
         return loginStatus;
