@@ -1,4 +1,179 @@
 package entities;
 
+import java.util.ArrayList;
+
+/**
+ * A class representing a conversation
+ */
 public class Conversation {
+    private String id;
+    private String title;
+    private String topic;
+    private String location;
+    private int locationRadius;
+    private int minRating;
+    private int maxSize;
+    private String closingTime;
+    private boolean isOpen;
+    private ArrayList<Message> messages;
+    private ArrayList<User> users;
+
+    public Conversation(String id, String title,
+                        String topic, String location,
+                        int locationRadius,
+                        int minRating, int maxSize,
+                        String closingTime, boolean isOpen,
+                        ArrayList<Message> messages,
+                        ArrayList<User> users) {
+        this.id = id;
+        this.title = title;
+        this.topic = topic;
+        this.location = location;
+        this.locationRadius = locationRadius;
+        this.minRating = minRating;
+        this.maxSize = maxSize;
+        this.closingTime = closingTime;
+        this.isOpen = isOpen;
+        this.messages = messages;
+        this.users = users;
+    }
+    
+
+    /**
+     * Return the id of the conversation.
+     * @return a string representing the id
+     */
+    public String getId(){ return this.id; }
+
+    /**
+     * Return the title of the conversation.
+     * @return a string representing the title
+     */
+    public String getTitle(){
+        return this.title;
+    }
+
+    /**
+     * Return the topic of the conversation.
+     * @return a string representing the topic of the conversation
+     */
+    public String getTopic() { return this.topic; }
+
+    /**
+     * Return the location of the conversation.
+     * @return a string representing the location
+     */
+    public String getLocation(){
+        return this.location;
+    }
+
+    /**
+     * Return the radius of the location.
+     * @return an int representing the location radius
+     */
+    public int getLocationRadius(){ return this.locationRadius; }
+
+    /**
+     * Return the minimum rating of the conversation.
+     * @return an int representing the minimum rating of the conversation
+     */
+    public int getMinRating(){
+        return this.minRating;
+    }
+
+    /**
+     * Return the maximum number of users in the conversation.
+     * @return an int representing the max number of users
+     */
+    public int getMaxSize(){
+        return this.maxSize;
+    }
+
+    /**
+     * Return the time the conversation closes.
+     * @return a string representing the closing time of the conversation
+     */
+    public String getClosingTime(){
+        return this.closingTime;
+    }
+
+    /**
+     * Return if the conversation is open.
+     * @return true if the conversation is open
+     */
+    public boolean getIsOpen(){
+        return this.isOpen;
+    }
+
+    /**
+     * Return the messages in the conversation.
+     * @return an ArrayList containing messages
+     */
+    public ArrayList<Message> getMessages(){
+        return this.messages;
+    }
+
+    /**
+     * Return the users in the conversation.
+     * @return an ArrayList containing users
+     */
+    public ArrayList<User> getUsers(){
+        return this.users;
+    }
+
+    /**
+     * Set a title for the conversation.
+     * @param title the title to be set
+     */
+    public void setTitle(String title){ this.title = title; }
+
+    /**
+     * Set a location for the conversation.
+     * @param location the location to be set
+     */
+    public void setLocation(String location){ this.location = location; }
+
+    /**
+     * Set a rating for the conversation.
+     * @param minRating the rating to be set
+     */
+    public void setMinRating(int minRating){ this.minRating = minRating; }
+
+    /**
+     * Set the max number of users in the conversation.
+     * @param maxSize the max number of users to be set
+     */
+    public void setMaxSize(int maxSize){ this.maxSize = maxSize; }
+
+    /**
+     * Set the closing time for the conversation.
+     * @param closingTime the closing time to be set
+     */
+    public void setClosingTime(String closingTime){ this.closingTime = closingTime; }
+
+    /**
+     * Set the status of the conversation.
+     * @param isOpen the status to be set
+     */
+    public void setIsOpen(boolean isOpen){ this.isOpen = isOpen; }
+
+    /**
+     * Add a message to the conversation.
+     * @param message the message to be added
+     */
+    public void addMessage(Message message){ this.messages.add(message); }
+
+    /**
+     * Add a user to the conversation.
+     * @param user a user to be added
+     * @return true if the user was added
+     */
+    public boolean addUser(User user){
+        if (this.users.size() < this.maxSize){
+            this.users.add(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
