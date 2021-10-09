@@ -3,6 +3,7 @@ package entities;
 import org.junit.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -14,7 +15,7 @@ public class ConversationTest {
 
     @Before
     public void setUp() throws Exception {
-        c = new Conversation("", "SampleConversation", "", "", 0, 0, 0, "", true,
+        c = new Conversation("", "Sample Conversation", "", "", 0, 0, 0, "", true,
                 new ArrayList<Message>(), new ArrayList<User>());
     }
 
@@ -54,7 +55,7 @@ public class ConversationTest {
 
     @Test(timeout = 50)
     public void TestGetStatus() {
-        assertEquals(true, c.getIsOpen());
+        assertTrue(c.getIsOpen());
     }
 
     @Test(timeout = 50)
@@ -98,32 +99,37 @@ public class ConversationTest {
     @Test(timeout = 50)
     public void TestSetStatus() {
         c.setIsOpen(false);
-        assertEquals(false, c.getIsOpen());
+        assertFalse(c.getIsOpen());
     }
 
     @Test(timeout = 50)
     public void TestAddMessage() {
-        Message m = new Message("", "");
+        Message m = new Message();
         c.addMessage(m);
-        assertTrue(m == c.getMessages().get(c.getMessages().size() - 1));
+        assertSame(m, c.getMessages().get(c.getMessages().size() - 1));
     }
 
     @Test(timeout = 50)
     public void TestAddUser() {
-        User u = new User();
+        c.setMaxSize(1);
+        ArrayList<String> interests = new ArrayList<>(List.of(new String[]{"Golf", "Painting"}));
+        User u = new User("testuser", "password", interests, 1);
         c.addUser(u);
-        assertTrue(u == c.getUsers().get(c.getUsers().size() - 1));
-    }
-
-    @Test(timeout = 50)
-    public void TestAddUserBelowMax() {
-        User u1 = new User();
-        assertTrue(c.addUser(u1));
+        assertSame(u, c.getUsers().get(c.getUsers().size() - 1));
     }
 
     @Test(timeout = 50)
     public void TestAddUserAtMax() {
-        User u2 = new User();
-        assertFalse(c.addUser(u2));
+        ArrayList<String> interests = new ArrayList<>(List.of(new String[]{"Golf", "Painting"}));
+        User u = new User("testuser", "password", interests, 1);
+        assertFalse(c.addUser(u));
+    }
+
+    @Test(timeout = 50)
+    public void TestAddUserBelowMax() {
+        c.setMaxSize(1);
+        ArrayList<String> interests = new ArrayList<>(List.of(new String[]{"Golf", "Painting"}));
+        User u = new User("testuser", "password", interests, 1);
+        assertTrue(c.addUser(u));
     }
 }
