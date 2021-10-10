@@ -23,6 +23,7 @@ public class UserTest {
         interests.add("Music");
         interests.add("Fitness");
         u = new User("test_user", "password123", interests, 1);
+        u.logIn();
     }
 
     /**
@@ -48,10 +49,24 @@ public class UserTest {
     public void testGetUsername() {assertEquals(u.getUsername(), "test_user");}
 
     /**
+     * Tests getSetUsername method
+     */
+    @Test
+    public void testSetUsername() {
+        u.setUsername("OptimisticNewt27");
+        assertEquals(u.getUsername(), "OptimisticNewt27");
+    }
+
+    /**
      * Tests getPassword method
      */
     @Test
     public void testGetPassword() {assertEquals(u.getPassword(), "password123");}
+
+    @Test
+    public void testSetPassword() throws EntityExceptions {
+        u.setPassword("p");
+    }
 
     /**
      * To be implemented
@@ -87,6 +102,33 @@ public class UserTest {
     public void removeInterest() {
         u.addInterests("Stocks");
         assertEquals(u.getInterests().get(2), "Fitness");
+    }
+
+    /**
+     * Tests getLoginStatus method
+     */
+    @Test
+    public void testGetLoginStatus() {
+        assertEquals(u.getLoginStatus(), true);
+    }
+
+
+    /**
+     * Tests logOut method
+     */
+    @Test
+    public void testLogOut() {
+        u.logOut();
+        assertEquals(u.getLoginStatus(), false);
+    }
+
+    /**
+     * Tests logIn method
+     */
+    @Test
+    public void testLogIn() {
+        u.logIn();
+        assertEquals(u.getLoginStatus(), true);
     }
 
 
