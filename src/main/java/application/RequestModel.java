@@ -1,20 +1,18 @@
 package application;
 
-import java.util.Optional;
-
 /**
  * A data structure representing a request passed through an InputBoundary Interface.
  */
 public class RequestModel {
-    private final String data;
+    private final Object[] data;
     private final OutputBoundary respondTo;
 
     /**
-     * Construct a new RequestModel with an output location and provided data.
+     * Construct a new RequestModel with an output location and provided data array.
      * @param respondTo     OutputBoundary to send response by
-     * @param data          Request data
+     * @param data          Request data array
      */
-    public RequestModel(OutputBoundary respondTo, String data) {
+    public RequestModel(OutputBoundary respondTo, Object[] data) {
         this.respondTo = respondTo;
         this.data = data;
     }
@@ -23,7 +21,7 @@ public class RequestModel {
      * Return this RequestModel's data.
      * @return  Request data
      */
-    public String getData() {
+    public Object[] getData() {
         return this.data;
     }
 

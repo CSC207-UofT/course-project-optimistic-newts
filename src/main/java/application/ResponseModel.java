@@ -4,21 +4,21 @@ package application;
  * A data structure representing a response passed through an OutputBoundary Interface.
  */
 public class ResponseModel {
-    private final String data;
+    private final Object[] data;
 
     /**
-     * Construct a new ResponseModel with provided data.
-     * @param data  response data
+     * Construct a new ResponseModel with provided data array.
+     * @param data  response data array
      */
-    public ResponseModel(String data) {
+    public ResponseModel(Object[] data) {
         this.data = data;
     }
 
     /**
-     * Return this ResponseModel's data.
-     * @return  response data
+     * Return this ResponseModel's data array.
+     * @return  response data array
      */
-    public String getData() {
+    public Object[] getData() {
         return this.data;
     }
 }
