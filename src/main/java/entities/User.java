@@ -2,6 +2,9 @@ package entities;
 
 import java.util.ArrayList;
 
+/**
+ * An object representing a User of the application.
+ */
 public class User {
     private int id;
     private String username;
@@ -14,7 +17,7 @@ public class User {
     private ArrayList<User> friends;
     private ArrayList<Conversation> conversations;
 
-    /***
+    /**
      *
      * @param username The user's username.
      * @param password The user's password.
@@ -55,6 +58,12 @@ public class User {
     }
 
     /**
+     * Setter method for username
+     * @param username Username to be set
+     */
+    public void setUsername(String username) {this.username = username;}
+
+    /**
      * Getter method for user's password.
      * NOTE: This is probably a bad idea to have.
      * @return Returns user's password
@@ -62,7 +71,6 @@ public class User {
     public String getPassword(){
         return password;
     }
-
     /**
      * Getter method for user's last updated location.
      * NOTE: Wasn't sure what type the location data would be,
@@ -72,6 +80,18 @@ public class User {
     public Object getLocation(){
         return location;
     }
+
+    /**
+     * Setter method for the user's password
+     * @param password Password to be set
+     */
+
+    public void setPassword(String password) throws EntityExceptions {
+        if(password.length() >= 6) {
+            this.password = password;
+            }
+        else throw new EntityExceptions("Please choose a password with at least 6 characters.");
+        }
 
     /**
      * Setter method for user's location.
@@ -101,10 +121,12 @@ public class User {
      * Removes specified interest from user's interests
      * @param interest Interest to be removed
      */
-    public void removeInterest(String interest){
+    public void removeInterest (String interest) throws EntityExceptions {
         int index = interests.indexOf(interest);
         if (index != -1)
             interests.remove(index);
+        else
+            throw new EntityExceptions("Interest not in interest list.");
     }
 
     /**
@@ -151,10 +173,12 @@ public class User {
      * Removes specified user from user's friendslist
      * @param friend User to be removed
      */
-    public void removeFriend(User friend){
+    public void removeFriend(User friend) throws EntityExceptions{
         int index = friends.indexOf(friend);
         if (index != -1)
             friends.remove(index);
+        else
+            throw new EntityExceptions("User not in friend's list.");
     }
 
     /**
@@ -178,10 +202,12 @@ public class User {
      * of active conversations.
      * @param conversation Conversation to be removed
      */
-    public void removeConversation(Conversation conversation){
+    public void removeConversation(Conversation conversation) throws EntityExceptions{
         int index = conversations.indexOf(conversation);
         if(index != -1)
             conversations.remove(conversation);
+        else
+            throw new EntityExceptions("Conversation not in conversation list.");
     }
 
     /**
