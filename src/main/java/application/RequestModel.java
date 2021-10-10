@@ -5,13 +5,7 @@ package application;
  */
 public abstract class RequestModel {
     /**
-     * Construct a new RequestModel.
-     */
-    public RequestModel() {}
-
-    /**
      * Fills in this RequestModel's instance attributes.
      */
-    public void fillRequest() {
-    }
+    public void fillRequest() {}
 }
