@@ -2,6 +2,9 @@ package entities;
 
 import java.util.ArrayList;
 
+/**
+ * An object representing a User of the application.
+ */
 public class User {
     private int id;
     private String username;
@@ -14,7 +17,7 @@ public class User {
     private ArrayList<User> friends;
     private ArrayList<Conversation> conversations;
 
-    /***
+    /**
      *
      * @param username The user's username.
      * @param password The user's password.

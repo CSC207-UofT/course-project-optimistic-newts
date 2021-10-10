@@ -3,7 +3,7 @@ package entities;
 import java.util.ArrayList;
 
 /**
- * A class representing a conversation
+ * A class representing a conversation.
  */
 public class Conversation {
     private String id;
@@ -37,7 +37,6 @@ public class Conversation {
         this.messages = messages;
         this.users = users;
     }
-    
 
     /**
      * Return the id of the conversation.
