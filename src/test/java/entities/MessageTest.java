@@ -4,6 +4,7 @@ import org.junit.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
@@ -15,7 +16,10 @@ public class MessageTest {
 
     @Before
     public void setUp() throws Exception {
-        m = new Message("Luke, I am your father", "Darth Vader");
+        ArrayList<String> interests = new ArrayList<>();
+        interests.add("darkside");
+        User u = new User("Darth Vader", "deathstar", interests, 123);
+        m = new Message("Luke, I am your father", u);
     }
 
     @Test(timeout = 50)

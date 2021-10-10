@@ -5,11 +5,11 @@ import java.time.format.DateTimeFormatter;
 
 public class Message {
     private String body;
-    private String author;
+    private User author;
     private String writtenAt;
     private String lastUpdatedAt;
 
-    public Message(String body, String author) {
+    public Message(String body, User author) {
         this.body = body;
         this.author = author;
         DateTimeFormatter date = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -32,7 +32,7 @@ public class Message {
      * @return a string representing the author of the message
      */
     public String getAuthor() {
-        return this.author;
+        return this.author.getUsername();
     }
 
     /**
@@ -62,6 +62,7 @@ public class Message {
         this.body = body;
         this.setLastUpdatedAt();
     }
+
     /**
      * Set the time at which the message was last updated.
      * This is called everytime setBody is called
