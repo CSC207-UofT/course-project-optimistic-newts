@@ -9,7 +9,7 @@ public class User {
     private int id;
     private String username;
     private String password;
-    private Object location;
+    private String location;
     private ArrayList<String> interests;
     private float rating;
     private int numRatings;
@@ -77,7 +77,7 @@ public class User {
      * using type Object for now, to be changed later.
      * @return Returns user's last updated location.
      */
-    public Object getLocation(){
+    public String getLocation(){
         return location;
     }
 
@@ -97,7 +97,7 @@ public class User {
      * Setter method for user's location.
      * @param location Location of user (Type to be changed)
      */
-    public void setLocation(Object location){
+    public void setLocation(String location){
         this.location = location;
     }
 

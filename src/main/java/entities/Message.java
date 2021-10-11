@@ -17,6 +17,10 @@ public class Message {
         this.lastUpdatedAt = LocalDateTime.now().format(date);
     }
 
+    public Message() {
+
+    }
+
     /**
      * Return the body of the message.
      *
