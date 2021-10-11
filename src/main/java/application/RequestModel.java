@@ -2,24 +2,10 @@ package application;
 
 /**
  * A data structure representing a request passed through an InputBoundary Interface.
- *
  */
-public class RequestModel {
-    private final String data;
-
+public abstract class RequestModel {
     /**
-     * Construct a new RequestModel with provided data.
-     * @param data  request data
+     * Fills in this RequestModel's instance attributes.
      */
-    public RequestModel(String data) {
-        this.data = data;
-    }
-
-    /**
-     * Return this RequestModel's data.
-     * @return  request data
-     */
-    public String getData() {
-        return this.data;
-    }
+    public void fillRequest() {}
 }

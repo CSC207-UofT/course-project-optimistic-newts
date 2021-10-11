@@ -12,6 +12,10 @@ import static org.junit.Assert.assertTrue;
 
 public class UserTest {
     User u;
+
+    /**
+     * Setting up a test User
+     */
     @Before
     public void setUp() {
         ArrayList<String> interests = new ArrayList<String>();
@@ -19,41 +23,112 @@ public class UserTest {
         interests.add("Music");
         interests.add("Fitness");
         u = new User("test_user", "password123", interests, 1);
+        u.logIn();
     }
+
+    /**
+     * To be implemented
+     */
     @Test
     public void isLoggedIn() {
         assertTrue(false);
     }
 
+    /**
+     * Tests the getID method
+     */
     @Test
     public void testGetId() {
         assertEquals(u.getId(), 1);
     }
 
+    /**
+     * Tests getUsername method
+     */
     @Test
     public void testGetUsername() {assertEquals(u.getUsername(), "test_user");}
 
+    /**
+     * Tests getSetUsername method
+     */
+    @Test
+    public void testSetUsername() {
+        u.setUsername("OptimisticNewt27");
+        assertEquals(u.getUsername(), "OptimisticNewt27");
+    }
+
+    /**
+     * Tests getPassword method
+     */
     @Test
     public void testGetPassword() {assertEquals(u.getPassword(), "password123");}
 
+    @Test
+    public void testSetPassword() throws EntityExceptions {
+        u.setPassword("p");
+    }
+
+    /**
+     * To be implemented
+     */
     @Test
     public void testGetLocation() {
         assertTrue(false);
     }
 
+    /**
+     * Tests getInterests method
+     */
     @Test
     public void testGetInterests() {
-        assertTrue(false);
+        assertEquals(u.getInterests().get(0), "Sports");
+        assertEquals(u.getInterests().get(1), "Music");
+        assertEquals(u.getInterests().get(2), "Fitness");
     }
 
+    /**
+     * Tests addInterests method
+     */
     @Test
     public void addInterests() {
-        assertTrue(false);
+        u.addInterests("Stocks");
+        assertEquals(u.getInterests().get(3), "Stocks");
     }
 
+    /**
+     * Tests removeInterest method
+     */
     @Test
     public void removeInterest() {
-        assertTrue(false);
+        u.addInterests("Stocks");
+        assertEquals(u.getInterests().get(2), "Fitness");
+    }
+
+    /**
+     * Tests getLoginStatus method
+     */
+    @Test
+    public void testGetLoginStatus() {
+        assertEquals(u.getLoginStatus(), true);
+    }
+
+
+    /**
+     * Tests logOut method
+     */
+    @Test
+    public void testLogOut() {
+        u.logOut();
+        assertEquals(u.getLoginStatus(), false);
+    }
+
+    /**
+     * Tests logIn method
+     */
+    @Test
+    public void testLogIn() {
+        u.logIn();
+        assertEquals(u.getLoginStatus(), true);
     }
 
 
