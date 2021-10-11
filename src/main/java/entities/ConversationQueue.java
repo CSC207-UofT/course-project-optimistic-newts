@@ -160,11 +160,6 @@ public class ConversationQueue implements Queue<KeyedConversation> {
         return toReturn;
     }
 
-    /**
-     * Removes all elements from this ConversationQueue that are also in an input Collection.
-     * @param c Collection to compare this ConversationQueue to
-     * @return  true iff at least one item in this ConversationQueue was also in c and was removed as a result
-     */
     @Override
     public boolean removeAll(Collection<?> c) {
         boolean toReturn = false;
@@ -176,30 +171,11 @@ public class ConversationQueue implements Queue<KeyedConversation> {
         return toReturn;
     }
 
-    /**
-     * Removes all elements from this ConversationQueue that are not also in an input Collection.
-     * @param c Collection to compare this ConversationQueue to
-     * @return  true iff at least one item in this ConversationQueue was not also in c and was removed as a result
-     */
     @Override
     public boolean retainAll(Collection<?> c) {
-        boolean toReturn = false;
-        Iterator<KeyedConversation> old = iterator();
-        clear();
-        while (old.hasNext()) {
-            KeyedConversation item = old.next();
-            if (c.contains(item)) {
-                add(item);
-            } else {
-                toReturn = true;
-            }
-        }
-        return toReturn;
+        return false;
     }
 
-    /**
-     * Removes all elements from this ConversationQueue.
-     */
     @Override
     public void clear() {
         conversations = new ArrayList<>();
@@ -207,32 +183,18 @@ public class ConversationQueue implements Queue<KeyedConversation> {
         size = 0;
     }
 
-    /**
-     * Adds a KeyedConversation to this ConversationQueue.
-     * @param toAdd item to add
-     * @return true iff the item was successfully added
-     */
     @Override
     public boolean add(KeyedConversation toAdd) {
         insert(toAdd);
         return true;
     }
 
-    /**
-     * Adds a KeyedConversation to this ConversationQueue.
-     * @param toAdd item to add
-     * @return true if the item was successfully added
-     */
     @Override
     public boolean offer(KeyedConversation toAdd) {
         insert(toAdd);
         return true;
     }
 
-    /**
-     * Retrieves and removes a highest priority KeyedConversation from this ConversationQueue.
-     * @return  highest priority KeyedConversation
-     */
     @Override
     public KeyedConversation remove() {
         KeyedConversation max = conversations.get(1);
@@ -242,10 +204,6 @@ public class ConversationQueue implements Queue<KeyedConversation> {
         return max;
     }
 
-    /**
-     * Retrieves and removes a highest priority KeyedConversation from this ConversationQueue.
-     * @return  highest priority KeyedConversation or null if ConversationQueue is empty
-     */
     @Override
     public KeyedConversation poll() {
         if (this.isEmpty()) {
@@ -258,19 +216,11 @@ public class ConversationQueue implements Queue<KeyedConversation> {
         return max;
     }
 
-    /**
-     * Retrieves but does not remove a highest priority KeyedConversation from this ConversationQueue.
-     * @return highest priority KeyedConversation
-     */
     @Override
     public KeyedConversation element() {
         return conversations.get(1);
     }
 
-    /**
-     * fix
-     * @return
-     */
     @Override
     public KeyedConversation peek() {
         if (this.isEmpty()) {
