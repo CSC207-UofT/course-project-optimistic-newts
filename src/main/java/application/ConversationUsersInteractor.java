@@ -27,13 +27,10 @@ public class ConversationUsersInteractor extends ConversationInteractor {
         private String action;
         private User user;
 
-        public ConversationUsersInteractorRequest(){
-        }
-
         /**
          * Fills in this RequestModel's instance attributes.
          */
-        public void fillRequest() {
+        public void fillRequest(String action, User user) {
             this.action = action;
             this.user = user;
         }
@@ -49,7 +46,8 @@ public class ConversationUsersInteractor extends ConversationInteractor {
      * @param request   a request stored as a RequestModel
      */
     @Override
-    public void request(ConversationUsersInteractorRequest request){
+    public void request(RequestModel request1){
+        ConversationUsersInteractorRequest request = (ConversationUsersInteractorRequest) request1;
         String action = request.action;
         if (Objects.equals(action, "addUser")) {
             this.addUser(request.user);
