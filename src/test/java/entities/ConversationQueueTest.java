@@ -7,6 +7,7 @@ import org.junit.Test;;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 public class ConversationQueueTest {
     ConversationQueue cq;
@@ -272,7 +273,7 @@ public class ConversationQueueTest {
         conversation2.setTopic("Toronto");
         cq.add(conversation2);
         Conversation conversation3 = new Conversation();
-        conversation2.setTopic("Fish");
+        conversation3.setTopic("Fish");
 
         Conversation[] compare = new Conversation[]{conversation0, conversation1, conversation2, conversation3};
         Assert.assertFalse(cq.containsAll(List.of(compare)));
@@ -297,5 +298,158 @@ public class ConversationQueueTest {
         Assert.assertTrue(cq.containsAll(List.of(compare)));
     }
 
+    /**
+     * Test addAll works as expected.
+     */
+    @Test
+    public void addAllTest() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Math");
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Toronto");
+        Conversation conversation3 = new Conversation();
+        conversation3.setTopic("Fish");
+        Conversation[] toAdd = new Conversation[]{conversation1, conversation2, conversation3};
 
+        Assert.assertTrue(cq.addAll(List.of(toAdd)));
+        Conversation[] expected = new Conversation[]{conversation0, conversation1, conversation2, conversation3};
+        Assert.assertArrayEquals(expected, cq.toArray());
+    }
+
+    /**
+     * Test removeAll works as expected where ConversationQueue is left with an item that should not be removed.
+     */
+    @Test
+    public void removeAllTest() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Math");
+        cq.add(conversation1);
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Toronto");
+        cq.add(conversation2);
+        Conversation conversation3 = new Conversation();
+        conversation3.setTopic("Fish");
+        cq.add(conversation3);
+        Conversation[] toRemove = new Conversation[]{conversation1, conversation2, conversation3};
+        Conversation[] expected = new Conversation[]{conversation0};
+
+        Assert.assertTrue(cq.removeAll(List.of(toRemove)));
+        Assert.assertArrayEquals(expected, cq.toArray());
+    }
+
+    /**
+     * Test retainAll works as expected in a situation where some elements should be removed
+     * and some should be retained.
+     */
+    @Test
+    public void retainAllTest() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Math");
+        cq.add(conversation1);
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Toronto");
+        cq.add(conversation2);
+        Conversation conversation3 = new Conversation();
+        conversation3.setTopic("Fish");
+        cq.add(conversation3);
+        Conversation[] toKeep = new Conversation[]{conversation1, conversation2};
+        Conversation[] expected = new Conversation[]{conversation1, conversation2};
+
+        Assert.assertTrue(cq.retainAll(List.of(toKeep)));
+        Assert.assertArrayEquals(expected, cq.toArray());
+    }
+
+    /**
+     * Test clear works as expected on a non-empty ConversationQueue.
+     */
+    @Test
+    public void clearTest() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Math");
+        cq.add(conversation1);
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Toronto");
+        cq.add(conversation2);
+        cq.clear();
+
+        Conversation[] expected = new Conversation[]{};
+        Assert.assertArrayEquals(expected, cq.toArray());
+    }
+
+    /**
+     * Test remove returns Conversations in the expected order.
+     */
+    @Test
+    public void removeTest() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Toronto");
+        cq.add(conversation1);
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Math");
+        cq.add(conversation2);
+
+        Assert.assertEquals(conversation0, cq.remove());
+        Assert.assertEquals(conversation2, cq.remove());
+        Assert.assertEquals(conversation1, cq.remove());
+    }
+
+    /**
+     * Test poll() returns null if ConversationQueue is empty.
+     */
+    @Test
+    public void pollTestEmpty() {
+        Assert.assertNull(cq.poll());
+    }
+
+    /**
+     * Test element returns null if called on empty ConversationQueue.
+     */
+    @Test
+    public void elementTestEmpty() {
+        NoSuchElementException thrown = Assert.assertThrows(NoSuchElementException.class, () -> cq.element());
+        Assert.assertTrue(thrown.getMessage().contains("Tried"));
+    }
+
+    /**
+     * Test whether element returns the head of ConversationQueue and whether the queue is unchanged after this.
+     */
+    @Test
+    public void elementTestNonEmpty() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Toronto");
+        cq.add(conversation1);
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Math");
+        cq.add(conversation2);
+
+        Conversation[] expected = new Conversation[]{conversation0, conversation2, conversation1};
+        Assert.assertEquals(conversation0, cq.element());
+        Assert.assertArrayEquals(expected, cq.toArray());
+    }
+
+    /**
+     * Test whether peek returns null when called on empty ConversationQueue.
+     */
+    @Test
+    public void peekTestEmpty() {
+        Assert.assertNull(cq.peek());
+    }
 }
