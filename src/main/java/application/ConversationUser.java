@@ -7,52 +7,58 @@ import entities.User;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ConversationUsersInteractor extends ConversationInteractor {
-
+public class ConversationUser extends ConversationInteractor {
     private final Conversation conversation;
 
     /**
-     * Construct a new ConversationInteractor object to interact with a Conversation.
+     * Construct a new ConversationUser object to interact with a Conversation.
      *
      * @param conversation Conversation to interact with
      */
-    public ConversationUsersInteractor(Conversation conversation) {
+    public ConversationUser(Conversation conversation) {
         this.conversation = conversation;
     }
 
     /**
-     * Construct a request model.
+     * A request to be carried out by ConversationUser.
      */
-    public class ConversationUsersInteractorRequest extends RequestModel{
+    public class ConversationUsersRequest extends RequestModel{
+        private OutputBoundary respondTo;
         private String action;
         private User user;
 
         /**
          * Fills in this RequestModel's instance attributes.
          */
-        public void fillRequest(String action, User user) {
+        public void fillRequest(OutputBoundary respondTo, String action, User user) {
+            this.respondTo = respondTo;
             this.action = action;
             this.user = user;
         }
     }
 
-    public ConversationUsersInteractorRequest getRequestModel(String action, User user){
-        return new ConversationUsersInteractorRequest(action, user);
+    /**
+     * @return  A request model to be filled in by caller
+     */
+    public ConversationUsersRequest getRequestModel(){
+        return new ConversationUsersRequest();
     }
 
     /**
      * Accept a given (RequestModel) request.
      *
-     * @param request   a request stored as a RequestModel
+     * @param request1   a request stored as a RequestModel
      */
     @Override
     public void request(RequestModel request1){
-        ConversationUsersInteractorRequest request = (ConversationUsersInteractorRequest) request1;
+        ConversationUsersRequest request = (ConversationUsersRequest) request1;
         String action = request.action;
         if (Objects.equals(action, "addUser")) {
             this.addUser(request.user);
         } else if (Objects.equals(action, "removeUser")) {
             this.removeUser(request.user);
+        } else if (Objects.equals(action, "getUserlist")){
+            ArrayList<User> User_lst = this.getUserlist();
         }
     }
 
@@ -74,14 +80,13 @@ public class ConversationUsersInteractor extends ConversationInteractor {
         ArrayList<User> user_lst = this.conversation.getUsers();
         user_lst.remove(u);
     }
-}
 
-class main{
-    public static void main(String[] args) {
-        ArrayList<String> interests = new ArrayList<>();
-        interests.add("darkside");
-        User u = new User("Darth Vader", "deathstar", interests, 123);
-        Conversation c = new Conversation("", "Sample Conversation", "", "", 0, 0,
-                5, "", true, new ArrayList<Message>(), new ArrayList<User>());
+    /**
+     * Remove a user to the conversation.
+     *
+     * @return a list of User
+     */
+    public ArrayList<User> getUserlist() {
+        return this.conversation.getUsers();
     }
 }
