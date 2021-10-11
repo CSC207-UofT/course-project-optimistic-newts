@@ -143,6 +143,14 @@ public class Conversation {
     public void setTitle(String title){ this.title = title; }
 
     /**
+     * Set a topic for the conversation.
+     * @param topic the topic to be set
+     */
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    /**
      * Set a location for the conversation.
      * @param location the location to be set
      */

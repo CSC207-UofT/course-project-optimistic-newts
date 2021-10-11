@@ -31,4 +31,10 @@ public class KeyedConversation {
     public int getKey() {
         return key;
     }
+
+    /**
+     * Primarily intended for testing purposes.
+     * @param key   key to set this KeyedConversation's key to.
+     */
+    public void setKey(int key) {this.key = key;}
 }
