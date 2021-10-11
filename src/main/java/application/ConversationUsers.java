@@ -56,7 +56,7 @@ public class ConversationUsers extends ConversationInteractor {
             this.addUser(request.user);
         } else if (Objects.equals(action, "removeUser")) {
             this.removeUser(request.user);
-        } else if (Objects.equals(action, "getUserlist")){
+        } else if (Objects.equals(action, "getUserList")){
             ArrayList<User> UserList = this.getUserList();
         }
     }
@@ -64,7 +64,7 @@ public class ConversationUsers extends ConversationInteractor {
     /**
      * Add a user to the conversation.
      *
-     * @param u a user to be added to the conversation.
+     * @param u a user to be added to the conversation
      */
     public void addUser(User u) {
         this.conversation.addUser(u);
@@ -73,7 +73,7 @@ public class ConversationUsers extends ConversationInteractor {
     /**
      * Remove a user from the conversation.
      *
-     * @param u a user to remove from the conversation.
+     * @param u a user to remove from the conversation
      */
     public void removeUser(User u) {
         ArrayList<User> user_lst = this.conversation.getUsers();
