@@ -1,7 +1,6 @@
 package application;
 
 import entities.Conversation;
-import entities.Message;
 import entities.User;
 
 import java.util.ArrayList;
@@ -11,7 +10,7 @@ public class ConversationUsers extends ConversationInteractor {
     private final Conversation conversation;
 
     /**
-     * Construct a new ConversationUser object to interact with a Conversation.
+     * Construct a new ConversationUsers object to interact with a Conversation.
      *
      * @param conversation Conversation to interact with
      */
@@ -20,7 +19,7 @@ public class ConversationUsers extends ConversationInteractor {
     }
 
     /**
-     * A request to be carried out by ConversationUser.
+     * A request to be carried out by ConversationUsers.
      */
     public class ConversationUsersRequest extends RequestModel{
         private OutputBoundary respondTo;
