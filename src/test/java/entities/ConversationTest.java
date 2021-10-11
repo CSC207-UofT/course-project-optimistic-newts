@@ -134,4 +134,6 @@ public class ConversationTest {
         User u = new User("testuser", "password", interests, 1);
         assertTrue(c.addUser(u));
     }
+
+
 }

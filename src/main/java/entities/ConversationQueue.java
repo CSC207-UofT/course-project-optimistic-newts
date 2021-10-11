@@ -1,12 +1,11 @@
 package entities;
 
-import java.security.Key;
 import java.util.*;
 
 /**
  * A Conversation Queue. A Max Priority Queue used to filter conversations by relevance to present to a user.
  */
-public class ConversationQueue implements Queue<KeyedConversation> {
+public class ConversationQueue implements Queue<Conversation> {
     private ArrayList<KeyedConversation> conversations;
     private int size;
     private String location;
@@ -78,7 +77,10 @@ public class ConversationQueue implements Queue<KeyedConversation> {
      */
     @Override
     public boolean contains(Object o) {
-        return conversations.contains(o);
+        if (!(o instanceof Conversation)) {
+            return false;
+        }
+        return conversations.contains(toKeyedConversation((Conversation) o));
     }
 
     /**
@@ -86,20 +88,20 @@ public class ConversationQueue implements Queue<KeyedConversation> {
      * @return  Iterator over the elements in this ConversationQueue
      */
     @Override
-    public Iterator<KeyedConversation> iterator() {
-        KeyedConversation[] array = toArray();
+    public Iterator<Conversation> iterator() {
+        Conversation[] array = toArray();
         return Arrays.stream(array).iterator();
     }
 
     /**
-     * Returns an array containing the elements in this ConversationQueue- in non-increasing order.
+     * Returns an array containing the Conversations in this ConversationQueue- in non-increasing order.
      * @return  sorted array
      */
     @Override
-    public KeyedConversation[] toArray() {
+    public Conversation[] toArray() {
         ArrayList<KeyedConversation> temp = (ArrayList<KeyedConversation>) conversations.clone();
         int tempSize = size;
-        KeyedConversation[] toReturn = new KeyedConversation[size];
+        Conversation[] toReturn = new Conversation[size];
         int i = 0;
         while (!this.isEmpty()) {
             toReturn[i] = poll();
@@ -111,14 +113,14 @@ public class ConversationQueue implements Queue<KeyedConversation> {
     }
 
     /**
-     * Returns an array containing the elements in this ConversationQueue- in non-increasing order. If contents
+     * Returns an array containing the Conversations in this ConversationQueue- in non-increasing order. If contents
      * of this ConversationQueue will fit in provided array, then return the provided array with these elements inserted
      * followed by null.
      * @return  sorted array
      */
     @Override
     public <T> T[] toArray(T[] a) {
-        if (!(a instanceof KeyedConversation[])) {
+        if (!(a instanceof Conversation[])) {
             return a;
         }
         if (a.length == size) {
@@ -159,7 +161,7 @@ public class ConversationQueue implements Queue<KeyedConversation> {
         if (o == null) {
             return false;
         }
-        int i = conversations.indexOf(o);
+        int i = conversations.indexOf(toKeyedConversation((Conversation) o));
         if (i == -1) {
             return false;
         }
@@ -179,6 +181,8 @@ public class ConversationQueue implements Queue<KeyedConversation> {
         for (Object object : c) {
             if (!contains(object)) {
                 return false;
+            } else if (!contains(toKeyedConversation((Conversation) object))) {
+                return false;
             }
         }
         return true;
@@ -189,9 +193,9 @@ public class ConversationQueue implements Queue<KeyedConversation> {
      * @return true iff this ConversationQueue was modified during this call
      */
     @Override
-    public boolean addAll(Collection<? extends KeyedConversation> c) {
+    public boolean addAll(Collection<? extends Conversation> c) {
         boolean toReturn = false;
-        for (KeyedConversation object : c) {
+        for (Conversation object : c) {
             add(object);
             toReturn = true;
         }
@@ -222,10 +226,10 @@ public class ConversationQueue implements Queue<KeyedConversation> {
     @Override
     public boolean retainAll(Collection<?> c) {
         boolean toReturn = false;
-        Iterator<KeyedConversation> old = iterator();
+        Iterator<Conversation> old = iterator();
         clear();
         while (old.hasNext()) {
-            KeyedConversation item = old.next();
+            Conversation item = old.next();
             if (c.contains(item)) {
                 add(item);
             } else {
@@ -246,46 +250,46 @@ public class ConversationQueue implements Queue<KeyedConversation> {
     }
 
     /**
-     * Adds a KeyedConversation to this ConversationQueue.
+     * Adds a Conversation to this ConversationQueue.
      * @param toAdd item to add
      * @return true iff the item was successfully added
      */
     @Override
-    public boolean add(KeyedConversation toAdd) {
-        insert(toAdd);
+    public boolean add(Conversation toAdd) {
+        insert(toKeyedConversation(toAdd));
         return true;
     }
 
     /**
-     * Adds a KeyedConversation to this ConversationQueue.
+     * Adds a Conversation to this ConversationQueue.
      * @param toAdd item to add
      * @return true if the item was successfully added
      */
     @Override
-    public boolean offer(KeyedConversation toAdd) {
-        insert(toAdd);
+    public boolean offer(Conversation toAdd) {
+        insert(toKeyedConversation(toAdd));
         return true;
     }
 
     /**
-     * Retrieves and removes a highest priority KeyedConversation from this ConversationQueue.
-     * @return  highest priority KeyedConversation
+     * Retrieves and removes a highest priority Conversation from this ConversationQueue.
+     * @return  highest priority Conversation
      */
     @Override
-    public KeyedConversation remove() {
+    public Conversation remove() {
         KeyedConversation max = conversations.get(1);
         conversations.set(1, conversations.get(size));
         size -= 1;
         heapify(1);
-        return max;
+        return max.getConversation();
     }
 
     /**
-     * Retrieves and removes a highest priority KeyedConversation from this ConversationQueue.
-     * @return  highest priority KeyedConversation or null if ConversationQueue is empty
+     * Retrieves and removes a highest priority Conversation from this ConversationQueue.
+     * @return  highest priority Conversation or null if ConversationQueue is empty
      */
     @Override
-    public KeyedConversation poll() {
+    public Conversation poll() {
         if (this.isEmpty()) {
             return null;
         }
@@ -293,38 +297,38 @@ public class ConversationQueue implements Queue<KeyedConversation> {
         conversations.set(1, conversations.get(size));
         size -= 1;
         heapify(1);
-        return max;
+        return max.getConversation();
     }
 
     /**
-     * Retrieves but does not remove a highest priority KeyedConversation from this ConversationQueue.
-     * @return highest priority KeyedConversation
+     * Retrieves but does not remove a highest priority Conversation from this ConversationQueue.
+     * @return highest priority Conversation
      */
     @Override
-    public KeyedConversation element() throws NoSuchElementException {
+    public Conversation element() throws NoSuchElementException {
         try {
-            return conversations.get(1);
+            return conversations.get(1).getConversation();
         } catch (IndexOutOfBoundsException e) {
             throw new NoSuchElementException("Tried to retrieve head of ConversationQueue, but the queue was empty.");
         }
     }
 
     /**
-     * Retrieves, but does not remove, a highest priority KeyedConversation from this ConversationQueue- or null if
+     * Retrieves, but does not remove, a highest priority Conversation from this ConversationQueue- or null if
      * the queue is empty.
-     * @return  highest priority KeyedConversation or null if empty queue
+     * @return  highest priority Conversation or null if empty queue
      */
     @Override
-    public KeyedConversation peek() {
+    public Conversation peek() {
         if (this.isEmpty()) {
             return null;
         }
-        return conversations.get(1);
+        return conversations.get(1).getConversation();
     }
 
     /**
      * Inserts the given element into a valid location in the ConversationQueue.
-     * @param toInsert  KeyedConversation to insert
+     * @param toInsert  Conversation to insert
      */
     private void insert(KeyedConversation toInsert) {
         size += 1;

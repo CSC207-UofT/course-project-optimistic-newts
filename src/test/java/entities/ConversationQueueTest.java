@@ -69,10 +69,10 @@ public class ConversationQueueTest {
 
         Assert.assertEquals(0, cq.size());
 
-        cq.add(cq.toKeyedConversation(conversation0));
+        cq.add(conversation0);
         Assert.assertEquals(1, cq.size());
 
-        cq.add(cq.toKeyedConversation(conversation1));
+        cq.add(conversation1);
         Assert.assertEquals(2, cq.size());
     }
 
@@ -84,7 +84,7 @@ public class ConversationQueueTest {
         Assert.assertTrue(cq.isEmpty());
         Conversation conversation0 = new Conversation();
         conversation0.setTopic("Hockey");
-        cq.add(cq.toKeyedConversation(conversation0));
+        cq.add(conversation0);
         Assert.assertFalse(cq.isEmpty());
     }
 
@@ -95,13 +95,11 @@ public class ConversationQueueTest {
     public void containsTest() {
         Conversation conversation0 = new Conversation();
         conversation0.setTopic("Hockey");
-        KeyedConversation kConversation0 = cq.toKeyedConversation(conversation0);
-        cq.add(kConversation0);
+        cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        KeyedConversation kConversation1 = cq.toKeyedConversation(conversation1);
 
-        Assert.assertTrue(cq.contains(kConversation0));
-        Assert.assertFalse(cq.contains(kConversation1));
+        Assert.assertTrue(cq.contains(conversation0));
+        Assert.assertFalse(cq.contains(conversation1));
     }
 
     /**
@@ -111,17 +109,15 @@ public class ConversationQueueTest {
     public void iteratorTest() {
         Conversation conversation0 = new Conversation();
         conversation0.setTopic("Hockey");
-        KeyedConversation kConversation0 = cq.toKeyedConversation(conversation0);
-        cq.add(kConversation0);
+        cq.add(conversation0);
         Conversation conversation1 = new Conversation();
         conversation0.setTopic("Toronto");
-        KeyedConversation kConversation1 = cq.toKeyedConversation(conversation1);
-        cq.add(kConversation1);
+        cq.add(conversation1);
 
-        Iterator<KeyedConversation> iter = cq.iterator();
+        Iterator<Conversation> iter = cq.iterator();
         Assert.assertTrue(iter.hasNext());
-        Assert.assertEquals(kConversation0, iter.next());
-        Assert.assertEquals(kConversation1, iter.next());
+        Assert.assertEquals(conversation0, iter.next());
+        Assert.assertEquals(conversation1, iter.next());
     }
 
     /**
@@ -131,14 +127,12 @@ public class ConversationQueueTest {
     public void toArrayTest() {
         Conversation conversation0 = new Conversation();
         conversation0.setTopic("Hockey");
-        KeyedConversation kConversation0 = cq.toKeyedConversation(conversation0);
-        cq.add(kConversation0);
+        cq.add(conversation0);
         Conversation conversation1 = new Conversation();
         conversation0.setTopic("Toronto");
-        KeyedConversation kConversation1 = cq.toKeyedConversation(conversation1);
-        cq.add(kConversation1);
+        cq.add(conversation1);
 
-        KeyedConversation[] expected = new KeyedConversation[]{kConversation0, kConversation1};
+        Conversation[] expected = new Conversation[]{conversation0, conversation1};
         Assert.assertArrayEquals(expected, cq.toArray());
     }
 
@@ -149,15 +143,13 @@ public class ConversationQueueTest {
     public void toArrayTestTooSmall() {
         Conversation conversation0 = new Conversation();
         conversation0.setTopic("Hockey");
-        KeyedConversation kConversation0 = cq.toKeyedConversation(conversation0);
-        cq.add(kConversation0);
+        cq.add(conversation0);
         Conversation conversation1 = new Conversation();
         conversation0.setTopic("Toronto");
-        KeyedConversation kConversation1 = cq.toKeyedConversation(conversation1);
-        cq.add(kConversation1);
+        cq.add(conversation1);
 
-        KeyedConversation[] input = new KeyedConversation[1];
-        KeyedConversation[] expected = new KeyedConversation[]{kConversation0, kConversation1};
+        Conversation[] input = new Conversation[1];
+        Conversation[] expected = new Conversation[]{conversation0, conversation1};
 
         Assert.assertArrayEquals(expected, cq.toArray(input));
     }
@@ -169,15 +161,13 @@ public class ConversationQueueTest {
     public void toArrayTestSameSize() {
         Conversation conversation0 = new Conversation();
         conversation0.setTopic("Hockey");
-        KeyedConversation kConversation0 = cq.toKeyedConversation(conversation0);
-        cq.add(kConversation0);
+        cq.add(conversation0);
         Conversation conversation1 = new Conversation();
         conversation0.setTopic("Toronto");
-        KeyedConversation kConversation1 = cq.toKeyedConversation(conversation1);
-        cq.add(kConversation1);
+        cq.add(conversation1);
 
-        KeyedConversation[] input = new KeyedConversation[2];
-        KeyedConversation[] expected = cq.toArray();
+        Conversation[] input = new Conversation[2];
+        Conversation[] expected = cq.toArray();
 
         Assert.assertArrayEquals(expected, cq.toArray(input));
     }
@@ -189,15 +179,13 @@ public class ConversationQueueTest {
     public void toArrayTestLarger() {
         Conversation conversation0 = new Conversation();
         conversation0.setTopic("Hockey");
-        KeyedConversation kConversation0 = cq.toKeyedConversation(conversation0);
-        cq.add(kConversation0);
+        cq.add(conversation0);
         Conversation conversation1 = new Conversation();
         conversation0.setTopic("Toronto");
-        KeyedConversation kConversation1 = cq.toKeyedConversation(conversation1);
-        cq.add(kConversation1);
+        cq.add(conversation1);
 
-        KeyedConversation[] input = new KeyedConversation[3];
-        KeyedConversation[] expected = new KeyedConversation[]{kConversation0, kConversation1, null};
+        Conversation[] input = new Conversation[3];
+        Conversation[] expected = new Conversation[]{conversation0, conversation1, null};
 
         Assert.assertArrayEquals(expected, cq.toArray(input));
     }
