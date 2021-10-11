@@ -7,7 +7,7 @@ import entities.User;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ConversationUser extends ConversationInteractor {
+public class ConversationUsers extends ConversationInteractor {
     private final Conversation conversation;
 
     /**
@@ -15,7 +15,7 @@ public class ConversationUser extends ConversationInteractor {
      *
      * @param conversation Conversation to interact with
      */
-    public ConversationUser(Conversation conversation) {
+    public ConversationUsers(Conversation conversation) {
         this.conversation = conversation;
     }
 
@@ -58,7 +58,7 @@ public class ConversationUser extends ConversationInteractor {
         } else if (Objects.equals(action, "removeUser")) {
             this.removeUser(request.user);
         } else if (Objects.equals(action, "getUserlist")){
-            ArrayList<User> User_lst = this.getUserlist();
+            ArrayList<User> UserList = this.getUserList();
         }
     }
 
@@ -72,7 +72,7 @@ public class ConversationUser extends ConversationInteractor {
     }
 
     /**
-     * Remove a user to the conversation.
+     * Remove a user from the conversation.
      *
      * @param u a user to remove from the conversation.
      */
@@ -82,11 +82,11 @@ public class ConversationUser extends ConversationInteractor {
     }
 
     /**
-     * Remove a user to the conversation.
+     * Return the users in a conversation.
      *
-     * @return a list of User
+     * @return an ArrayList containing the users in a conversation
      */
-    public ArrayList<User> getUserlist() {
+    public ArrayList<User> getUserList() {
         return this.conversation.getUsers();
     }
 }
