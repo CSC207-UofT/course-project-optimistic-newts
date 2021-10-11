@@ -1,5 +1,6 @@
 package entities;
 
+import java.security.Key;
 import java.util.*;
 
 /**
@@ -9,7 +10,7 @@ public class ConversationQueue implements Queue<KeyedConversation> {
     private ArrayList<KeyedConversation> conversations;
     private int size;
     private String location;
-    private int locationRadius;
+    private int locationRadius; // not implemented to influence queue.
     private String[] interests;
 
     /**
@@ -22,6 +23,27 @@ public class ConversationQueue implements Queue<KeyedConversation> {
         this.location = location;
         this.locationRadius = locationRadius;
         this.interests = interests;
+    }
+
+    /**
+     * @return location where this ConversationQueue is centered.
+     */
+    public String getLocation() {
+        return location;
+    }
+
+    /**
+     * @return location radius around which to search for conversations.
+     */
+    public int getLocationRadius() {
+        return locationRadius;
+    }
+
+    /**
+     * @return array of interests that factor into this ConversationQueue's priority function.
+     */
+    public String[] getInterests() {
+        return interests;
     }
 
     /**
@@ -65,7 +87,7 @@ public class ConversationQueue implements Queue<KeyedConversation> {
      */
     @Override
     public Iterator<KeyedConversation> iterator() {
-        KeyedConversation[] array = (KeyedConversation[]) toArray();
+        KeyedConversation[] array = toArray();
         return Arrays.stream(array).iterator();
     }
 
@@ -74,16 +96,18 @@ public class ConversationQueue implements Queue<KeyedConversation> {
      * @return  sorted array
      */
     @Override
-    public Object[] toArray() {
+    public KeyedConversation[] toArray() {
         ArrayList<KeyedConversation> temp = (ArrayList<KeyedConversation>) conversations.clone();
         int tempSize = size;
-        ArrayList<KeyedConversation> toReturn = new ArrayList<>();
+        KeyedConversation[] toReturn = new KeyedConversation[size];
+        int i = 0;
         while (!this.isEmpty()) {
-            toReturn.add(poll());
+            toReturn[i] = poll();
+            i ++;
         }
         conversations = temp;
         size = tempSize;
-        return toReturn.toArray();
+        return toReturn;
     }
 
     /**
@@ -305,7 +329,7 @@ public class ConversationQueue implements Queue<KeyedConversation> {
     private void insert(KeyedConversation toInsert) {
         size += 1;
         int i = size;
-        conversations.set(i, toInsert);
+        conversations.add(i, toInsert);
 
         while (i > 1 && conversations.get(parent(i)).getKey() < conversations.get(i).getKey()) {
             KeyedConversation temp = conversations.get(parent(i));
