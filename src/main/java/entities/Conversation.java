@@ -1,9 +1,10 @@
 package entities;
 
+import java.sql.Array;
 import java.util.ArrayList;
 
 /**
- * A class representing a conversation.
+ * A class representing a conversation
  */
 public class Conversation {
     private String id;
@@ -37,6 +38,21 @@ public class Conversation {
         this.messages = messages;
         this.users = users;
     }
+
+    public Conversation() {
+        this.id = "";
+        this.title = "";
+        this.topic = "";
+        this.location = "";
+        this.locationRadius = 0;
+        this.minRating = 0;
+        this.maxSize = 0;
+        this.closingTime = "";
+        this.isOpen = false;
+        this.messages = new ArrayList<Message>();
+        this.users = new ArrayList<User>();
+    }
+
 
     /**
      * Return the id of the conversation.
