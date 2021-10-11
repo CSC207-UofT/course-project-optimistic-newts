@@ -52,6 +52,7 @@ public class CreateConversation extends ConversationInteractor {
      * @return  A request model to be filled in by caller
      */
     public CreateConversationRequest getRequestModel(){
+
         return new CreateConversationRequest();
     }
 
@@ -66,5 +67,13 @@ public class CreateConversation extends ConversationInteractor {
                 request1.locationRadius, request1.minRating, request1.maxSize,
                 request1.closingTime, request1.isOpen, request1.messages,
                 request1.users);
+    }
+
+    /**
+     * Getter method for CreateConversation's conversation.
+     * @return Returns CreateConversation's conversation.
+     */
+    public Conversation getConversation(){
+        return this.conversation;
     }
 }
