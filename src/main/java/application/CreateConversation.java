@@ -5,6 +5,7 @@ import entities.Message;
 import entities.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CreateConversation extends ConversationInteractor {
     private Conversation conversation;
@@ -52,6 +53,7 @@ public class CreateConversation extends ConversationInteractor {
      * @return  A request model to be filled in by caller
      */
     public CreateConversationRequest getRequestModel(){
+
         return new CreateConversationRequest();
     }
 
@@ -61,10 +63,26 @@ public class CreateConversation extends ConversationInteractor {
      */
     @Override
     public void request(RequestModel request) {
-        CreateConversationRequest request1 = (CreateConversationRequest) request;
-        conversation = new Conversation(request1.id, request1.title, request1.topic, request1.location,
-                request1.locationRadius, request1.minRating, request1.maxSize,
-                request1.closingTime, request1.isOpen, request1.messages,
-                request1.users);
+
+        CreateConversationRequest cc_request = (CreateConversationRequest) request;
+
+        conversation = new Conversation(cc_request.id, cc_request.title, cc_request.topic, cc_request.location,
+                cc_request.locationRadius, cc_request.minRating, cc_request.maxSize,
+                cc_request.closingTime, cc_request.isOpen, cc_request.messages,
+                cc_request.users);
+
+        if (cc_request.respondTo != null) {                   //if statement for testing purposes
+            HashMap<String, Object> h_map = new HashMap<>();
+            h_map.put(cc_request.title, conversation);
+            cc_request.respondTo.response(new ResponseModel(h_map));
+        }
+    }
+
+    /**
+     * Getter method for CreateConversation's conversation.
+     * @return Returns CreateConversation's conversation.
+     */
+    public Conversation getConversation(){
+        return this.conversation;
     }
 }

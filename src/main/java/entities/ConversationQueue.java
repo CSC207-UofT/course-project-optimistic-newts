@@ -10,12 +10,12 @@ public class ConversationQueue implements Queue<Conversation> {
     private int size;
     private String location;
     private int locationRadius; // not implemented to influence queue.
-    private String[] interests;
+    private ArrayList<String> interests;
 
     /**
      * Initialize a new, empty ConversationQueue.
      */
-    public ConversationQueue(String location, int locationRadius, String[] interests) {
+    public ConversationQueue(String location, int locationRadius, ArrayList<String> interests) {
         conversations = new ArrayList<>();
         conversations.add(null); // item at index 0 will never be used, due to Array representation of binary heap.
         size = 0;
@@ -41,7 +41,7 @@ public class ConversationQueue implements Queue<Conversation> {
     /**
      * @return array of interests that factor into this ConversationQueue's priority function.
      */
-    public String[] getInterests() {
+    public ArrayList<String> getInterests() {
         return interests;
     }
 
@@ -158,7 +158,6 @@ public class ConversationQueue implements Queue<Conversation> {
      */
     @Override
     public boolean remove(Object o) {
-
         if (o == null) {
             return false;
         }

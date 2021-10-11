@@ -1,5 +1,6 @@
 package entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class KeyedConversation {
      * @param conversation  Conversation to pair key to
      * @param params        Relevance parameters
      */
-    public KeyedConversation(Conversation conversation, String[] params) {
+    public KeyedConversation(Conversation conversation, ArrayList<String> params) {
         this.conversation = conversation;
         key = 0;
         for (String param : params) {
