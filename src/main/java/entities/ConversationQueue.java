@@ -158,6 +158,7 @@ public class ConversationQueue implements Queue<Conversation> {
      */
     @Override
     public boolean remove(Object o) {
+
         if (o == null) {
             return false;
         }
@@ -179,9 +180,9 @@ public class ConversationQueue implements Queue<Conversation> {
     @Override
     public boolean containsAll(Collection<?> c) {
         for (Object object : c) {
-            if (!contains(object)) {
+            if (!(object instanceof Conversation)) {
                 return false;
-            } else if (!contains(toKeyedConversation((Conversation) object))) {
+            } else if (!contains(object)) {
                 return false;
             }
         }

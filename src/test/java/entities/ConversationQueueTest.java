@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;;
 
 import java.util.Iterator;
+import java.util.List;
 
 public class ConversationQueueTest {
     ConversationQueue cq;
@@ -189,4 +190,112 @@ public class ConversationQueueTest {
 
         Assert.assertArrayEquals(expected, cq.toArray(input));
     }
+
+    /**
+     * Test remove on a root node.
+     */
+    @Test
+    public void removeTestFirst() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Math");
+        cq.add(conversation1);
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Toronto");
+        cq.add(conversation2);
+
+        Assert.assertTrue(cq.remove(conversation0));
+        Conversation[] expected = new Conversation[]{conversation1, conversation2};
+        Assert.assertArrayEquals(expected, cq.toArray());
+    }
+
+    /**
+     * Test remove on last node.
+     */
+    @Test
+    public void removeTestLast() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Math");
+        cq.add(conversation1);
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Toronto");
+        cq.add(conversation2);
+
+        Assert.assertTrue(cq.remove(conversation2));
+        Conversation[] expected = new Conversation[]{conversation0, conversation1};
+        Assert.assertArrayEquals(expected, cq.toArray());
+    }
+
+    /**
+     * Test remove on middle node - one with parent and children.
+     */
+    @Test
+    public void removeTestMiddle() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Math");
+        cq.add(conversation1);
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Toronto");
+        cq.add(conversation2);
+        Conversation conversation3 = new Conversation();
+        conversation3.setTopic("Golf");
+        cq.add(conversation3);
+        Conversation conversation4 = new Conversation();
+        conversation4.setTopic("Hockey");
+        cq.add(conversation4);
+
+        Assert.assertTrue(cq.remove(conversation1));
+        Conversation[] expected = new Conversation[]{conversation0, conversation4, conversation2, conversation3};
+        Assert.assertArrayEquals(expected, cq.toArray());
+    }
+
+    /**
+     * Test contains all returns false.
+     */
+    @Test
+    public void containsAllTestFalse() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Math");
+        cq.add(conversation1);
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Toronto");
+        cq.add(conversation2);
+        Conversation conversation3 = new Conversation();
+        conversation2.setTopic("Fish");
+
+        Conversation[] compare = new Conversation[]{conversation0, conversation1, conversation2, conversation3};
+        Assert.assertFalse(cq.containsAll(List.of(compare)));
+    }
+
+    /**
+     * Test contains all returns true.
+     */
+    @Test
+    public void containsAllTestTrue() {
+        Conversation conversation0 = new Conversation();
+        conversation0.setTopic("Hockey");
+        cq.add(conversation0);
+        Conversation conversation1 = new Conversation();
+        conversation1.setTopic("Math");
+        cq.add(conversation1);
+        Conversation conversation2 = new Conversation();
+        conversation2.setTopic("Toronto");
+        cq.add(conversation2);
+
+        Conversation[] compare = new Conversation[]{conversation0, conversation1, conversation2};
+        Assert.assertTrue(cq.containsAll(List.of(compare)));
+    }
+
+
 }
