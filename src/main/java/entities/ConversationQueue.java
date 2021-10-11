@@ -1,7 +1,5 @@
 package entities;
 
-import java.lang.reflect.Array;
-import java.security.Key;
 import java.util.*;
 
 /**
@@ -10,14 +8,30 @@ import java.util.*;
 public class ConversationQueue implements Queue<KeyedConversation> {
     private ArrayList<KeyedConversation> conversations;
     private int size;
+    private String location;
+    private int locationRadius;
+    private String[] interests;
 
     /**
      * Initialize a new, empty ConversationQueue.
      */
-    public ConversationQueue() {
+    public ConversationQueue(String location, int locationRadius, String[] interests) {
         conversations = new ArrayList<>();
         conversations.add(null); // item at index 0 will never be used, due to Array representation of binary heap.
         size = 0;
+        this.location = location;
+        this.locationRadius = locationRadius;
+        this.interests = interests;
+    }
+
+    /**
+     * Returns a KeyedConversation made up of the given conversation and a priority key generated relative to
+     * this ConversationQueue.
+     * @param conversation  conversation to include in new KeyedConversation
+     * @return  KeyedConversation with Conversation and a generated priority key
+     */
+    public KeyedConversation toKeyedConversation(Conversation conversation) {
+        return new KeyedConversation(conversation, interests);
     }
 
     /**
@@ -263,13 +277,18 @@ public class ConversationQueue implements Queue<KeyedConversation> {
      * @return highest priority KeyedConversation
      */
     @Override
-    public KeyedConversation element() {
-        return conversations.get(1);
+    public KeyedConversation element() throws NoSuchElementException {
+        try {
+            return conversations.get(1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoSuchElementException("Tried to retrieve head of ConversationQueue, but the queue was empty.");
+        }
     }
 
     /**
-     * fix
-     * @return
+     * Retrieves, but does not remove, a highest priority KeyedConversation from this ConversationQueue- or null if
+     * the queue is empty.
+     * @return  highest priority KeyedConversation or null if empty queue
      */
     @Override
     public KeyedConversation peek() {
