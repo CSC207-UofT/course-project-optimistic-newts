@@ -1,10 +1,10 @@
 package entities;
 
-import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -17,7 +17,10 @@ public class ConversationQueueTest {
      */
     @Before
     public void setUp() {
-        cq = new ConversationQueue("Toronto", 10, new String[]{"Hockey", "Math"});
+        ArrayList<String> interests = new ArrayList<>();
+        interests.add("Hockey");
+        interests.add("Math");
+        cq = new ConversationQueue("Toronto", 10, interests);
     }
 
     /**
@@ -41,7 +44,7 @@ public class ConversationQueueTest {
      */
     @Test
     public void getInterestsTest() {
-        Assert.assertArrayEquals(new String[]{"Hockey", "Math"}, cq.getInterests());
+        Assert.assertArrayEquals(new String[]{"Hockey", "Math"}, cq.getInterests().toArray());
     }
 
     /**
