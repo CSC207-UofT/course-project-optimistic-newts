@@ -3,6 +3,7 @@ package entities;
 import org.junit.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -104,7 +105,8 @@ public class ConversationTest {
 
     @Test(timeout = 50)
     public void TestAddMessage() {
-        Message m = new Message();
+        User u = new User("Joe", "pass", new ArrayList<String>(), 1);
+        Message m = new Message("Hello!", u);
         c.addMessage(m);
         assertSame(m, c.getMessages().get(c.getMessages().size() - 1));
     }
@@ -132,4 +134,6 @@ public class ConversationTest {
         User u = new User("testuser", "password", interests, 1);
         assertTrue(c.addUser(u));
     }
+
+
 }

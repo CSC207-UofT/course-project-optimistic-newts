@@ -9,16 +9,20 @@ public class ConversationQueue implements Queue<Conversation> {
     private ArrayList<KeyedConversation> conversations;
     private int size;
     private String location;
-    private int locationRadius; // not implemented to influence queue.
+    private int locationRadius; // not implemented to influence queue yet.
     private ArrayList<String> interests;
 
+    /**
+     * Initialize a new, empty ConversationQueue.
+     */
     public ConversationQueue(String location, int locationRadius, ArrayList<String> interests) {
+        conversations = new ArrayList<>();
+        conversations.add(null); // item at index 0 will never be used, due to Array representation of binary heap.
+        size = 0;
         this.location = location;
         this.locationRadius = locationRadius;
         this.interests = interests;
-
     }
-
 
     /**
      * @return location where this ConversationQueue is centered.
@@ -31,7 +35,6 @@ public class ConversationQueue implements Queue<Conversation> {
      * @return location radius around which to search for conversations.
      */
     public int getLocationRadius() {
-
         return locationRadius;
     }
 
@@ -39,7 +42,6 @@ public class ConversationQueue implements Queue<Conversation> {
      * @return array of interests that factor into this ConversationQueue's priority function.
      */
     public ArrayList<String> getInterests() {
-
         return interests;
     }
 
@@ -177,9 +179,9 @@ public class ConversationQueue implements Queue<Conversation> {
     @Override
     public boolean containsAll(Collection<?> c) {
         for (Object object : c) {
-            if (!contains(object)) {
+            if (!(object instanceof Conversation)) {
                 return false;
-            } else if (!contains(toKeyedConversation((Conversation) object))) {
+            } else if (!contains(object)) {
                 return false;
             }
         }
