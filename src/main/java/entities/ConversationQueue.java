@@ -9,7 +9,7 @@ public class ConversationQueue implements Queue<Conversation> {
     private ArrayList<KeyedConversation> conversations;
     private int size;
     private String location;
-    private int locationRadius; // not implemented to influence queue.
+    private int locationRadius; // not implemented to influence queue yet.
     private ArrayList<String> interests;
 
     public ConversationQueue(String location, int locationRadius, ArrayList<String> interests) {
