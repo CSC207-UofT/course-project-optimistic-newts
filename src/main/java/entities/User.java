@@ -14,7 +14,7 @@ public class User {
     private float rating;
     private int numRatings;
     private boolean loginStatus;
-    private ArrayList<User> friends;
+    private ArrayList<User> friends = new ArrayList<>();
     private ArrayList<Conversation> conversations;
 
     /**
