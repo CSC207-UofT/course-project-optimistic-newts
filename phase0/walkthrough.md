@@ -10,13 +10,13 @@ $ java driver/CliDriver
 
 Then they can make a new profile for themselves by using the terminal and using the command: 
 
-make user <name> <password>
+make user "name" "password"
 
-In this scenario, the user should change <name> to a username they would like to use and <password> to a password they would like to use. Now that a new profile has been created, they can log in using the terminal and using the command:
+In this scenario, the user should change "name" to a username they would like to use and "password" to a password they would like to use. Now that a new profile has been created, they can log in using the terminal and using the command:
 
-login <name> <password>
+login "name" "password"
 
-Where <name> and <password> are the same as what they set it to earlier. Then the user can log out of the system by using the terminal and command:
+Where "name" and "password" are the same as what they set it to earlier. Then the user can log out of the system by using the terminal and command:
 
-logout <name>
+logout "name"
 
