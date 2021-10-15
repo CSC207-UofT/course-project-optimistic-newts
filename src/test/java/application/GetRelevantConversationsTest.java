@@ -1,7 +1,8 @@
 package application;
 
-import entities.User;
+
 import entities.ConversationQueue;
+import entities.User;
 import org.junit.Before;
 import org.junit.Test;
 

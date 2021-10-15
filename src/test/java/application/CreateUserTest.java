@@ -1,7 +1,8 @@
 package application;
 
-import adapters.CliPresenter;
 import cli.CliDriver;
+import adapters.CliPresenter;
+
 import org.junit.Before;
 import org.junit.Test;
 

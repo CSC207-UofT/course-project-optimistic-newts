@@ -1,8 +1,9 @@
 package application;
 import application.CreateConversation;
 import entities.Conversation;
-import entities.Message;
 import entities.User;
+import entities.Message;
+
 
 import java.util.ArrayList;
 

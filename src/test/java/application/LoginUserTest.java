@@ -1,8 +1,9 @@
 package application;
 
+import entities.User;
 import adapters.CliPresenter;
 import cli.CliDriver;
-import entities.User;
+
 import org.junit.Before;
 import org.junit.Test;
 

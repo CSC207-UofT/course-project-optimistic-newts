@@ -1,8 +1,8 @@
 package application;
 
+import entities.User;
 import entities.Conversation;
 import entities.Message;
-import entities.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;

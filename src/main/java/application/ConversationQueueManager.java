@@ -1,7 +1,8 @@
 package application;
 
-import entities.Conversation;
 import entities.ConversationQueue;
+import entities.Conversation;
+
 
 /**
  * An object representing a ConversationQueueManager of the application.
