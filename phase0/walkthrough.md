@@ -1,27 +1,21 @@
-Scenario Walkthrough:
+**Scenario Walkthrough:**
 
-First the User runs the CliMain.java file through a command line. To do so they should first ensure they are in the root directory. Then they can use the command:
+First the User runs the `cli.CliMain.java` file through IntelliJ or through the command line by running the following in the project directory:
 
-$ javac cli/CliMain.java
+`$ gradle build -x test`
 
-This command compiles the code and then the program should start after using the command:
+`$ gradle run`
 
-$ java cli/CliMain
+---
+Upon running `cli.CliMain.java`, a `CliDriver` is created along with a `CliPresenter` (which is given the `CliDriver`) and a `CliController` (which is given the `CliDriver` and the `CliPresenter`), then the controller is asked to run the CLI application. The controller will prompt the user for input and lead them through the various menus available in the CLI implementation of our program. Each time an input is recieved, the controller calls upon the appropriate use case to carry out the necessary operations. Our skeleton program's functionality can be outlined by the following:
 
-Then they can make a new profile for themselves by using the terminal and using the command: 
+---
+Once the user has started the command line application, they are at the Login Menu and will be prompted to login or create an account. To login, an existing user enters their user name and then their password once prompted.
 
-make user "name" "password"
+To create an account, the user can enter '`create`', the program will take them to the Create User Menu and prompt them for their username (which must be unique), a password, their location, and an interest of theirs. After successful account creation, the user will be logged into their new account.
 
-In this scenario, the user should change "name" to a username they would like to use and "password" to a password they would like to use. The CliMain class runs the main method which first creates a CliDriver object to be used to create a Controller object, at which point the controller.run() method is run. The CliDriver takes inputs and passes them to the Controller which validates the input name and password and calls the UserManager interactor to create a new User object with the given name and password.
+Once logged in, the user will see the User Menu- which gives them additional menu options: `conversations`, `friends`, `userinfo`, and `logout`. The first three of these are not implemented in this skeleton program, but the user is able to use `logout`.
 
-Now that a new profile has been created, they can log in using the terminal and using the command:
+When the user enters `logout` at the User Menu, they will be logged out and returned to the Login Menu.
 
-login "name" "password"
-
-Where "name" and "password" are the same as what they set it to earlier. The CliDriver takes the input and passes it to the Controller. Once again, the Controller validates the input by the user which then uses the UserManager interactor to log in to the created User object from earlier.
-
-Then the user can log out of the system by using the terminal and command:
-
-logout "name"
-
-The CliDriver takes the input and passes it to the Controller. The Controller validates the input by the user and then uses the UserManager interactor to log out of the User object.
+The User can enter `exit` at the Login Menu or the Create User Menu to stop the program.
