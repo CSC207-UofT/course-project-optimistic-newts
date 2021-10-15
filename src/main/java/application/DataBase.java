@@ -21,6 +21,10 @@ public class DataBase {
         UserList.add(user);
     }
 
+
+    public static void deleteUser(User user) {UserList.remove(user); }
+
+
     /**
      * add a Conversation to ConversationList
      * @param conversation Conversation to be added
