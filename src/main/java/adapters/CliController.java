@@ -48,9 +48,6 @@ public class CliController {
         }
     }
 
-    private void stop() { // TODO: Make nicer stopping solution
-    }
-
     /**
      * Stops the CLI program.
      */

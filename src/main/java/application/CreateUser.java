@@ -66,6 +66,5 @@ public class CreateUser extends UserInteractor {
         ResponseModel response = new ResponseModel(responseMap);
         request1.respondTo.response(response);
         DataBase.addUser(user);
-        }
     }
 }
