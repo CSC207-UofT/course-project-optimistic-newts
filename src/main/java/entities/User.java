@@ -14,7 +14,7 @@ public class User {
     private float rating;
     private int numRatings;
     private boolean loginStatus;
-    private ArrayList<User> friends = new ArrayList<>();
+    private ArrayList<User> friends;
     private ArrayList<Conversation> conversations;
 
     /**
@@ -31,6 +31,26 @@ public class User {
         this.password = password;
         this.interests = interests;
         this.id = id;
+        this.rating = 5;
+        this.numRatings = 1;
+        this.loginStatus = false;
+        this.friends = new ArrayList<>();
+        this.conversations = new ArrayList<>();
+    }
+
+    /**
+     * Empty User constructor- primarily for testing purposes.
+     */
+    public User() {
+        this.username = null;
+        this.password = null;
+        this.interests = new ArrayList<>();
+        this.id = -1;
+        this.rating = 0;
+        this.numRatings = 0;
+        this.loginStatus = false;
+        this.friends = new ArrayList<>();
+        this.conversations = new ArrayList<>();
     }
 
     /**

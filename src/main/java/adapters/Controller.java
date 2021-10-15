@@ -2,18 +2,6 @@ package adapters;
 
 public class Controller {
 
-    /**
-     * placeholder
-     * @param inOut
-     */
-    public Controller(InOut inOut) {
+    public void input() {}
 
-    }
-
-    /**
-     * placeholder
-     */
-    public void run(){
-
-    };
 }

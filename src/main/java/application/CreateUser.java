@@ -1,11 +1,14 @@
 package application;
 
-import entities.Conversation;
 import entities.User;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+//TODO: Check that username is not already in use before creating.
 
 public class CreateUser extends UserInteractor {
-    private User User;
+    private User user;
 
     /**
      * A request to be carried out by CreateUser.
@@ -15,34 +18,30 @@ public class CreateUser extends UserInteractor {
         private int id;
         private String username;
         private String password;
-        private Object location;
+        private String location;
         private ArrayList<String> interests;
-        private float rating;
-        private int numRatings;
-        private boolean loginStatus;
-        private ArrayList<User> friends;
-        private ArrayList<Conversation> conversations;
 
 
         /**
          * Fills in this RequestModel's instance attributes.
          */
-        public void fillRequest(OutputBoundary respondTo, int id, String username, String password, Object location,
-                                ArrayList<String> interests, float rating, int numRatings, boolean loginStatus,
-                                ArrayList<User> friends, ArrayList<Conversation> conversations) {
+        public void fillRequest(OutputBoundary respondTo, int id, String username, String password, String location,
+                                ArrayList<String> interests) {
             this.respondTo = respondTo;
             this.id = id;
             this.username = username;
             this.password = password;
             this.location = location;
             this.interests = interests;
-            this.rating = rating;
-            this.numRatings = numRatings;
-            this.loginStatus = loginStatus;
-            this.friends = friends;
-            this.conversations = conversations;
         }
 
+    }
+
+    /**
+     * @return  the User created by this CreateUser request, or null if no such user exists.
+     */
+    public User getUser() {
+        return user;
     }
 
     /**
@@ -59,7 +58,14 @@ public class CreateUser extends UserInteractor {
     @Override
     public void request(RequestModel request) {
         CreateUserRequest request1 = (CreateUserRequest) request;
-        User = new User(request1.username, request1.password, request1.interests, request1.id);
+        user = new User(request1.username, request1.password, request1.interests, request1.id);
+        // output that user creation was successful
+        Map<String, Object> responseMap = new HashMap<>();
+        String s = request1.username + " successfully created!";
+        responseMap.put("Success", s);
+        ResponseModel response = new ResponseModel(responseMap);
+        request1.respondTo.response(response);
+        DataBase.addUser(user);
         }
     }
 

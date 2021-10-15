@@ -6,12 +6,14 @@ import entities.Message;
 import entities.User;
 
 import java.util.ArrayList;
+import java.util.Objects;
+import java.util.Optional;
 
 public class DataBase {
 
-    private static ArrayList<User> UserList;
-    private static ArrayList<Conversation> ConversationList;
-    private static ArrayList<Message> MessageList;
+    private static final ArrayList<User> UserList = new ArrayList<>();
+    private static final ArrayList<Conversation> ConversationList = new ArrayList<>();
+    private static final ArrayList<Message> MessageList = new ArrayList<>();
 
     /**
      * add a Conversation to ConversationList
@@ -19,6 +21,15 @@ public class DataBase {
      */
     public static void addUser(User user){
         UserList.add(user);
+    }
+
+    public static User getUser(String username) {
+        for (User user : UserList) {
+            if (Objects.equals(user.getUsername(), username)) {
+                return user;
+            }
+        }
+        return new User();
     }
 
     /**
