@@ -1,7 +1,9 @@
-# Specifications
+# Specification
 
-We chose to outline our specifications using Agile User Stories
-in and effort to design our program with the User as our main priority. Our specifications are as follows:
+We chose to write our specification using Agile User Stories
+in and effort to design our program with the User as our main priority.
+
+---
 
 1. As a **User**, I want to be able to **create an account** so that I can use the application.
 2. As a **User**, I want to be able to **log in** to my account so that I don’t have to create an account each time I use the application.
@@ -21,5 +23,4 @@ in and effort to design our program with the User as our main priority. Our spec
 16. As a **User**, I want to be able to **remove people as friends** so that I am not forced to stay in contact with someone who I am not interested in communicating with.
 17. As a **User**, I want to be able to **discover new topics** which may interest me, so that I am not limited to a certain range of topics.
 18. As a **User**, I want to be able to **filter-out topics** that I am not interested in, so that I am not repeatedly presented with topics which I am not interested in.
-
 
