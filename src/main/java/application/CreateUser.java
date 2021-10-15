@@ -60,6 +60,7 @@ public class CreateUser extends UserInteractor {
     public void request(RequestModel request) {
         CreateUserRequest request1 = (CreateUserRequest) request;
         User = new User(request1.username, request1.password, request1.interests, request1.id);
+        DataBase.addUser(User);
         }
     }
 
