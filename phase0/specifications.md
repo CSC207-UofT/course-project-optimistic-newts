@@ -18,7 +18,7 @@ in and effort to design our program with the User as our main priority. Our spec
 13. As a **User**, I want to be able to **find conversations happening elsewhere in the world** so that I can meet people internationally.
 14. As a **User**, I want to be able to **leave conversation** in case I am not interested in participating in them anymore.
 15. As a **User**, I want to be able to **add people as friends** so that I can stay in touch with them outside of a conversation.
-16. As a **User**, I want to be able to choose who I talk to so that I am not forced to talk with someone I don’t like.
+16. As a **User**, I want to be able to **remove people as friends** so that I am not forced to stay in contact with someone who I am not interested in communicating with.
 17. As a **User**, I want to be able to **discover new topics** which may interest me, so that I am not limited to a certain range of topics.
 18. As a **User**, I want to be able to **filter-out topics** that I am not interested in, so that I am not repeatedly presented with topics which I am not interested in.
 
