@@ -1,7 +1,8 @@
 package application;
 
-import entities.User;
+
 import entities.ConversationQueue;
+import entities.User;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,7 +11,6 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 public class GetRelevantConversationsTest {
-    User u;
     GetRelevantConversations g;
 
     /**
@@ -22,8 +22,7 @@ public class GetRelevantConversationsTest {
         interests.add("Sports");
         interests.add("Music");
         interests.add("Fitness");
-        u = new User("test_user", "password123", interests, 1);
-        g = new GetRelevantConversations(u);
+        g = new GetRelevantConversations();
     }
 
     /**
@@ -47,7 +46,7 @@ public class GetRelevantConversationsTest {
         interests.add("Music");
         interests.add("Fitness");
 
-        r.fillRequest(null, 3);
+        r.fillRequest(null, "SampleLocation", 3, interests);
         g.request(r);
         assertEquals(3, g.getConversationQueue().getLocationRadius());
     }
