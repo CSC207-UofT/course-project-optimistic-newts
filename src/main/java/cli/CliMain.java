@@ -1,6 +1,7 @@
 package cli;
 
-import adapters.Controller;
+import adapters.CliController;
+import adapters.CliPresenter;
 
 /**
  * Runs the main application in a command line interface.
@@ -8,7 +9,8 @@ import adapters.Controller;
 public class CliMain {
     public static void main(String[] args) {
         CliDriver cli = new CliDriver();
-        Controller controller = new Controller(cli);
+        CliPresenter presenter = new CliPresenter(cli);
+        CliController controller = new CliController(cli, presenter);
         controller.run();
     }
 }
