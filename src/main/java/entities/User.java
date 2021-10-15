@@ -14,7 +14,7 @@ public class User {
     private float rating;
     private int numRatings;
     private boolean loginStatus;
-    private ArrayList<User> friends = new ArrayList<>();
+    private ArrayList<User> friends;
     private ArrayList<Conversation> conversations;
 
     /**
@@ -31,6 +31,26 @@ public class User {
         this.password = password;
         this.interests = interests;
         this.id = id;
+        this.rating = 5;
+        this.numRatings = 1;
+        this.loginStatus = false;
+        this.friends = new ArrayList<>();
+        this.conversations = new ArrayList<>();
+    }
+
+    /**
+     * Empty User constructor- primarily for testing purposes.
+     */
+    public User() {
+        this.username = null;
+        this.password = null;
+        this.interests = new ArrayList<>();
+        this.id = -1;
+        this.rating = 0;
+        this.numRatings = 0;
+        this.loginStatus = false;
+        this.friends = new ArrayList<>();
+        this.conversations = new ArrayList<>();
     }
 
     /**
@@ -89,9 +109,9 @@ public class User {
     public void setPassword(String password) throws EntityExceptions {
         if(password.length() >= 6) {
             this.password = password;
-            }
-        else throw new EntityExceptions("Please choose a password with at least 6 characters.");
         }
+        else throw new EntityExceptions("Please choose a password with at least 6 characters.");
+    }
 
     /**
      * Setter method for user's location.
@@ -219,4 +239,3 @@ public class User {
     }
 
 }
-
