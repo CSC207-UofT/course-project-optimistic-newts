@@ -17,17 +17,20 @@ public class GetRelevantConversations extends UserInteractor{
      */
     public class GetRelevantConversationsRequest extends RequestModel{
         private OutputBoundary respondTo;
-        private User user;
+        private String location;
         private int locationRadius;
+        private ArrayList<String> interests;
 
         /**
          * Fills in this RequestModel's instance attributes.
          */
-        public void fillRequest(OutputBoundary respondTo, User user, int locationRadius) {
+        public void fillRequest(OutputBoundary respondTo, String location, int locationRadius,
+                                ArrayList<String> interests) {
 
             this.respondTo = respondTo;
-            this.user = user;
+            this.location = location;
             this.locationRadius = locationRadius;
+            this.interests = interests;
         }
     }
 
@@ -46,21 +49,18 @@ public class GetRelevantConversations extends UserInteractor{
      */
     @Override
     public void request(RequestModel request) {
-
         GetRelevantConversationsRequest grc_request = (GetRelevantConversationsRequest) request;
-        User grc_user = grc_request.user;
-        conversationQueue = new ConversationQueue(grc_user.getLocation(), grc_request.locationRadius,
-                grc_user.getInterests());
 
-        if (grc_request.respondTo != null){                 // if statement added for testing
+        conversationQueue = new ConversationQueue(grc_request.location, grc_request.locationRadius,
+                grc_request.interests);
+
+        if (grc_request.respondTo != null) {                 // if statement added for testing
             conversationQueue.addAll(DataBase.getConversationList());
             HashMap<String, Object> h_map = new HashMap<>();
             h_map.put("RelevantConversations", conversationQueue.toArray());
-
             grc_request.respondTo.response(new ResponseModel(h_map));
         }
     }
-
     /**
      * Getter method for GetRelevantConversation's conversationQueue.
      * @return Returns GetRelevantConversation's conversationQueue.
