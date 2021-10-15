@@ -60,6 +60,7 @@ public class CreateConversation extends ConversationInteractor {
     /**
      * Accepts a request.
      * @param request   a request stored as a RequestModel
+     * TODO: change request() based on the code in 'CliController'.
      */
     @Override
     public void request(RequestModel request) {

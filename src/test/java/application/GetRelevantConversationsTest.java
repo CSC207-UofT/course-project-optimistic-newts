@@ -23,7 +23,7 @@ public class GetRelevantConversationsTest {
         interests.add("Music");
         interests.add("Fitness");
         u = new User("test_user", "password123", interests, 1);
-        g = new GetRelevantConversations(u);
+        g = new GetRelevantConversations();
     }
 
     /**
@@ -47,7 +47,7 @@ public class GetRelevantConversationsTest {
         interests.add("Music");
         interests.add("Fitness");
 
-        r.fillRequest(null, 3);
+        r.fillRequest(null, u, 3);
         g.request(r);
         assertEquals(3, g.getConversationQueue().getLocationRadius());
     }

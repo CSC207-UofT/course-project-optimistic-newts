@@ -10,30 +10,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GetRelevantConversations extends UserInteractor{
-    private User user;
     private ConversationQueue conversationQueue;
-
-    /**
-     * Initialize a new GetRelevantConversations.
-     */
-    GetRelevantConversations(User user){
-        this.user = user;
-
-    }
 
     /**
      * A request to be carried out by GetRelevantConversations.
      */
     public class GetRelevantConversationsRequest extends RequestModel{
         private OutputBoundary respondTo;
+        private User user;
         private int locationRadius;
 
         /**
          * Fills in this RequestModel's instance attributes.
          */
-        public void fillRequest(OutputBoundary respondTo, int locationRadius) {
+        public void fillRequest(OutputBoundary respondTo, User user, int locationRadius) {
 
             this.respondTo = respondTo;
+            this.user = user;
             this.locationRadius = locationRadius;
         }
     }
@@ -49,14 +42,15 @@ public class GetRelevantConversations extends UserInteractor{
     /**
      * Accepts a request.
      * @param request   a request stored as a RequestModel
+     * TODO: change request() based on the code in 'CliController'.
      */
     @Override
     public void request(RequestModel request) {
 
         GetRelevantConversationsRequest grc_request = (GetRelevantConversationsRequest) request;
-
-        conversationQueue = new ConversationQueue(user.getLocation(), grc_request.locationRadius,
-                user.getInterests());
+        User grc_user = grc_request.user;
+        conversationQueue = new ConversationQueue(grc_user.getLocation(), grc_request.locationRadius,
+                grc_user.getInterests());
 
         if (grc_request.respondTo != null){                 // if statement added for testing
             conversationQueue.addAll(DataBase.getConversationList());
