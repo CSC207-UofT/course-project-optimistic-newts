@@ -32,6 +32,8 @@ public class DataBase {
         return new User();
     }
 
+    public static void deleteUser(User user) { UserList.remove(user); }
+
     /**
      * add a Conversation to ConversationList
      * @param conversation Conversation to be added
