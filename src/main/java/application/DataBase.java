@@ -49,4 +49,8 @@ public class DataBase {
     public static ArrayList<Conversation> getConversationList(){
         return (ArrayList<Conversation>) ConversationList.clone();
     }
+
+    public static void deleteUser(User user) {
+        UserList.remove(user);
+    }
 }

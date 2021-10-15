@@ -4,6 +4,7 @@ import application.CreateUser;
 import application.DataBase;
 import application.LoginUser;
 import application.RequestModel;
+import application.UserManager;
 import entities.Conversation;
 import entities.Message;
 import entities.User;
@@ -45,6 +46,9 @@ public class CliController {
             }
             userMenu();
         }
+    }
+
+    private void stop() { // TODO: Make nicer stopping solution
     }
 
     /**
@@ -143,11 +147,7 @@ public class CliController {
                 } else {
                     presenter.present("Password:");
                     String passwordInput = inOut.getInput();
-                    LoginUser loginUser = new LoginUser();
-                    LoginUser.LoginUserRequest requestForm = loginUser.getRequestModel();
-                    requestForm.fillRequest(presenter, usernameInput, passwordInput);
-                    loginUser.request(requestForm);
-                    user = loginUser.getUser();
+                    user = new UserManager().LoginUser(presenter, usernameInput, passwordInput);
                 }
             } catch (IOException e) {
                 presenter.present("Something went wrong.");
@@ -174,9 +174,7 @@ public class CliController {
                 } else if (Objects.equals(DataBase.getUser(username).getUsername(), username)) { // TODO: replace DataBase reference
                     presenter.present("Username already in use.");
                 } else {
-                    // username is unique, so we can create a new user with this username!
-                    CreateUser creator = new CreateUser();
-                    CreateUser.CreateUserRequest request = creator.getRequestModel();
+                    // username is unique, so we can create a new user with this username.
                     presenter.present("Enter a password:");
                     String password = inOut.getInput();
                     presenter.present("Enter your location:");
@@ -184,14 +182,12 @@ public class CliController {
                     presenter.present("Enter something you're interested in:");
                     ArrayList<String> interests = new ArrayList<>();
                     interests.add(inOut.getInput());
-                    request.fillRequest(presenter, 1, username, password, location, interests);
-                    creator.request(request);
-                    user = creator.getUser();
+                    user = new UserManager().CreateUser(presenter, username, password, location, interests);
                     // We will now log the new user in
                     LoginUser loginUser = new LoginUser();
                     LoginUser.LoginUserRequest requestForm = loginUser.getRequestModel();
                     requestForm.fillRequest(presenter, username, password);
-                    loginUser.request(requestForm);
+                    new UserManager().LoginUser(presenter, username, password);
                 }
             } catch (IOException e) {
                 presenter.present("Something went wrong.");

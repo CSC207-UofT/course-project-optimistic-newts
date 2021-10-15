@@ -68,4 +68,4 @@ public class CreateUser extends UserInteractor {
         DataBase.addUser(user);
         }
     }
-
+}
