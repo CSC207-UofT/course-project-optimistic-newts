@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
  * Command line interface driver that accepts text input from System.in and can output to System.out.
  */
 public class CliDriver implements adapters.InOut{
-    private BufferedReader reader;
+    private final BufferedReader reader;
 
     /**
      * Creates a new CliDriver object.

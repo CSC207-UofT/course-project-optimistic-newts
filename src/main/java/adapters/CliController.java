@@ -19,16 +19,25 @@ import java.util.Objects;
 public class CliController {
     private InOut inOut;
     private CliPresenter presenter;
-    //TODO: fix dependency on entities
+    //TODO: fix dependency on entities. Clean Architecture violation. Thinking to replace these with an instance of
+    // their associated Manager class which we are working on implementing.
     private User currentUser;
     private Conversation currentConversation;
     private Message currentMessage;
 
+    /**
+     * Create a new CliController.
+     * @param inOut         InOut for retrieving input and send output
+     * @param presenter     Presenter to send output by
+     */
     public CliController(InOut inOut, CliPresenter presenter) {
         this.inOut = inOut;
         this.presenter = presenter;
     }
 
+    /**
+     * Runs the main CLI Program.
+     */
     public void run() {
         while (true) {
             currentUser = logInMenu();
@@ -42,6 +51,16 @@ public class CliController {
     private void stop() { // TODO: Make nicer stopping solution
     }
 
+    /**
+     * Stops the CLI program.
+     */
+    private void stop() { // TODO: Make nicer stopping solution
+    }
+
+    /**
+     * The User Menu, leads to the Conversations Menu, Friends Menu, and User Information Menu.
+     * Also has option to logout.
+     */
     private void userMenu() {
         String input = null;
         while (input == null) {
@@ -72,21 +91,35 @@ public class CliController {
         }
     }
 
+    /**
+     * The User Information Menu. Shows current User Information and allows user to change information.
+     */
     private void userinfoMenu() {
         presenter.present("-------");
         presenter.present("User Information Menu not yet implemented, returning to User Menu");
     }
 
+    /**
+     * The Friends Menu. Shows list of user's current friends, allows removal of existing friends, and addition of new friends.
+     */
     private void friendsMenu() {
         presenter.present("-------");
         presenter.present("Friends Menu not yet implemented, returning to User Menu");
     }
 
+    /**
+     * The Conversations Menu. Shows list of user's current conversations and allows user to enter a specific
+     * Conversation's Menu. Also allows user to find new conversations.
+     */
     private void conversationsMenu() {
         presenter.present("-------");
         presenter.present("Conversations Menu not yet implemented, returning to User Menu");
     }
 
+    /**
+     * Logs the user out.
+     * TODO: have use case handle this and call use case in User Menu instead of this.
+     */
     private void logout() {
         presenter.present("-------");
         // need interactor for this. BAD
@@ -94,6 +127,10 @@ public class CliController {
         presenter.present(currentUser.getUsername() + " logged out");
     }
 
+    /**
+     * The Login Menu. Logs a user in or leads user to Create User Menu.
+     * @return Logged in User. TODO: CA violation
+     */
     private User logInMenu() {
         User user = null;
         while (user == null) {
@@ -119,6 +156,10 @@ public class CliController {
         return user;
     }
 
+    /**
+     * The Create User Menu. Leads a user through account creation and then logs them into their new account.
+     * @return  Logged in User. TODO: CA violation
+     */
     private User createUserMenu() {
         User user = null;
         while (user == null) {
@@ -133,7 +174,7 @@ public class CliController {
                 } else if (Objects.equals(DataBase.getUser(username).getUsername(), username)) { // TODO: replace DataBase reference
                     presenter.present("Username already in use.");
                 } else {
-                    // username is unique, so we can create a new user with this username!
+                    // username is unique, so we can create a new user with this username.
                     presenter.present("Enter a password:");
                     String password = inOut.getInput();
                     presenter.present("Enter your location:");
