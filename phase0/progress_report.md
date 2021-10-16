@@ -1,13 +1,4 @@
-# Task 6 — Progress Report
-Prepare a short written document updating your TA on your group's progress so far. At your next meeting with your TA, your group should be ready to present a summary of your progress report to your TA. Each group member must present part of the progress report.
-The report should include:
-- A brief summary of:
-	- your specification? ✅
-	- your CRC model? ✅
-	- your scenario walk-through? ✅
-	- your skeleton program? ✅
-	- what each group member has been working on and plans to work on next? ✅
-- what has worked well so far with your design as you have started implementing the code? ✅
+# Progress Report
 
 ### Specification 
   Our group has chosen to create and develop a social media application that facilitates meeting new people with similar interests through conversations. 
