@@ -1,8 +1,8 @@
 package application;
 
+import entities.User;
 import entities.Conversation;
 import entities.Message;
-import entities.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,6 +60,7 @@ public class CreateConversation extends ConversationInteractor {
     /**
      * Accepts a request.
      * @param request   a request stored as a RequestModel
+     * TODO: change request() based on the code in 'CliController'.
      */
     @Override
     public void request(RequestModel request) {

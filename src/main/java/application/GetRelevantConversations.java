@@ -1,40 +1,35 @@
 package application;
 
-;
+import entities.User;
 import entities.Conversation;
 import entities.ConversationQueue;
 import entities.Message;
-import entities.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GetRelevantConversations extends UserInteractor{
-    private User user;
     private ConversationQueue conversationQueue;
-
-    /**
-     * Initialize a new GetRelevantConversations.
-     */
-    GetRelevantConversations(User user){
-        this.user = user;
-
-    }
 
     /**
      * A request to be carried out by GetRelevantConversations.
      */
     public class GetRelevantConversationsRequest extends RequestModel{
         private OutputBoundary respondTo;
+        private String location;
         private int locationRadius;
+        private ArrayList<String> interests;
 
         /**
          * Fills in this RequestModel's instance attributes.
          */
-        public void fillRequest(OutputBoundary respondTo, int locationRadius) {
+        public void fillRequest(OutputBoundary respondTo, String location, int locationRadius,
+                                ArrayList<String> interests) {
 
             this.respondTo = respondTo;
+            this.location = location;
             this.locationRadius = locationRadius;
+            this.interests = interests;
         }
     }
 
@@ -49,24 +44,22 @@ public class GetRelevantConversations extends UserInteractor{
     /**
      * Accepts a request.
      * @param request   a request stored as a RequestModel
+     * TODO: change request() based on the code in 'CliController'.
      */
     @Override
     public void request(RequestModel request) {
+        GetRelevantConversationsRequest grcRequest = (GetRelevantConversationsRequest) request;
 
-        GetRelevantConversationsRequest grc_request = (GetRelevantConversationsRequest) request;
+        conversationQueue = new ConversationQueue(grcRequest.location, grcRequest.locationRadius,
+                grcRequest.interests);
 
-        conversationQueue = new ConversationQueue(user.getLocation(), grc_request.locationRadius,
-                user.getInterests());
-
-        if (grc_request.respondTo != null){                 // if statement added for testing
+        if (grcRequest.respondTo != null) {                 // if statement added for testing
             conversationQueue.addAll(DataBase.getConversationList());
             HashMap<String, Object> h_map = new HashMap<>();
             h_map.put("RelevantConversations", conversationQueue.toArray());
-
-            grc_request.respondTo.response(new ResponseModel(h_map));
+            grcRequest.respondTo.response(new ResponseModel(h_map));
         }
     }
-
     /**
      * Getter method for GetRelevantConversation's conversationQueue.
      * @return Returns GetRelevantConversation's conversationQueue.
