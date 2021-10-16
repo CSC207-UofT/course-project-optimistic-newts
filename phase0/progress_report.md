@@ -2,7 +2,7 @@
 
 ### Specification 
   Our group has chosen to create and develop a social media application that facilitates meeting new people with similar interests through conversations. 
-Our application aims to deliver a platform for users to find, initiate and contribute to conversations through topics that interest them, with a focus on inspiring opportunities for people to meet and make new friends. We want to give users the option of searching for conversations locally or internationally so that groups can have the opportunity to make and meet friends both in person and internationally. 
+Our application aims to deliver a platform for users to find, initiate and contribute to conversations through topics that interest them, with a focus on inspiring opportunities for people to meet and make new friends. As such, we want to give users the option of searching for conversations locally or internationally so that groups can have the opportunity to make and meet friends both in person or online. 
 After creating and personalizing an account, users will be able to specify topics of interest. They will then be given the option to join existing groups on these topics. Users can also choose to create a new thread.
 
 ### CRC model
