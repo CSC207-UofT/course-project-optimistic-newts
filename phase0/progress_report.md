@@ -40,8 +40,8 @@ Finally, in preparation for our Phase 0 meeting, we further divided the remainin
 - Finishing up Skeleton Code - Spencer
 
 ### Looking forward
-  We are all looking forward to continuing the development of our application. Here are some ideas of the next steps in our development:
-reworking the interactors/request model. 
+We are all looking forward to continuing the development of our application. Here are some ideas of the next steps in our development:
+- reworking the interactors/request model. 
 - Implementing remaining interactions between users: conversations, messages, friends, profile customization.
 - Rethinking the interface adapter layer as it currently violates Clean Architecture.
 
