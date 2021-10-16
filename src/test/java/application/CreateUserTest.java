@@ -1,5 +1,6 @@
 package application;
 
+import adapters.TestPresenter;
 import cli.CliDriver;
 import adapters.CliPresenter;
 
@@ -35,14 +36,13 @@ public class CreateUserTest {
      */
     @Test
     public void testRequest() {
-        CliDriver cli = new CliDriver();
-        CliPresenter cp = new CliPresenter(cli);
+        TestPresenter tp = new TestPresenter();
         CreateUser.CreateUserRequest r = c.getRequestModel();
         ArrayList<String> interests = new ArrayList<String>();
         interests.add("Sports");
         interests.add("Music");
         interests.add("Fitness");
-        r.fillRequest(cp, 1, "Sample User", "", "", interests);
+        r.fillRequest(tp, 1, "Sample User", "", "", interests);
         c.request(r);
         assertEquals("Sample User", c.getUser().getUsername());
     }

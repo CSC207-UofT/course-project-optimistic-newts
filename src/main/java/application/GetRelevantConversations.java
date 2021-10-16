@@ -48,16 +48,16 @@ public class GetRelevantConversations extends UserInteractor{
      */
     @Override
     public void request(RequestModel request) {
-        GetRelevantConversationsRequest grc_request = (GetRelevantConversationsRequest) request;
+        GetRelevantConversationsRequest grcRequest = (GetRelevantConversationsRequest) request;
 
-        conversationQueue = new ConversationQueue(grc_request.location, grc_request.locationRadius,
-                grc_request.interests);
+        conversationQueue = new ConversationQueue(grcRequest.location, grcRequest.locationRadius,
+                grcRequest.interests);
 
-        if (grc_request.respondTo != null) {                 // if statement added for testing
+        if (grcRequest.respondTo != null) {                 // if statement added for testing
             conversationQueue.addAll(DataBase.getConversationList());
             HashMap<String, Object> h_map = new HashMap<>();
             h_map.put("RelevantConversations", conversationQueue.toArray());
-            grc_request.respondTo.response(new ResponseModel(h_map));
+            grcRequest.respondTo.response(new ResponseModel(h_map));
         }
     }
     /**
