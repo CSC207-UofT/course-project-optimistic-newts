@@ -51,5 +51,5 @@ After we finalize all the remaining fundamental components of our application, w
 - The design differences between the frontend of the app and the backend.
 - Considering how we will deal with user privacy/security.
 
-Name for the app? A preliminary idea: Render ( tinder and Reddit, Rinder)
+Name for the app? A preliminary idea: Render ( tinder and Reddit )
 	
