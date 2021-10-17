@@ -43,7 +43,7 @@ Finally, in preparation for our Phase 0 meeting, we further divided the remainin
 We are all looking forward to continuing the development of our application. Here are some ideas of the next steps in our development:
 - Implementing remaining interactions between users: conversations, messages, friends, profile customization.
 - Reworking our temporary database for conversations and users
-- reworking the interactors/request model. 
+- Reworking the interactors/request model. 
 - Rethinking the interface adapter layer as it currently violates Clean Architecture.
 
 After we finalize all the remaining fundamental components of our application, we can then turn our attention to transferring/implementing our app to an accessible format for users. Could include:
