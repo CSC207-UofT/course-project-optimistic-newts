@@ -41,12 +41,12 @@ Finally, in preparation for our Phase 0 meeting, we further divided the remainin
 
 ### Looking forward
 We are all looking forward to continuing the development of our application. Here are some ideas of the next steps in our development:
-- Implementing remaining interactions between users
-- Reworking our temporary database for conversations and users / Data Acess Interface
-- Reworking the interactors/request model. 
+- Implementing remaining interactions between users - Yukthiw
+- Reworking our temporary database for conversations and users / Data Access Interface - Alex
+- Reworking the interactors/request model - Ted
 - Rethinking the interface adapter layer as it currently violates Clean Architecture - Spencer
-- Implement Message Interactors
-- Implement Conversation Interactors 
+- Implement Message Interactors - Will
+- Implement Conversation Interactors - Zach 
 
 After we finalize all the remaining fundamental components of our application, we can then turn our attention to transferring/implementing our app to an accessible format for users. Could include:
 - Transferring our work to a web app → Design / UI choices.
