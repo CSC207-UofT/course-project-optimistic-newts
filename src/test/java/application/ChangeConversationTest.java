@@ -34,7 +34,7 @@ public class ChangeConversationTest {
     @Test
     public void testRequest() {
         DataBase.addConversation(new Conversation("Sample Conversation", "", "", "", 0, 0, 0,
-                "", false, new ArrayList<Message>, new ArrayList<User>()));
+                "", false, new ArrayList<Message>(), new ArrayList<User>()));
         ChangeConversationStatus.ChangeConversationRequest r = c.getRequestModel();
         r.fillRequest(null, "Sample Conversation");
         c.request(r);
