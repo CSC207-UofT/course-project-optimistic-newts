@@ -49,4 +49,18 @@ public class DataBase {
     public static ArrayList<Conversation> getConversationList(){
         return (ArrayList<Conversation>) ConversationList.clone();
     }
+
+    /**
+     * return the conversation with the given id
+     * @param id the id of the conversation
+     * @return the conversation
+     */
+    public static Conversation getConversation(String id){
+        for (Conversation conversation: ConversationList){
+            if (Objects.equals(conversation.getId(), id)) {
+                return conversation;
+            }
+        }
+        return new Conversation();
+    }
 }

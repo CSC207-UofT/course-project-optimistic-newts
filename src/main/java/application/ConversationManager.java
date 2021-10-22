@@ -12,9 +12,11 @@ import java.util.ArrayList;
  */
 public class ConversationManager {
     private CreateConversation createConversation;
+    private ChangeConversationStatus changeConversationStatus;
 
     public ConversationManager(){
         createConversation = new CreateConversation();
+        changeConversationStatus = new ChangeConversationStatus();
     }
 
     /**
@@ -25,4 +27,10 @@ public class ConversationManager {
     public Conversation CreateConversation(){
         return createConversation.getConversation();
     }
+
+
+    /**
+     * Changes the status of the conversation with the given id
+     */
+    public void ChangeConversationStatus() { changeConversationStatus.changeStatus();}
 }
