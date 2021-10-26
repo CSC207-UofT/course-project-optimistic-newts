@@ -1,11 +1,12 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * An object representing a User of the application.
  */
-public class User {
+public class User implements Serializable {
     private int id;
     private String username;
     private String password;
@@ -67,6 +68,14 @@ public class User {
      */
     public int getId(){
         return id;
+    }
+
+    /**
+     * Setter method for user's ID.
+     * @param id    The new id to assign this user.
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
     /**

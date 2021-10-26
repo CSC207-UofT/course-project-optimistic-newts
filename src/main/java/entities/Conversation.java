@@ -1,12 +1,13 @@
 package entities;
 
+import java.io.Serializable;
 import java.sql.Array;
 import java.util.ArrayList;
 
 /**
  * A class representing a conversation
  */
-public class Conversation {
+public class Conversation implements Serializable {
     private String id;
     private String title;
     private String topic;
