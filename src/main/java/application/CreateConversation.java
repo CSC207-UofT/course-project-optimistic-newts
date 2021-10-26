@@ -13,7 +13,7 @@ public class CreateConversation extends ConversationInteractor {
     /**
      * A request to be carried out by CreateConversation.
      */
-    public class CreateConversationRequest extends RequestModel{
+    public class CreateConversationRequest extends RequestModel{ //TODO: Adjust to fit new RequestModel
         private OutputBoundary respondTo;
         private String id;
         private String title;
@@ -75,7 +75,7 @@ public class CreateConversation extends ConversationInteractor {
         if (cc_request.respondTo != null) {                   //if statement for testing purposes
             HashMap<String, Object> h_map = new HashMap<>();
             h_map.put(cc_request.title, conversation);
-            cc_request.respondTo.response(new ResponseModel(h_map));
+            cc_request.respondTo.respond(new ResponseModel(h_map));
         }
     }
 

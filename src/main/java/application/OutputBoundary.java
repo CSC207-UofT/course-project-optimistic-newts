@@ -9,5 +9,5 @@ public interface OutputBoundary {
      * Accepts a response.
      * @param response   a response stored as a ResponseModel
      */
-    public void response(ResponseModel response);
+    public void respond(ResponseModel response);
 }

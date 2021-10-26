@@ -1,9 +1,6 @@
 package application;
 
-import entities.User;
-import entities.Conversation;
 import entities.ConversationQueue;
-import entities.Message;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,7 +11,7 @@ public class GetRelevantConversations extends UserInteractor{
     /**
      * A request to be carried out by GetRelevantConversations.
      */
-    public class GetRelevantConversationsRequest extends RequestModel{
+    public class GetRelevantConversationsRequest extends RequestModel{ //TODO: Adjust to fit new RequestModel
         private OutputBoundary respondTo;
         private String location;
         private int locationRadius;
@@ -57,7 +54,7 @@ public class GetRelevantConversations extends UserInteractor{
             conversationQueue.addAll(DataBase.getConversationList());
             HashMap<String, Object> h_map = new HashMap<>();
             h_map.put("RelevantConversations", conversationQueue.toArray());
-            grcRequest.respondTo.response(new ResponseModel(h_map));
+            grcRequest.respondTo.respond(new ResponseModel(h_map));
         }
     }
     /**

@@ -2,7 +2,6 @@ package application;
 
 import entities.Conversation;
 
-import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +13,7 @@ public class ChangeConversationStatus extends ConversationInteractor{
      * For this use case we need the id of the conversation
      * to change status for.
      */
-    public class ChangeConversationRequest extends RequestModel{
+    public class ChangeConversationRequest extends RequestModel{ //TODO: adjust to fit new RequestModel
         private OutputBoundary respondTo;
         private String id;
 
@@ -48,14 +47,14 @@ public class ChangeConversationStatus extends ConversationInteractor{
             responseMap.put("Failure",
                     new Exception(ApplicationExceptions.NoSuchConversationError).getMessage());
             ResponseModel response = new ResponseModel(responseMap);
-            cc_request.respondTo.response(response);
+            cc_request.respondTo.respond(response);
         } else {
             // Set the conversation
             Map<String, Object> responseMap = new HashMap<>();
             String s = cc_request.id + " conversation selected";
             responseMap.put("Success", s);
             ResponseModel response = new ResponseModel(responseMap);
-            cc_request.respondTo.response(response);
+            cc_request.respondTo.respond(response);
             this.conversation = selectedConversation;
         }
     }

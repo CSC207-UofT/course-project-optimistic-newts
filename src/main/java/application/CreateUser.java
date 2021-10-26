@@ -13,7 +13,7 @@ public class CreateUser extends UserInteractor {
     /**
      * A request to be carried out by CreateUser.
      */
-    public class CreateUserRequest extends RequestModel {
+    public class CreateUserRequest extends RequestModel { //TODO: adjust to fit new RequestModel
         private OutputBoundary respondTo;
         private int id;
         private String username;
@@ -64,7 +64,7 @@ public class CreateUser extends UserInteractor {
         String s = request1.username + " successfully created!";
         responseMap.put("Success", s);
         ResponseModel response = new ResponseModel(responseMap);
-        request1.respondTo.response(response);
+        request1.respondTo.respond(response);
         DataBase.addUser(user);
     }
 }

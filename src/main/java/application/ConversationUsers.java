@@ -21,7 +21,7 @@ public class ConversationUsers extends ConversationInteractor {
     /**
      * A request to be carried out by ConversationUsers.
      */
-    public class ConversationUsersRequest extends RequestModel{
+    public class ConversationUsersRequest extends RequestModel{ //TODO: adjust to fit new RequestModel
         private OutputBoundary respondTo;
         private String action;
         private User user;

@@ -5,6 +5,5 @@ package application;
  */
 public class ApplicationExceptions{
     public static final String NoSuchUserError = "No such user exists";
-    public static final String IncorrectPasswordError = "Incorrect password";
     public static final String NoSuchConversationError = "No such conversation exists";
 }

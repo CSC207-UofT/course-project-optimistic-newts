@@ -13,7 +13,7 @@ public class DeleteUser extends UserInteractor {
     /**
      * A DeleteUserRequest to be carried out by LoginUser.
      */
-    public class DeleteUserRequest extends RequestModel {
+    public class DeleteUserRequest extends RequestModel { //TODO: adjust to fit new RequestModel
         private OutputBoundary respondTo;
         private User User;
         private String Password;
