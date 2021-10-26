@@ -11,7 +11,7 @@ public interface DataAccessObject<T> {
      * @return              The entity associated with the given id.
      * @throws Exception    If no entity exists with given id.
      */
-    T get(int id) throws Exception;
+    T get(String id) throws Exception;
 
     /**
      * Update the corresponding entity in the attached data store to match the provided entity.
@@ -32,5 +32,5 @@ public interface DataAccessObject<T> {
      * @param id    ID of entity to delete.
      * @return      True iff deletion was successful.
      */
-    boolean delete(int id);
+    boolean delete(String id);
 }

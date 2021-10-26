@@ -26,17 +26,19 @@ public class TempUsersTest {
     @Test
     public void insertRetrieveTest() {
         User user = new User();
-        user.setUsername("testuser123");
+        user.setUsername("testuser");
         try {
             user.setPassword("password");
         } catch (EntityExceptions entityExceptions) {
             entityExceptions.printStackTrace();
         }
         user.setLocation("Toronto");
-        int id = 0;
+        int idNum = 0;
+        String id = "testuser#" + idNum;
         user.setId(id);
         while (!tempUsers.insert(user)) {
-            id++;
+            idNum++;
+            id = "testuser#" + idNum;
             user.setId(id);
         }
         try {
@@ -53,21 +55,23 @@ public class TempUsersTest {
     @Test
     public void insertDeleteTest() {
         User user = new User();
-        user.setUsername("testuser123");
+        user.setUsername("testuser");
         try {
             user.setPassword("password");
         } catch (EntityExceptions entityExceptions) {
             entityExceptions.printStackTrace();
         }
         user.setLocation("Toronto");
-        int id = 0;
+        int idNum = 0;
+        String id = "testuser#" + idNum;
         user.setId(id);
         while (!tempUsers.insert(user)) {
-            id++;
+            idNum++;
+            id = "testuser#" + idNum;
             user.setId(id);
         }
         Assert.assertTrue(tempUsers.delete(id));
-        int finalId = id;
+        String finalId = id;
         Assert.assertThrows(Exception.class, () -> tempUsers.get(finalId));
     }
 }

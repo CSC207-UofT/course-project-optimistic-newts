@@ -2,14 +2,13 @@ package application;
 
 import adapters.TestPresenter;
 import entities.User;
-
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class LoginUserTest {
     LoginUser l;
@@ -43,8 +42,8 @@ public class LoginUserTest {
         interests.add("Music");
         interests.add("Fitness");
 
-        DataBase.addUser(new User("Sample User", "1234", interests, 1));
-        r.fillRequest(tp, "Sample User", "1234");
+        DataBase.addUser(new User("SampleUser", "1234", interests, "SampleUser#0"));
+        r.fillRequest(tp, "SampleUser", "1234");
         l.request(r);
         assertTrue(l.getUser().getLoginStatus());
     }

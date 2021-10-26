@@ -1,10 +1,11 @@
 package gateways;
 
 import application.UserDataAccessObject;
-import entities.EntityExceptions;
 import entities.User;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A temporary User Data Access Object for development purposes. Serialized User objects are stored by their user id
@@ -14,18 +15,17 @@ public class TempUsers implements UserDataAccessObject {
     private final String usersPath = "tempDataStore/users/";
 
     public static void main(String[] args) {
-        User user = new User();
-        user.setUsername("realuser123");
-        try {
-            user.setPassword("password");
-        } catch (EntityExceptions entityExceptions) {
-            entityExceptions.printStackTrace();
-        }
-        user.setLocation("Toronto");
-        user.setId(0);
-
+        List<String> interests = new ArrayList<>();
+        interests.add("Bikes");
+        interests.add("Programming");
+        User user = new User("Spencer", "password", interests, "Spencer#0");
         TempUsers tempUsers = new TempUsers();
         tempUsers.insert(user);
+    }
+
+    @Override
+    public String getNextId(String username) {
+        return null;
     }
 
     /**
@@ -35,7 +35,7 @@ public class TempUsers implements UserDataAccessObject {
      * @throws Exception    If no User exists with given id.
      */
     @Override
-    public User get(int id) throws Exception {
+    public User get(String id) throws Exception {
         FileInputStream fileInput = new FileInputStream(usersPath + id + ".ser");
         ObjectInputStream objectInput = new ObjectInputStream(fileInput);
         User userFromStore = (User) objectInput.readObject();
@@ -82,7 +82,7 @@ public class TempUsers implements UserDataAccessObject {
      * @return      True iff deletion was successful.
      */
     @Override
-    public boolean delete(int id) {
+    public boolean delete(String id) {
         File file = new File(usersPath + id + ".ser");
         return file.delete();
     }

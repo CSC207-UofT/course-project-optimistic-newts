@@ -1,6 +1,5 @@
 package application;
-import application.CreateUser;
-import application.LoginUser;
+
 import entities.User;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class UserManager {
                            ArrayList<String> interests){
         CreateUser createUser = new CreateUser();
         CreateUser.CreateUserRequest request = createUser.getRequestModel();
-        request.fillRequest(respondTo, 1, username, password, location, interests);
+        request.fillRequest(respondTo, "1", username, password, location, interests);
         createUser.request(request);
         return createUser.getUser();
     }

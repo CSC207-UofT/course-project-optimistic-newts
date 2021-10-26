@@ -1,15 +1,13 @@
 package application;
 
 import adapters.TestPresenter;
-import cli.CliDriver;
-import adapters.CliPresenter;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class CreateUserTest {
     CreateUser c;
@@ -42,8 +40,8 @@ public class CreateUserTest {
         interests.add("Sports");
         interests.add("Music");
         interests.add("Fitness");
-        r.fillRequest(tp, 1, "Sample User", "", "", interests);
+        r.fillRequest(tp, "SampleUser#0", "SampleUser", "", "", interests);
         c.request(r);
-        assertEquals("Sample User", c.getUser().getUsername());
+        assertEquals("SampleUser", c.getUser().getUsername());
     }
 }

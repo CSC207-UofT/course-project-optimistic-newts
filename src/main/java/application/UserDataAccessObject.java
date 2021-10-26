@@ -8,13 +8,21 @@ import entities.User;
 public interface UserDataAccessObject extends DataAccessObject<User>{
 
     /**
+     * Return the next valid User ID corresponding to the given username. A user's id is of the form 'username#1234'
+     * where the trailing number is a unique identifier distinguishing this User from others with the same username.
+     * @param username
+     * @return
+     */
+    String getNextId(String username);
+
+    /**
      * Return User with the given id.
      * @param id            ID of User.
      * @return              User associated with the given id.
      * @throws Exception    If no User exists with given id.
      */
     @Override
-    User get(int id) throws Exception;
+    User get(String id) throws Exception;
 
     /**
      * Update the corresponding User in the attached data store to match the provided User.
@@ -38,6 +46,6 @@ public interface UserDataAccessObject extends DataAccessObject<User>{
      * @return      True iff deletion was successful.
      */
     @Override
-    boolean delete(int id);
+    boolean delete(String id);
 }
 
