@@ -23,9 +23,29 @@ public class TempUsers implements UserDataAccessObject {
         tempUsers.insert(user);
     }
 
+    /**
+     * Return the next valid User ID corresponding to the given username. A user's id is of the form 'username#1234'
+     * where the trailing number is a unique identifier distinguishing this User from others with the same username.
+     * @param username  Username to get next id of.
+     * @return          Next valid id corresponding to username.
+     */
     @Override
     public String getNextId(String username) {
-        return null;
+        int maxId = 0;
+        File usersDirectory = new File(usersPath);
+        File[] userFiles = usersDirectory.listFiles();
+        for (File file : userFiles) {
+            if (file.isFile()) {
+                String name = file.getName();
+                String currId = name.substring(0, name.lastIndexOf('.'));
+                String currUsername = currId.substring(0, currId.lastIndexOf('#'));
+                int currIdNum = Integer.parseInt(currId.substring(currId.lastIndexOf('#') + 1));
+                if (currUsername.equals(username) && currIdNum > maxId) {
+                    maxId = currIdNum;
+                }
+            }
+        }
+        return username + '#' + (maxId + 1);
     }
 
     /**
@@ -50,8 +70,8 @@ public class TempUsers implements UserDataAccessObject {
      */
     @Override
     public boolean update(User user) {
-        return false;
-    } // TODO: Implement this!
+        return delete(user.getId()) && insert(user);
+    }
 
     /**
      * Insert the given User to the attached data store.

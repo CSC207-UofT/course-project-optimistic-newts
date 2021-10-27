@@ -74,4 +74,43 @@ public class TempUsersTest {
         String finalId = id;
         Assert.assertThrows(Exception.class, () -> tempUsers.get(finalId));
     }
+
+    /**
+     * Test that TempUsers.getNextId() works as expected.
+     */
+    @Test
+    public void getNextIdTest() {
+        Assert.assertEquals(tempUsers.getNextId("Spencer"), "Spencer#1");
+    }
+
+    /**
+     * Test that TempUsers.update() works as expected.
+     */
+    @Test
+    public void updateTest() {
+        User user = new User();
+        user.setUsername("testuser");
+        try {
+            user.setPassword("password");
+        } catch (EntityExceptions entityExceptions) {
+            entityExceptions.printStackTrace();
+        }
+        user.setLocation("Toronto");
+        int idNum = 0;
+        String id = "testuser#" + idNum;
+        user.setId(id);
+        while (!tempUsers.insert(user)) {
+            idNum++;
+            id = "testuser#" + idNum;
+            user.setId(id);
+        }
+        user.setLocation("New York");
+        Assert.assertTrue(tempUsers.update(user));
+        try {
+            Assert.assertEquals(tempUsers.get(id).getLocation(), "New York");
+        } catch (Exception e) {
+            Assert.fail();
+        }
+        tempUsers.delete(id);
+    }
 }
