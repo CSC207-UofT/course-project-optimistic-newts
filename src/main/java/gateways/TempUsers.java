@@ -34,6 +34,7 @@ public class TempUsers implements UserDataAccessObject {
         int maxId = 0;
         File usersDirectory = new File(usersPath);
         File[] userFiles = usersDirectory.listFiles();
+        assert userFiles != null;
         for (File file : userFiles) {
             if (file.isFile()) {
                 String name = file.getName();
