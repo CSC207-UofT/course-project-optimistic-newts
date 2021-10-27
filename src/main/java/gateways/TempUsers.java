@@ -4,24 +4,16 @@ import application.UserDataAccessObject;
 import entities.User;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A temporary User Data Access Object for development purposes. Serialized User objects are stored by their user id
  * in the project directory under /tempDataStore/users/
  */
 public class TempUsers implements UserDataAccessObject {
+    /**
+     * Path to the data store this TempUsers object is attached to.
+     */
     private final String usersPath = "tempDataStore/users/";
-
-    public static void main(String[] args) {
-        List<String> interests = new ArrayList<>();
-        interests.add("Bikes");
-        interests.add("Programming");
-        User user = new User("Spencer", "password", interests, "Spencer#0");
-        TempUsers tempUsers = new TempUsers();
-        tempUsers.insert(user);
-    }
 
     /**
      * Return the next valid User ID corresponding to the given username. A user's id is of the form 'username#1234'
