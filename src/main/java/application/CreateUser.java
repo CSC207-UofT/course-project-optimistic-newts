@@ -15,7 +15,7 @@ public class CreateUser extends UserInteractor {
      */
     public class CreateUserRequest extends RequestModel {
         private OutputBoundary respondTo;
-        private int id;
+        private String id;
         private String username;
         private String password;
         private String location;
@@ -25,7 +25,7 @@ public class CreateUser extends UserInteractor {
         /**
          * Fills in this RequestModel's instance attributes.
          */
-        public void fillRequest(OutputBoundary respondTo, int id, String username, String password, String location,
+        public void fillRequest(OutputBoundary respondTo, String id, String username, String password, String location,
                                 ArrayList<String> interests) {
             this.respondTo = respondTo;
             this.id = id;
