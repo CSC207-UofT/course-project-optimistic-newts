@@ -199,4 +199,12 @@ public class Conversation {
             return false;
         }
     }
+
+    /**
+     * Returns the number of Users in a Conversation
+     * @return Number of users.
+     */
+    public int getNumUsers(){
+        return users.size();
+    }
 }
