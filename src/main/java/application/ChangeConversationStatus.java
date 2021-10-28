@@ -23,7 +23,13 @@ public class ChangeConversationStatus extends ConversationInteractor{
         } else {
             // Change the status of the conversation
             selectedConversation.setIsOpen(!selectedConversation.getIsOpen());
-            response.fill(ResponseField.SUCCESS, ResponseValues.ChangedConversationStatus + conversationId);
+            if (selectedConversation.getIsOpen()) {
+                response.fill(ResponseField.SUCCESS, ResponseValues.ChangedConversationStatus +
+                        conversationId + " to open");
+            } else {
+                response.fill(ResponseField.SUCCESS, ResponseValues.ChangedConversationStatus +
+                        conversationId + " to closed");
+            }
         }
 
         request.getOutput().respond(response);
