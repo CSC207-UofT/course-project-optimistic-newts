@@ -10,22 +10,22 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class ChangeConversationTest {
+public class ChangeConversationStatusTest {
     ChangeConversationStatus c;
+
+    private static class TestOutput implements OutputBoundary {
+
+        @Override
+        public void respond(ResponseModel response) {
+        }
+    }
 
     /**
      *  Setting up a test conversation
      */
     @Before
-    public void setUp(){ c = new ChangeConversationStatus();}
-
-    /**
-     * Tests the getRequestModel method
-     */
-    @Test
-    public void testGetRequestModel() {
-
-        assertNotNull(c.getRequestModel());
+    public void setUp(){
+        c = new ChangeConversationStatus();
     }
 
     /**
@@ -33,11 +33,13 @@ public class ChangeConversationTest {
      */
     @Test
     public void testRequest() {
+        RequestModel request = new RequestModel(new TestOutput());
         DataBase.addConversation(new Conversation("Sample Conversation", "", "", "", 0, 0, 0,
                 "", false, new ArrayList<Message>(), new ArrayList<User>()));
-        ChangeConversationStatus.ChangeConversationRequest r = c.getRequestModel();
-        r.fillRequest(null, "Sample Conversation");
-        c.request(r);
+        request.fill(RequestField.ID, "Sample Conversation");
+
+        c.request(request);
+
         assertTrue(DataBase.getConversation("Sample Conversation").getIsOpen());
     }
 }
