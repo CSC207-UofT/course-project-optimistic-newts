@@ -26,7 +26,7 @@ public class CreateUser extends UserInteractor {
             User user = new User(Username, Password, Interests, ID);
 
             DataBase.addUser(user);
-            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.CreateUser);
+            response.fill(ResponseField.SUCCESS, user.getId() + ResponseValues.CreateUser);
         }
         else {
             response.fill(ResponseField.FAILURE, ResponseValues.InvalidPassword);
@@ -45,5 +45,4 @@ public class CreateUser extends UserInteractor {
     }
 
 }
-
 
