@@ -106,11 +106,8 @@ public class User {
      * @param password Password to be set
      */
 
-    public void setPassword(String password) throws EntityExceptions {
-        if(password.length() >= 6) {
-            this.password = password;
-        }
-        else throw new EntityExceptions("Please choose a password with at least 6 characters.");
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**

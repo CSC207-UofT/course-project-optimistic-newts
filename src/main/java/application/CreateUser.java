@@ -10,30 +10,27 @@ import java.util.Map;
 public class CreateUser extends UserInteractor {
     private User user;
 
+
     @Override
     public void request(RequestModel request) {
         ResponseModel response = new ResponseModel();
-        user.setUsername((String) request.get(RequestField.USERNAME));
 
-        // Check if this username is already taken
-        if (DataBase.checkForUser(user)) {
-            response.fill(ResponseField.FAILURE, ResponseValues.UsernameTaken);
-        }
+        // check that password is strong enough before creating User
+        if (((String) request.get(RequestField.PASSWORD)).length() >= 6) {
 
-        try {
-            user.setPassword((String) request.get(RequestField.PASSWORD));
-
-            // All conditions met. create this user.
-            user.setLocation((String) request.get(RequestField.LOCATION));
-            user.addInterests((String) request.get(RequestField.INTERESTS));
+            String Username = ((String) request.get(RequestField.USERNAME));
+            String Password = (String) request.get(RequestField.PASSWORD);
+            ArrayList<String> Interests = new ArrayList<>();
+            Interests.add((String) request.get(RequestField.INTERESTS));
+            int ID = (int) request.get(RequestField.ID); //TODO adjust for new data access object
+            User user = new User(Username, Password, Interests, ID);
 
             DataBase.addUser(user);
             response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.CreateUser);
-
-        } catch (EntityExceptions e) {
-            e.printStackTrace();
+        }
+        else {
             response.fill(ResponseField.FAILURE, ResponseValues.InvalidPassword);
-            }
+        }
 
         // send response through provided output boundary
         request.getOutput().respond(response);
@@ -43,7 +40,7 @@ public class CreateUser extends UserInteractor {
      * Returns the User that was sucesfually createdby this interactor, or null otherwise.
      * @return created User or null if no user has been created.
      */
-    public User getCreatedUser() {
+    public User getUser() {
         return user;
     }
 

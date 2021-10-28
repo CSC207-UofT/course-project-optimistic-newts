@@ -10,7 +10,7 @@ public class DeleteUser extends UserInteractor {
 
     @Override
     public void request(RequestModel request) {
-        user = DataBase.getUser((String) request.get(RequestField.USERNAME));
+        user = DataBase.getUser((String) request.get(RequestField.USER));
         ResponseModel response = new ResponseModel();
         // First, check that User user exists.
         if (user.getUsername() == null) {

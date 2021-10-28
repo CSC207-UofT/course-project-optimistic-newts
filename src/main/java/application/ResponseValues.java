@@ -9,5 +9,4 @@ public class ResponseValues {
     public static final String InvalidPassword = " Please choose a password with at least 6 characters. ";
     public static final String CreateUser = " User has been created ";
     public static final String DeletedUser = " User has been deleted ";
-    public static final String UsernameTaken = " Sorry, this username is already linked to an account.";
 }
