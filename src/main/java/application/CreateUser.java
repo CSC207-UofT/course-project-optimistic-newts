@@ -1,70 +1,52 @@
 package application;
 
+import entities.EntityExceptions;
 import entities.User;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO: Check that username is not already in use before creating.
 
 public class CreateUser extends UserInteractor {
     private User user;
 
-    /**
-     * A request to be carried out by CreateUser.
-     */
-    public class CreateUserRequest extends RequestModel { //TODO: adjust to fit new RequestModel
-        private OutputBoundary respondTo;
-        private int id;
-        private String username;
-        private String password;
-        private String location;
-        private ArrayList<String> interests;
+    @Override
+    public void request(RequestModel request) {
+        ResponseModel response = new ResponseModel();
+        user.setUsername((String) request.get(RequestField.USERNAME));
 
-
-        /**
-         * Fills in this RequestModel's instance attributes.
-         */
-        public void fillRequest(OutputBoundary respondTo, int id, String username, String password, String location,
-                                ArrayList<String> interests) {
-            this.respondTo = respondTo;
-            this.id = id;
-            this.username = username;
-            this.password = password;
-            this.location = location;
-            this.interests = interests;
+        // Check if this username is already taken
+        if (DataBase.checkForUser(user)) {
+            response.fill(ResponseField.FAILURE, ResponseValues.UsernameTaken);
         }
 
+        try {
+            user.setPassword((String) request.get(RequestField.PASSWORD));
+
+            // All conditions met. create this user.
+            user.setLocation((String) request.get(RequestField.LOCATION));
+            user.addInterests((String) request.get(RequestField.INTERESTS));
+
+            DataBase.addUser(user);
+            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.CreateUser);
+
+        } catch (EntityExceptions e) {
+            e.printStackTrace();
+            response.fill(ResponseField.FAILURE, ResponseValues.InvalidPassword);
+            }
+
+        // send response through provided output boundary
+        request.getOutput().respond(response);
     }
 
     /**
-     * @return  the User created by this CreateUser request, or null if no such user exists.
+     * Returns the User that was sucesfually createdby this interactor, or null otherwise.
+     * @return created User or null if no user has been created.
      */
-    public User getUser() {
+    public User getCreatedUser() {
         return user;
     }
 
-    /**
-     * @return  A request model to be filled in by caller
-     */
-    public CreateUserRequest getRequestModel() {
-        return new CreateUserRequest();
-    }
-
-    /**
-     * Accepts a request.
-     * @param request   a request stored as a RequestModel
-     */
-    @Override
-    public void request(RequestModel request) {
-        CreateUserRequest request1 = (CreateUserRequest) request;
-        user = new User(request1.username, request1.password, request1.interests, request1.id);
-        // output that user creation was successful
-        Map<String, Object> responseMap = new HashMap<>();
-        String s = request1.username + " successfully created!";
-        responseMap.put("Success", s);
-        ResponseModel response = new ResponseModel(responseMap);
-        request1.respondTo.respond(response);
-        DataBase.addUser(user);
-    }
 }
+
+
