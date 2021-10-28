@@ -33,10 +33,7 @@ public class DataBase {
     }
 
     public static Boolean checkForUser(User user)  {
-       if (UserList.contains(user)) {
-           return Boolean.TRUE;
-       }
-       else { return Boolean.FALSE; }
+        return UserList.contains(user);
     }
 
     public static void deleteUser(User user) { UserList.remove(user); }
