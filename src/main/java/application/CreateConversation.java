@@ -33,9 +33,9 @@ public class CreateConversation extends ConversationInteractor {
                     new ArrayList<>(), new ArrayList<>());
             DataBase.addConversation(this.conversation);
 
-            response.fill(ResponseField.SUCCESS, "Conversation with ID " + id + ResponseValues.Created);
+            response.fill(ResponseField.SUCCESS, "Conversation with ID " + id + ResponseValues.created);
         } else {
-            response.fill(ResponseField.FAILURE, ResponseValues.InvalidConversationID);
+            response.fill(ResponseField.FAILURE, ResponseValues.invalidConversationID);
         }
     }
 

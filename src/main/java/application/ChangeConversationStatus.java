@@ -16,15 +16,15 @@ public class ChangeConversationStatus extends ConversationInteractor{
 
         if (selectedConversation.getId().equals("")){
             // Output an error because there is no such conversation with the id
-            response.fill(ResponseField.ERROR, ResponseValues.InvalidConversation + conversationId);
+            response.fill(ResponseField.ERROR, ResponseValues.invalidConversation + conversationId);
         } else {
             // Change the status of the conversation
             selectedConversation.setIsOpen(!selectedConversation.getIsOpen());
             if (selectedConversation.getIsOpen()) {
-                response.fill(ResponseField.SUCCESS, ResponseValues.ChangedConversationStatus +
+                response.fill(ResponseField.SUCCESS, ResponseValues.changedConversationStatus +
                         conversationId + " to open");
             } else {
-                response.fill(ResponseField.SUCCESS, ResponseValues.ChangedConversationStatus +
+                response.fill(ResponseField.SUCCESS, ResponseValues.changedConversationStatus +
                         conversationId + " to closed");
             }
         }

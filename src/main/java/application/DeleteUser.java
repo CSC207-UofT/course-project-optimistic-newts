@@ -1,6 +1,5 @@
 package application;
 
-import entities.Conversation;
 import entities.User;
 
 public class DeleteUser extends UserInteractor {
@@ -15,7 +14,7 @@ public class DeleteUser extends UserInteractor {
 
         if (DataBase.containsUserID(ID) == Boolean.TRUE) {
             DataBase.deleteUser(ID);
-            response.fill(ResponseField.SUCCESS, ResponseValues.DeletedUser);
+            response.fill(ResponseField.SUCCESS, ResponseValues.deletedUser);
         } else {
             response.fill(ResponseField.FAILURE, ResponseValues.InvalidID);
         }

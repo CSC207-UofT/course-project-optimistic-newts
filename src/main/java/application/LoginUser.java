@@ -19,10 +19,10 @@ public class LoginUser extends UserInteractor {
         } else if (user.getPassword() == request.get(RequestField.PASSWORD)) {
             // Login the user
             user.logIn();
-            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.LoggedIn);
+            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.loggedIn);
         } else {
             // Input password was incorrect.
-            response.fill(ResponseField.FAILURE, ResponseValues.IncorrectPassword);
+            response.fill(ResponseField.FAILURE, ResponseValues.incorrectPassword);
         }
         // send response through provided output boundary
         request.getOutput().respond(response);
