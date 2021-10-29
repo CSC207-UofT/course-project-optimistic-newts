@@ -1,8 +1,6 @@
 package application;
 
 import entities.Conversation;
-import entities.Message;
-import entities.User;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -35,7 +33,7 @@ public class ChangeConversationStatusTest {
     public void testRequest() {
         RequestModel request = new RequestModel(new TestOutput());
         DataBase.addConversation(new Conversation("Sample Conversation", "", "", "", 0, 0, 0,
-                "", false, new ArrayList<Message>(), new ArrayList<User>()));
+                "", false, new ArrayList<>(), new ArrayList<>()));
         request.fill(RequestField.ID, "Sample Conversation");
 
         c.request(request);

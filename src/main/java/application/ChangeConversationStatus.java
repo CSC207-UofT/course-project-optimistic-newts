@@ -2,9 +2,6 @@ package application;
 
 import entities.Conversation;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class ChangeConversationStatus extends ConversationInteractor{
     /**
      * Changes the status of the conversation with the id in the request

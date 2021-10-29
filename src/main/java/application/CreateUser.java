@@ -1,10 +1,7 @@
 package application;
 
-import entities.EntityExceptions;
 import entities.User;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 
 public class CreateUser extends UserInteractor {
@@ -26,7 +23,7 @@ public class CreateUser extends UserInteractor {
             User user = new User(Username, Password, Interests, ID);
 
             DataBase.addUser(user);
-            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.CreateUser);
+            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.Created);
         }
         else {
             response.fill(ResponseField.FAILURE, ResponseValues.InvalidPassword);
