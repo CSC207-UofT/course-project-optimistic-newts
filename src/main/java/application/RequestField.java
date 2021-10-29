@@ -8,12 +8,5 @@ public enum RequestField {
     LOCATION,
     INTERESTS,
     ID,
-    CONVERSATION,
-    TITLE,
-    TOPIC,
-    LOCATION_RADIUS,
-    MIN_RATING,
-    MAX_SIZE,
-    CLOSING_TIME,
-    IS_OPEN
+    CONVERSATIONID
 }
