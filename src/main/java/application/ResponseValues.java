@@ -16,6 +16,6 @@ public class ResponseValues {
     public static final String conversationFull = "This conversation is already full.";
     public static final String belowMinimumRating = "You have a user rating below the minimum rating threshold for" +
             "this conversation.";
-    public static final String RemovedUser = "has been removed from conversation" ;
-    public static final String UserNotInConversation = "not in conversation";
+    public static final String removedUser = "has been removed from conversation" ;
+    public static final String userNotInConversation = "not in conversation";
 }
