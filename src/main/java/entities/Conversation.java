@@ -202,9 +202,23 @@ public class Conversation {
 
     /**
      * Returns the number of Users in a Conversation
-     * @return Number of users.
+     * @return Number of users
      */
     public int getNumUsers(){
         return users.size();
+    }
+
+    /**
+     * Remove a user from a conversation.
+     * @param user a user to be removed
+     * @return true if the user was removed
+     */
+    public boolean removeUser(User user) {
+        if (this.users.contains(user)){
+            this.users.remove(user);
+            return true;
+        } else {
+            return false;
+        }
     }
 }

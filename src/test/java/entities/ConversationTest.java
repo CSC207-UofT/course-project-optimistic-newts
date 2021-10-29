@@ -135,5 +135,16 @@ public class ConversationTest {
         assertTrue(c.addUser(u));
     }
 
+    @Test(timeout = 50)
+    public void TestRemoveUser() {
+        User u = new User();
+        c.addUser(u);
+        assertTrue(c.removeUser(u));
+    }
 
+    @Test(timeout = 50)
+    public void TestRemoveUserNotInConversation() {
+        User u = new User();
+        assertFalse(c.removeUser(u));
+    }
 }
