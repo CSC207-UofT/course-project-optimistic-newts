@@ -12,4 +12,8 @@ public class ResponseValues {
     public static final String ChangedConversationStatus = "Changed Status of conversation with ID";
     public static final String InvalidConversation = "There is no conversation with ID ";
     public static final String InvalidConversationID = "Conversation ID must not be empty";
+    public static final String userJoinedConversation = "has joined";
+    public static final String conversationFull = "This conversation is already full.";
+    public static final String belowMinimumRating = "You have a user rating below the minimum rating threshold for" +
+            "this conversation.";
 }
