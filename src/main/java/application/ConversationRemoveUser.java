@@ -26,6 +26,7 @@ public class ConversationRemoveUser extends ConversationInteractor {
         if (conversation.getUsers().contains(user)) {
             // Remove the user from the conversation
             conversation.removeUser(user);
+            user.removeConversation(conversation);
             response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.removedUser);
         } else {
             // // Output an error since user not in conversation
