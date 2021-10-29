@@ -22,11 +22,11 @@ public class CreateUser extends UserInteractor {
             String Password = (String) request.get(RequestField.PASSWORD);
             ArrayList<String> Interests = new ArrayList<>();
             Interests.add((String) request.get(RequestField.INTERESTS));
-            int ID = (int) request.get(RequestField.ID); //TODO adjust for new data access object
+            String ID = (String) request.get(RequestField.ID); //TODO adjust for new data access object
             User user = new User(Username, Password, Interests, ID);
 
             DataBase.addUser(user);
-            response.fill(ResponseField.SUCCESS, user.getId() + ResponseValues.CreateUser);
+            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.CreateUser);
         }
         else {
             response.fill(ResponseField.FAILURE, ResponseValues.InvalidPassword);
@@ -37,7 +37,7 @@ public class CreateUser extends UserInteractor {
     }
 
     /**
-     * Returns the User that was sucesfually createdby this interactor, or null otherwise.
+     * Returns the User that was successfully created this interactor, or null otherwise.
      * @return created User or null if no user has been created.
      */
     public User getUser() {

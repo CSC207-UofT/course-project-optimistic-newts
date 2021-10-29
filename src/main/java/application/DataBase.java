@@ -32,11 +32,23 @@ public class DataBase {
         return new User();
     }
 
-    public static Boolean checkForUser(User user)  {
-        return UserList.contains(user);
+    /**
+     *
+     * @param id ID corresponding to a user
+     * @return True if there exists a user corresponding to the required id, False otherwise
+     */
+    public static Boolean containsUserID(String id)  {
+        for (User user : UserList) {
+            if (user.getId().equals(id)) {
+                return Boolean.TRUE;
+            }
+        }
+        return Boolean.FALSE;
     }
 
-    public static void deleteUser(User user) { UserList.remove(user); }
+    public static void deleteUser(String id) {
+        UserList.removeIf(user -> user.getId().equals(id));
+    }
 
     /**
      * add a Conversation to ConversationList

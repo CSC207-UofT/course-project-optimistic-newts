@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * An object representing a User of the application.
  */
 public class User {
-    private int id;
+    private String id;
     private String username;
     private String password;
     private String location;
@@ -26,11 +26,11 @@ public class User {
     public User(String username,
                 String password,
                 ArrayList<String> interests,
-                int id){
+                String id){
         this.username = username;
         this.password = password;
         this.interests = interests;
-        this.id = id;
+        this.id = this.username + "#" + id;
         this.rating = 5;
         this.numRatings = 1;
         this.loginStatus = false;
@@ -45,7 +45,7 @@ public class User {
         this.username = null;
         this.password = null;
         this.interests = new ArrayList<>();
-        this.id = -1;
+        this.id = null;
         this.rating = 0;
         this.numRatings = 0;
         this.loginStatus = false;
@@ -65,7 +65,7 @@ public class User {
      * Getter method for user's ID.
      * @return Returns user ID.
      */
-    public int getId(){
+    public String getId(){
         return id;
     }
 

@@ -10,14 +10,16 @@ public class DeleteUser extends UserInteractor {
 
     @Override
     public void request(RequestModel request) {
-        user = DataBase.getUser((String) request.get(RequestField.USER));
+        String ID = (String) request.get(RequestField.ID);
         ResponseModel response = new ResponseModel();
 
-        DataBase.deleteUser(user);
-        response.fill(ResponseField.SUCCESS, user.getId() + ResponseValues.DeletedUser);
-
+        if (DataBase.containsUserID(ID) == Boolean.TRUE) {
+            DataBase.deleteUser(ID);
+            response.fill(ResponseField.SUCCESS, ResponseValues.DeletedUser);
+        } else {
+            response.fill(ResponseField.FAILURE, ResponseValues.InvalidID);
+        }
         // send response through provided output boundary
         request.getOutput().respond(response);
-
     }
 }
