@@ -7,5 +7,6 @@ public enum RequestField {
     PASSWORD,
     LOCATION,
     INTERESTS,
-    ID;
+    ID,
+    CONVERSATION
 }

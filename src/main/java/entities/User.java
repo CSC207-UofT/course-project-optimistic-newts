@@ -106,8 +106,10 @@ public class User {
      * @param password Password to be set
      */
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password){
+        if(password.length() >= 6) {
+            this.password = password;
+        }
     }
 
     /**
@@ -138,12 +140,10 @@ public class User {
      * Removes specified interest from user's interests
      * @param interest Interest to be removed
      */
-    public void removeInterest (String interest) throws EntityExceptions {
+    public void removeInterest (String interest){
         int index = interests.indexOf(interest);
         if (index != -1)
             interests.remove(index);
-        else
-            throw new EntityExceptions("Interest not in interest list.");
     }
 
     /**
@@ -190,12 +190,10 @@ public class User {
      * Removes specified user from user's friendslist
      * @param friend User to be removed
      */
-    public void removeFriend(User friend) throws EntityExceptions{
+    public void removeFriend(User friend){
         int index = friends.indexOf(friend);
         if (index != -1)
             friends.remove(index);
-        else
-            throw new EntityExceptions("User not in friend's list.");
     }
 
     /**
@@ -219,12 +217,10 @@ public class User {
      * of active conversations.
      * @param conversation Conversation to be removed
      */
-    public void removeConversation(Conversation conversation) throws EntityExceptions{
+    public void removeConversation(Conversation conversation){
         int index = conversations.indexOf(conversation);
         if(index != -1)
             conversations.remove(conversation);
-        else
-            throw new EntityExceptions("Conversation not in conversation list.");
     }
 
     /**
