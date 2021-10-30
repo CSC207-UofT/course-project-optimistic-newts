@@ -3,7 +3,7 @@ package application;
 import entities.Conversation;
 import entities.User;
 
-public class UserJoinConversation extends UserInteractor{
+public class ConversationAddUser extends ConversationInteractor{
     Conversation conversation;
     User user;
 

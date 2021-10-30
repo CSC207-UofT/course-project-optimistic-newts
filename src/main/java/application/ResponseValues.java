@@ -18,4 +18,6 @@ public class ResponseValues {
             "this conversation.";
     public static final String removedUser = "has been removed from conversation" ;
     public static final String userNotInConversation = "not in conversation";
+    public static final String emptyConversation = "This conversation is empty";
+    public static final String inConversation = "are discussing";
 }
