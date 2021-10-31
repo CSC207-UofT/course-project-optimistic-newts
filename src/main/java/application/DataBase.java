@@ -79,4 +79,19 @@ public class DataBase {
         }
         return new Conversation();
     }
+
+    /**
+     * Adds message to specified conversation's messagelist.
+     * @param conversationID String id of the conversation that the message is being added to.
+     * @param message Message being added.
+     */
+    public static void addMessage(String conversationID, Message message){
+        for(Conversation c : ConversationList){
+            if(Objects.equals(c.getId(), conversationID)){
+                c.addMessage(message);
+            }
+        }
+    }
+
+
 }

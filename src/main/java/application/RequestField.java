@@ -8,5 +8,9 @@ public enum RequestField {
     LOCATION,
     INTERESTS,
     ID,
-    CONVERSATIONID
+    CONVERSATIONID,
+    MESSAGEBODY,
+    WRITETIME,
+    LASTUPDATEDTIME,
+    MESSAGEID
 }

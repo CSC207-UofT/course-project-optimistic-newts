@@ -18,8 +18,8 @@ public class MessageTest {
     public void setUp() throws Exception {
         ArrayList<String> interests = new ArrayList<>();
         interests.add("darkside");
-        User u = new User("Darth Vader", "deathstar", interests, 123);
-        m = new Message("Luke, I am your father", u);
+        User u = new User("Darth Vader", "deathstar", interests, "123");
+        m = new Message("1", "Luke, I am your father", u);
     }
 
     @Test(timeout = 50)
@@ -46,5 +46,10 @@ public class MessageTest {
         String testDate = LocalDateTime.now().format(date);
         assertEquals(testDate, m.getLastUpdatedAt());
         assertEquals("May the force be with you", m.getBody());
+    }
+
+    @Test(timeout = 50)
+    public void TestGetID(){
+        assertEquals(m.getID(), "1");
     }
 }

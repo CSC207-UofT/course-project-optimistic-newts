@@ -4,12 +4,14 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Message {
+    private String id;
     private String body;
     private User author;
     private String writtenAt;
     private String lastUpdatedAt;
 
-    public Message(String body, User author) {
+    public Message(String id, String body, User author) {
+        this.id = id;
         this.body = body;
         this.author = author;
         DateTimeFormatter date = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
@@ -73,5 +75,13 @@ public class Message {
     private void setLastUpdatedAt(){
         DateTimeFormatter date = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         this.lastUpdatedAt = LocalDateTime.now().format(date);
+    }
+
+    /**
+     * Returns message ID.
+     * @return String representing messages unique id.
+     */
+    public String getID(){
+        return id;
     }
 }

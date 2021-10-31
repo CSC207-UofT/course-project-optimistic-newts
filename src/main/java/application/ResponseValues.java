@@ -20,4 +20,6 @@ public class ResponseValues {
     public static final String userNotInConversation = "not in conversation";
     public static final String emptyConversation = "This conversation is empty";
     public static final String inConversation = "are discussing";
+    public static final String emptyMessage = "No message entered.";
+    public static final String messageSent = "Message has been sent.";
 }

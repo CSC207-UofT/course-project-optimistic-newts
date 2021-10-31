@@ -1,21 +1,24 @@
 package application;
 
 import entities.ConversationQueue;
+import entities.User;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GetRelevantConversations extends UserInteractor{
     private ConversationQueue conversationQueue;
+    private User user;
+    private String location;
+    private int locationRadius;
+    private ArrayList<String> interests;
 
     /**
      * A request to be carried out by GetRelevantConversations.
      */
     public class GetRelevantConversationsRequest extends RequestModel{ //TODO: Adjust to fit new RequestModel
-        private OutputBoundary respondTo;
-        private String location;
-        private int locationRadius;
-        private ArrayList<String> interests;
+
 
         /**
          * Fills in this RequestModel's instance attributes.
@@ -45,7 +48,8 @@ public class GetRelevantConversations extends UserInteractor{
      */
     @Override
     public void request(RequestModel request) {
-        GetRelevantConversationsRequest grcRequest = (GetRelevantConversationsRequest) request;
+        // Fetching User to generate ConversationQueue for
+        user = DataBase.getUser((String) request.get(RequestField.USERNAME));
 
         conversationQueue = new ConversationQueue(grcRequest.location, grcRequest.locationRadius,
                 grcRequest.interests);
