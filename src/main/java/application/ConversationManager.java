@@ -1,9 +1,6 @@
 package application;
 
 import application.conversationInteractors.*;
-import entities.Conversation;
-
-import javax.print.attribute.standard.RequestingUserName;
 
 /**
  * An object representing a ConversationManager of the application.
