@@ -5,7 +5,7 @@ import entities.Message;
 import entities.User;
 
 
-public class CreateMessage extends MessageInteractor{
+public class AddMessage extends MessageInteractor{
     Message message;
     /**
      * Accepts a request.
