@@ -1,6 +1,7 @@
 package application;
 
 import adapters.TestPresenter;
+import application.conversationInteractors.ConversationAddUser;
 import entities.Conversation;
 import entities.Message;
 import entities.User;

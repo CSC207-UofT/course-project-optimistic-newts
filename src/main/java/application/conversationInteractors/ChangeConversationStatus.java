@@ -1,8 +1,9 @@
-package application;
+package application.conversationInteractors;
 
+import application.*;
 import entities.Conversation;
 
-public class ChangeConversationStatus extends ConversationInteractor{
+public class ChangeConversationStatus extends ConversationInteractor {
     /**
      * Changes the status of the conversation with the id in the request
      * @param request   a request stored as a RequestModel

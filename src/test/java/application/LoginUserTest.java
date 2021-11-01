@@ -1,6 +1,7 @@
 package application;
 
 import adapters.TestPresenter;
+import application.userInteractors.LoginUser;
 import entities.User;
 import org.junit.Before;
 import org.junit.Test;

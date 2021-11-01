@@ -1,5 +1,7 @@
 package application;
 
+import application.conversationInteractors.ChangeConversationStatus;
+import application.conversationInteractors.CreateConversation;
 import entities.Conversation;
 
 /**

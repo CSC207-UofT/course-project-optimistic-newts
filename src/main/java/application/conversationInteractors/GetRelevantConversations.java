@@ -1,13 +1,14 @@
-package application;
+package application.conversationInteractors;
 
+import application.*;
+import application.userInteractors.UserInteractor;
 import entities.ConversationQueue;
 import entities.User;
 
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GetRelevantConversations extends UserInteractor{
+public class GetRelevantConversations extends UserInteractor {
     private ConversationQueue conversationQueue;
     private User user;
     private String location;
@@ -17,7 +18,7 @@ public class GetRelevantConversations extends UserInteractor{
     /**
      * A request to be carried out by GetRelevantConversations.
      */
-    public class GetRelevantConversationsRequest extends RequestModel{ //TODO: Adjust to fit new RequestModel
+    public class GetRelevantConversationsRequest extends RequestModel { //TODO: Adjust to fit new RequestModel
 
 
         /**

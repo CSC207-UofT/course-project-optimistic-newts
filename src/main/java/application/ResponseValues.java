@@ -23,4 +23,5 @@ public class ResponseValues {
     public static final String emptyMessage = "No message entered.";
     public static final String messageSent = "Message has been sent.";
     public static final String friendAdded = " has been added to your friends list";
+    public static final String InvalidID = " This ID is invalid. ";
 }
