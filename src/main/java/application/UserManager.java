@@ -3,7 +3,7 @@ package application;
 import entities.User;
 
 /**
- * An object representing a UserManager of the application.
+ * An object representing an UserManager of the application.
  */
 public class UserManager {
     /**
@@ -31,6 +31,26 @@ public class UserManager {
     }
 
     public void logout() {
+        user.logOut();
+    }
+
+    /**
+     * Deletes a user according to the given RequestModel and sets this UserManager's user to null.
+     * @param request   RequestModel containing delete User information.
+     */
+    public void deleteUser(RequestModel request){
+        DeleteUser deleteUser = new DeleteUser();
+        deleteUser.request(request);
+    }
+
+    /**
+     * Finds a user according to the given RequestModel and adds it to the friends list of the user.
+     * @param request   RequestModel containing addFriend User information.
+     */
+    public void addFriend(RequestModel request){
+        AddFriend addFriend = new AddFriend();
+        addFriend.request(request);
+        user.addFriend(addFriend.getUser());
     }
 
     /**
