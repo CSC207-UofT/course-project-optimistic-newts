@@ -1,11 +1,12 @@
 package application;
 
+import application.conversationInteractors.ConversationInteractor;
 import entities.Conversation;
 import entities.Message;
 import entities.User;
 
 
-public class AddMessage extends ConversationInteractor{
+public class AddMessage extends ConversationInteractor {
     Message message;
     Conversation conversation;
     /**
