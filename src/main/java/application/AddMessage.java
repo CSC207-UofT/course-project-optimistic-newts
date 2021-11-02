@@ -5,8 +5,9 @@ import entities.Message;
 import entities.User;
 
 
-public class AddMessage extends MessageInteractor{
+public class AddMessage extends ConversationInteractor{
     Message message;
+    Conversation conversation;
     /**
      * Accepts a request.
      *
@@ -17,7 +18,7 @@ public class AddMessage extends MessageInteractor{
         ResponseModel response = new ResponseModel();
 
         // Fetching conversation that the message is being added to and user writing message
-        Conversation conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATIONID));
+        conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATIONID));
         User user = DataBase.getUser((String) request.get(RequestField.USERNAME));
 
         String messageBody = ((String) request.get(RequestField.MESSAGEBODY));
