@@ -1,9 +1,10 @@
-package application;
+package application.conversationInteractors;
 
+import application.*;
 import entities.Conversation;
 import entities.User;
 
-public class ConversationAddUser extends ConversationInteractor{
+public class ConversationAddUser extends ConversationInteractor {
     Conversation conversation;
     User user;
 

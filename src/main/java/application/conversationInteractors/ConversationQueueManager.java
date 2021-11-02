@@ -1,5 +1,6 @@
-package application;
+package application.conversationInteractors;
 
+import application.conversationInteractors.GetRelevantConversations;
 import entities.ConversationQueue;
 
 

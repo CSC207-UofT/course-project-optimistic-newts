@@ -1,10 +1,11 @@
-package application;
+package application.conversationInteractors;
+import application.InputBoundary;
 import entities.Conversation;
 
 /**
  * An abstract ConversationInteractor object. Generally to be extended as a specific Conversation usecase.
  * Requires simply that an implementing class stores a Conversation object and handles requests.
  */
-public abstract class ConversationInteractor implements InputBoundary{
+public abstract class ConversationInteractor implements InputBoundary {
     private Conversation conversation;
 }

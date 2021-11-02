@@ -1,5 +1,10 @@
 package application;
 
+import application.RequestModel;
+import application.userInteractors.AddFriend;
+import application.userInteractors.CreateUser;
+import application.userInteractors.DeleteUser;
+import application.userInteractors.LoginUser;
 import entities.User;
 
 /**

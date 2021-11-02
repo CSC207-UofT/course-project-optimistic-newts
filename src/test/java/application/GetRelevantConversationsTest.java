@@ -1,8 +1,7 @@
 package application;
 
 
-import entities.ConversationQueue;
-import entities.User;
+import application.conversationInteractors.GetRelevantConversations;
 import org.junit.Before;
 import org.junit.Test;
 

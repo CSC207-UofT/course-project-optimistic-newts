@@ -1,7 +1,7 @@
-package application;
+package application.conversationInteractors;
 
+import application.*;
 import entities.Conversation;
-import entities.User;
 
 public class ConversationGetUserList extends ConversationInteractor {
     private Conversation conversation;

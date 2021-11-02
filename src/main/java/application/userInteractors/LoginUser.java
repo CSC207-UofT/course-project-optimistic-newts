@@ -1,5 +1,6 @@
-package application;
+package application.userInteractors;
 
+import application.*;
 import entities.User;
 
 public class LoginUser extends UserInteractor {

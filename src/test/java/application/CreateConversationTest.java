@@ -1,5 +1,6 @@
 package application;
 
+import application.conversationInteractors.CreateConversation;
 import org.junit.Before;
 import org.junit.Test;
 

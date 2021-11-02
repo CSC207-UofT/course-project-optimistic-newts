@@ -1,27 +1,56 @@
 package application;
 
-import entities.Conversation;
+import application.conversationInteractors.*;
 
 /**
  * An object representing a ConversationManager of the application.
  */
 public class ConversationManager {
-    Conversation conversation;
 
     /**
-     * Creates and returns a new user with the given arguments
-     * @return returns the new created user
-     * TODO: implement createConversation() using 'CreateConversation' based on the code in 'CliController'.
+     * Creates a conversation using request
+     * @param request the filled in RequestModel
      */
-    public void createConversation(){
+    public void createConversation(RequestModel request){
         CreateConversation createConversation = new CreateConversation();
-        conversation = createConversation.getConversation();
+        createConversation.request(request);
     }
 
     /**
-     * Changes the status of the conversation with the given id
+     * Changes the status of a conversation specified by request
+     * @param request the filled in RequestModel
      */
-    public void changeConversationStatus() {
+    public void changeConversationStatus(RequestModel request) {
         ChangeConversationStatus changeConversationStatus = new ChangeConversationStatus();
-        changeConversationStatus.changeStatus();}
+        changeConversationStatus.request(request);
+    }
+
+    /**
+     * Adds the user specified by request to the conversation
+     * @param request the filled in RequestModel
+     */
+    public void addUser(RequestModel request){
+        ConversationAddUser conversationAddUser = new ConversationAddUser();
+        conversationAddUser.request(request);
+    }
+
+    /**
+     * Gets the user list of a conversation and outputs it using a ResponseModel
+     * @param request the filled in RequestModel
+     */
+    public void getUserList(RequestModel request){
+        ConversationGetUserList conversationGetUserList= new ConversationGetUserList();
+        conversationGetUserList.request(request);
+    }
+
+    /**
+     * Removes the user specified by request to the conversation
+     * @param request the filled in RequestModel
+     */
+    public void removeUser(RequestModel request){
+        ConversationRemoveUser conversationRemoveUser = new ConversationRemoveUser();
+        conversationRemoveUser.request(request);
+    }
+
+    //TODO: Whatever needs to be done with regards to the conversationqueue stuff
 }
