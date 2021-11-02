@@ -34,9 +34,8 @@ public class ConversationManager {
         conversationAddUser.request(request);
     }
 
-    // TODO: Implement this with the method properly
     /**
-     *
+     * Gets the user list of a conversation and outputs it using a ResponseModel
      * @param request the filled in RequestModel
      */
     public void getUserList(RequestModel request){
