@@ -5,62 +5,34 @@ import application.userInteractors.UserInteractor;
 import entities.ConversationQueue;
 import entities.User;
 
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class GetRelevantConversations extends UserInteractor {
     private ConversationQueue conversationQueue;
     private User user;
-    private String location;
-    private int locationRadius;
-    private ArrayList<String> interests;
-
-    /**
-     * A request to be carried out by GetRelevantConversations.
-     */
-    public class GetRelevantConversationsRequest extends RequestModel { //TODO: Adjust to fit new RequestModel
-
-
-        /**
-         * Fills in this RequestModel's instance attributes.
-         */
-        public void fillRequest(OutputBoundary respondTo, String location, int locationRadius,
-                                ArrayList<String> interests) {
-
-            this.respondTo = respondTo;
-            this.location = location;
-            this.locationRadius = locationRadius;
-            this.interests = interests;
-        }
-    }
-
-    /**
-     * @return  A request model to be filled in by caller
-     */
-    public GetRelevantConversationsRequest getRequestModel(){
-
-        return new GetRelevantConversationsRequest();
-    }
 
     /**
      * Accepts a request.
-     * @param request   a request stored as a RequestModel
-     * TODO: change request() based on the code in 'CliController'.
+     *
+     * @param request a request stored as a RequestModel
      */
     @Override
     public void request(RequestModel request) {
         // Fetching User to generate ConversationQueue for
         user = DataBase.getUser((String) request.get(RequestField.USERNAME));
 
-        conversationQueue = new ConversationQueue(grcRequest.location, grcRequest.locationRadius,
-                grcRequest.interests);
+        // Create a ConversationQueue with desired settings
+        conversationQueue = new ConversationQueue((String) request.get(RequestField.LOCATION),
+                (int) request.get(RequestField.LOCATION_RADIUS),
+                (ArrayList<String>) request.get(RequestField.INTERESTS));
+        ResponseModel response = new ResponseModel();
 
-        if (grcRequest.respondTo != null) {                 // if statement added for testing
-            conversationQueue.addAll(DataBase.getConversationList());
-            HashMap<String, Object> h_map = new HashMap<>();
-            h_map.put("RelevantConversations", conversationQueue.toArray());
-            grcRequest.respondTo.respond(new ResponseModel(h_map));
-        }
+        //Get all the conversations in DataBase
+        conversationQueue.addAll(DataBase.getConversationList());
+        response.fill(ResponseField.VALUE, conversationQueue.toArray());
+        // send response through provided output boundary
+        request.getOutput().respond(response);
     }
     /**
      * Getter method for GetRelevantConversation's conversationQueue.
@@ -69,5 +41,14 @@ public class GetRelevantConversations extends UserInteractor {
     public ConversationQueue getConversationQueue(){
 
         return this.conversationQueue;
+    }
+
+    /**
+     * Getter method for GetRelevantConversation's user.
+     * @return Returns GetRelevantConversation's user.
+     */
+    public User getUser(){
+
+        return this.user;
     }
 }

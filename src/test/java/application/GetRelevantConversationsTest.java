@@ -1,7 +1,9 @@
 package application;
 
 
+import adapters.CliPresenter;
 import application.conversationInteractors.GetRelevantConversations;
+import cli.CliDriver;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,20 +19,7 @@ public class GetRelevantConversationsTest {
      */
     @Before
     public void setUp() {
-        ArrayList<String> interests = new ArrayList<String>();
-        interests.add("Sports");
-        interests.add("Music");
-        interests.add("Fitness");
         g = new GetRelevantConversations();
-    }
-
-    /**
-     * Tests the getRequestModel method
-     */
-    @Test
-    public void testGetRequestModel() {
-
-        assertNotNull(g.getRequestModel());
     }
 
     /**
@@ -38,15 +27,20 @@ public class GetRelevantConversationsTest {
      */
     @Test
     public void testRequest() {
-        GetRelevantConversations.GetRelevantConversationsRequest r = g.getRequestModel();
+        CliDriver cli = new CliDriver();
+        CliPresenter presenter = new CliPresenter(cli);
+        RequestModel request = new RequestModel(presenter);
 
         ArrayList<String> interests = new ArrayList<String>();
         interests.add("Sports");
         interests.add("Music");
         interests.add("Fitness");
 
-        r.fillRequest(null, "SampleLocation", 3, interests);
-        g.request(r);
+        request.fill(RequestField.LOCATION, "SampleLocation");
+        request.fill(RequestField.LOCATION_RADIUS, 3);
+        request.fill(RequestField.INTERESTS, interests);
+        g.request(request);
+
         assertEquals(3, g.getConversationQueue().getLocationRadius());
     }
 }

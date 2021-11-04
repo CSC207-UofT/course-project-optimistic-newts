@@ -1,7 +1,6 @@
 package application.conversationInteractors;
 
 import application.*;
-import application.conversationInteractors.ConversationInteractor;
 import entities.Conversation;
 import entities.User;
 
@@ -18,7 +17,7 @@ public class ConversationRemoveUser extends ConversationInteractor {
     @Override
     public void request(RequestModel request) {
         // Fetching the conversation from which we remove user
-        conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATIONID));
+        conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATION_ID));
 
         //Fetching the user to remove from conversation
         user = DataBase.getUser((String) request.get(RequestField.USERNAME));
