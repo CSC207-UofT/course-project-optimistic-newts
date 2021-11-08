@@ -1,9 +1,8 @@
 package application;
 
 
-import adapters.CliPresenter;
+import adapters.TestPresenter;
 import application.conversationInteractors.GetRelevantConversations;
-import cli.CliDriver;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,8 +26,7 @@ public class GetRelevantConversationsTest {
      */
     @Test
     public void testRequest() {
-        CliDriver cli = new CliDriver();
-        CliPresenter presenter = new CliPresenter(cli);
+        TestPresenter presenter = new TestPresenter();
         RequestModel request = new RequestModel(presenter);
 
         ArrayList<String> interests = new ArrayList<String>();
