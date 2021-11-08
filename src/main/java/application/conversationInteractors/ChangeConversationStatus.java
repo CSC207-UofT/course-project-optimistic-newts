@@ -9,7 +9,7 @@ public class ChangeConversationStatus extends ConversationInteractor {
      * @param request   a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request){
+    public void request(RequestModel request, ConfigReader config) throws Exception {
         ResponseModel response = new ResponseModel();
 
         String conversationId = (String) request.get(RequestField.ID);
@@ -17,15 +17,15 @@ public class ChangeConversationStatus extends ConversationInteractor {
 
         if (selectedConversation.getId().equals("")){
             // Output an error because there is no such conversation with the id
-            response.fill(ResponseField.ERROR, ResponseValues.invalidConversation + conversationId);
+            response.fill(ResponseField.ERROR, config.get("invalidConversation") + conversationId);
         } else {
             // Change the status of the conversation
             selectedConversation.setIsOpen(!selectedConversation.getIsOpen());
             if (selectedConversation.getIsOpen()) {
-                response.fill(ResponseField.SUCCESS, ResponseValues.changedConversationStatus +
+                response.fill(ResponseField.SUCCESS, config.get("changedConversationStatus") +
                         conversationId + " to open");
             } else {
-                response.fill(ResponseField.SUCCESS, ResponseValues.changedConversationStatus +
+                response.fill(ResponseField.SUCCESS, config.get("changedConversationStatus") +
                         conversationId + " to closed");
             }
         }
