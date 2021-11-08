@@ -1,0 +1,21 @@
+{
+  "belowMinimumRating": "You have a user rating below the minimum rating threshold for this conversation.",
+  "changedConversationStatus": "Changed Status of conversation with ID",
+  "conversationFull": "This conversation is already full.",
+  "created": " has been created ",
+  "deletedUser": " has been deleted ",
+  "emptyConversation": "This conversation is empty",
+  "emptyMessage": "No message entered.",
+  "friendAdded": " has been added to your friends list",
+  "inConversation": "are discussing",
+  "incorrectPassword": "Incorrect password",
+  "invalidConversation": "There is no conversation with ID ",
+  "invalidConversationID": "Conversation ID must not be empty",
+  "invalidID": " This ID is invalid. ",
+  "invalidPassword": " Please choose a password with at least 6 characters.",
+  "loggedIn": " Logged In",
+  "messageSent": "Message has been sent.",
+  "removedUser": "has been removed from conversation",
+  "userJoinedConversation": "has joined",
+  "userNotInConversation": "not in conversation"
+}
