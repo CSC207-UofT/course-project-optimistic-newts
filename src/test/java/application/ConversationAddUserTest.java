@@ -44,7 +44,7 @@ public class ConversationAddUserTest{
                 0, 0, 1, "", true,
                 new ArrayList<Message>(), new ArrayList<User>()));
         r.fill(RequestField.USERNAME, "Sample User");
-        r.fill(RequestField.CONVERSATIONID, "1");
+        r.fill(RequestField.CONVERSATION_ID, "1");
         cau.request(r);
         assertTrue(cau.getConversation().getUsers().contains(cau.getUser()));
 

@@ -1,7 +1,6 @@
 package application.conversationInteractors;
 
 import application.*;
-import application.conversationInteractors.ConversationInteractor;
 import entities.Conversation;
 import java.util.ArrayList;
 

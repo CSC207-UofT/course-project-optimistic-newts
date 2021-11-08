@@ -19,19 +19,19 @@ public class AddMessage extends ConversationInteractor {
         ResponseModel response = new ResponseModel();
 
         // Fetching conversation that the message is being added to and user writing message
-        conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATIONID));
+        conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATION_ID));
         User user = DataBase.getUser((String) request.get(RequestField.USERNAME));
 
-        String messageBody = ((String) request.get(RequestField.MESSAGEBODY));
+        String messageBody = ((String) request.get(RequestField.MESSAGE_BODY));
 
         //Checks if message is empty
         if(messageBody.isEmpty()){
             response.fill(ResponseField.FAILURE, ResponseValues.emptyMessage);
         }
         else{
-            String writeTime = ((String) request.get(RequestField.WRITETIME));
-            String lastUpdatedTime = ((String) request.get(RequestField.LASTUPDATEDTIME));
-            String messageID = ((String) request.get(RequestField.MESSAGEID));
+            String writeTime = ((String) request.get(RequestField.WRITE_TIME));
+            String lastUpdatedTime = ((String) request.get(RequestField.LAST_UPDATED_TIME));
+            String messageID = ((String) request.get(RequestField.MESSAGE_ID));
             message  = new Message(messageID, messageBody, user);
             DataBase.addMessage(conversation.getId(), message);
             response.fill(ResponseField.SUCCESS, ResponseValues.messageSent);
