@@ -19,7 +19,7 @@ public class ResponseValueReaderTest {
     }
 
     @Test
-    public void getTest() throws Exception {
+    public void getTest(){
         String response = responseValueReader.get("created");
         Assert.assertEquals(response, " has been created ");
     }
