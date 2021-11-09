@@ -25,6 +25,9 @@ public class AddFriend extends UserInteractor {
         if (user.getUsername() == null || userTwo.getUsername() == null) {
             // Output an error because there is no such user with the given username
             response.fill(ResponseField.FAILURE, new Exception(ApplicationExceptions.NO_SUCH_USER_ERROR));
+        } else if (user.getUsername().equals(userTwo.getUsername())) {
+            // Output an error because the usernames are same
+            response.fill(ResponseField.FAILURE, new Exception(ApplicationExceptions.SAME_USER_NAME_ERROR));
         } else {
             // A User with the given username was found
             response.fill(ResponseField.SUCCESS, user.getUsername() + config.get("friendAdded"));
