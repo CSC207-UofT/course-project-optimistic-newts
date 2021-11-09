@@ -1,10 +1,9 @@
 package entities;
 
-import org.junit.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -17,7 +16,7 @@ public class ConversationTest {
     @Before
     public void setUp() throws Exception {
         c = new Conversation("", "Sample Conversation", "", "", 0, 0, 0, "", true,
-                new ArrayList<Message>(), new ArrayList<User>());
+                new ArrayList<>(), new ArrayList<>());
     }
 
     @Test(timeout = 50)
@@ -105,8 +104,7 @@ public class ConversationTest {
 
     @Test(timeout = 50)
     public void TestAddMessage() {
-        User u = new User("Joe", "pass", new ArrayList<String>(), "1");
-        Message m = new Message("Hello!", u);
+        Message m = new Message();
         c.addMessage(m);
         assertSame(m, c.getMessages().get(c.getMessages().size() - 1));
     }
@@ -114,24 +112,21 @@ public class ConversationTest {
     @Test(timeout = 50)
     public void TestAddUser() {
         c.setMaxSize(1);
-        ArrayList<String> interests = new ArrayList<>(List.of(new String[]{"Golf", "Painting"}));
-        User u = new User("testuser", "password", interests, 1);
+        User u = new User();
         c.addUser(u);
         assertSame(u, c.getUsers().get(c.getUsers().size() - 1));
     }
 
     @Test(timeout = 50)
     public void TestAddUserAtMax() {
-        ArrayList<String> interests = new ArrayList<>(List.of(new String[]{"Golf", "Painting"}));
-        User u = new User("testuser", "password", interests, 1);
+        User u = new User();
         assertFalse(c.addUser(u));
     }
 
     @Test(timeout = 50)
     public void TestAddUserBelowMax() {
         c.setMaxSize(1);
-        ArrayList<String> interests = new ArrayList<>(List.of(new String[]{"Golf", "Painting"}));
-        User u = new User("testuser", "password", interests, 1);
+        User u = new User();
         assertTrue(c.addUser(u));
     }
 
