@@ -15,23 +15,24 @@ public class ConversationRemoveUser extends ConversationInteractor {
      * @param request a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request) {
+    public void request(RequestModel request) throws Exception {
         // Fetching the conversation from which we remove user
         conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATION_ID));
 
         //Fetching the user to remove from conversation
         user = DataBase.getUser((String) request.get(RequestField.USERNAME));
         ResponseModel response = new ResponseModel();
+        ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
 
         // Check that the user is in the conversation
         if (conversation.getUsers().contains(user)) {
             // Remove the user from the conversation
             conversation.removeUser(user);
             user.removeConversation(conversation);
-            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.removedUser);
+            response.fill(ResponseField.SUCCESS, user.getUsername() + config.get("removedUser"));
         } else {
             // // Output an error since user not in conversation
-            response.fill(ResponseField.FAILURE, user.getUsername() + ResponseValues.userNotInConversation);
+            response.fill(ResponseField.FAILURE, user.getUsername() + config.get("userNotInConversation"));
         }
         // send response through provided output boundary
         request.getOutput().respond(response);

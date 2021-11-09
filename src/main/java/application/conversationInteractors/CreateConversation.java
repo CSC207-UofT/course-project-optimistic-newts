@@ -13,9 +13,10 @@ public class CreateConversation extends ConversationInteractor {
      * @param request   a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request) {
+    public void request(RequestModel request) throws Exception {
 
         ResponseModel response = new ResponseModel();
+        ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
 
         // check that a valid id is given
         if (((String) request.get(RequestField.ID)).length() != 0){
@@ -34,9 +35,9 @@ public class CreateConversation extends ConversationInteractor {
                     new ArrayList<>(), new ArrayList<>());
             DataBase.addConversation(this.conversation);
 
-            response.fill(ResponseField.SUCCESS, "Conversation with ID " + id + ResponseValues.created);
+            response.fill(ResponseField.SUCCESS, "Conversation with ID " + id + config.get("created"));
         } else {
-            response.fill(ResponseField.FAILURE, ResponseValues.invalidConversationID);
+            response.fill(ResponseField.FAILURE, config.get("invalidConversationID"));
         }
     }
 
