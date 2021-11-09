@@ -26,16 +26,16 @@ public class ConversationGetUserList extends ConversationInteractor {
             response.fill(ResponseField.SUCCESS, config.get("emptyConversation"));
         } else {
             ArrayList<String> usernames = new ArrayList<>();
-            // Get the username of the users
+            // Get the usernames of the users
             // TODO: Change how Conversation store users
             for (String userId: conversation.getUsers()){
-                // Retrieve username from DataBase and add it to userList
+                // Retrieve a username from DataBase and add it to usernames
                 usernames.add(DataBase.getUser(userId).getUsername());
             }
-            // Get rid of the last space and comma and output users in a conversation
+            // Output usernames of users in a conversation
             response.fill(ResponseField.SUCCESS, usernames + config.get("inConversation"));
         }
-        // send response through provided output boundary
+        // Send response through provided output boundary
         request.getOutput().respond(response);
     }
 
