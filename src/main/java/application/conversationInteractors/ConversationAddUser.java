@@ -14,7 +14,7 @@ public class ConversationAddUser extends ConversationInteractor {
      * @param request a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request) throws Exception {
+    public void request(RequestModel request) {
         // Fetching the conversation that the user is requesting to be added to
         conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATION_ID));
 
