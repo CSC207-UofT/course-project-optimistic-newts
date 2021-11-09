@@ -25,7 +25,7 @@ public class GetRelevantConversations extends UserInteractor {
         // Create a ConversationQueue with desired settings
         conversationQueue = new ConversationQueue((String) request.get(RequestField.LOCATION),
                 (int) request.get(RequestField.LOCATION_RADIUS),
-                (ArrayList<String>) request.get(RequestField.INTERESTS));
+                (ArrayList<String>) request.get(RequestField.INTEREST));
         ResponseModel response = new ResponseModel();
 
         //Get all the conversations in DataBase
