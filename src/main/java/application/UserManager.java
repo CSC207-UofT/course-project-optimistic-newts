@@ -52,10 +52,9 @@ public class UserManager {
      * Finds a user according to the given RequestModel and adds it to the friends list of the user.
      * @param request   RequestModel containing addFriend User information.
      */
-    public void addFriend(RequestModel request){
+    public void addFriend(RequestModel request) throws Exception {
         AddFriend addFriend = new AddFriend();
         addFriend.request(request);
-        user.addFriend(addFriend.getUser());
     }
 
     /**

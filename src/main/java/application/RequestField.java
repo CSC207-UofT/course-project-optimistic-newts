@@ -19,6 +19,7 @@ public enum RequestField {
     TOPIC,
     USER,
     USERNAME,
+    USERNAME_TWO,
     WRITE_TIME,
     CONFIG
 }
