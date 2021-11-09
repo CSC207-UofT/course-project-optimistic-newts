@@ -20,7 +20,7 @@ public class UserManager {
      * Creates a new user according to the given RequestModel and sets this UserManager's user accordingly.
      * @param request   RequestModel containing new User information.
      */
-    public void createUser(RequestModel request){
+    public void createUser(RequestModel request) {
         CreateUser createUser = new CreateUser();
         createUser.request(request);
         user = createUser.getUser();
@@ -29,7 +29,7 @@ public class UserManager {
     /**
      * Logs in a user according to RequestModel information and sets this UserManager's user accordingly.
      */
-    public void login(RequestModel request){
+    public void login(RequestModel request) {
         LoginUser loginUser = new LoginUser();
         loginUser.request(request);
         user = loginUser.getUser();
@@ -43,7 +43,7 @@ public class UserManager {
      * Deletes a user according to the given RequestModel and sets this UserManager's user to null.
      * @param request   RequestModel containing delete User information.
      */
-    public void deleteUser(RequestModel request){
+    public void deleteUser(RequestModel request) {
         DeleteUser deleteUser = new DeleteUser();
         deleteUser.request(request);
     }
@@ -52,7 +52,7 @@ public class UserManager {
      * Finds a user according to the given RequestModel and adds it to the friends list of the user.
      * @param request   RequestModel containing addFriend User information.
      */
-    public void addFriend(RequestModel request) throws Exception {
+    public void addFriend(RequestModel request) {
         AddFriend addFriend = new AddFriend();
         addFriend.request(request);
     }

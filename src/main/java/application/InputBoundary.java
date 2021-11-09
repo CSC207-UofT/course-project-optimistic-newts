@@ -9,5 +9,5 @@ public interface InputBoundary {
      * Accepts a request.
      * @param request   a request stored as a RequestModel
      */
-    public void request(RequestModel request) throws Exception;
+    public void request(RequestModel request);
 }
