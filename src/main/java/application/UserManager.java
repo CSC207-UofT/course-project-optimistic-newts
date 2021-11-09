@@ -1,44 +1,65 @@
 package application;
-
 import entities.User;
 
-import java.util.ArrayList;
+import application.userInteractors.*;
 
 /**
- * An object representing a UserManager of the application.
+ * An object representing an UserManager of the application.
  */
 public class UserManager {
+    /**
+     * The User this UserManager is managing.
+     */
+    private User user;
 
     /**
-     * creates and returns a new user with the given arguments.
-     * @param respondTo the OutputBoundary to receive the return
-     * @param username the username of the new user
-     * @param password the password of the new user
-     * @param location the location of the new user
-     * @param interests the interests of the new user
-     * @return returns the new created user
+     * Creates a new user according to the given RequestModel and sets this UserManager's user accordingly.
+     * @param request   RequestModel containing new User information.
      */
-    public User CreateUser(OutputBoundary respondTo, String username, String password, String location,
-                           ArrayList<String> interests){
+    public void createUser(RequestModel request) {
         CreateUser createUser = new CreateUser();
-        CreateUser.CreateUserRequest request = createUser.getRequestModel();
-        request.fillRequest(respondTo, "1", username, password, location, interests);
         createUser.request(request);
-        return createUser.getUser();
+        user = createUser.getUser();
     }
 
     /**
-     * creates and returns a new user with the given arguments.
-     * @param respondTo the OutputBoundary to receive the return
-     * @param username the username of the user
-     * @param password the password of the user
-     * @return returns the new created user
+     * Logs in a user according to RequestModel information and sets this UserManager's user accordingly.
      */
-    public User LoginUser(OutputBoundary respondTo, String username, String password){
+    public void login(RequestModel request) {
         LoginUser loginUser = new LoginUser();
-        LoginUser.LoginUserRequest request = loginUser.getRequestModel();
-        request.fillRequest(respondTo, username, password);
         loginUser.request(request);
-        return loginUser.getUser();
+        user = loginUser.getUser();
+    }
+
+    public void logout() {
+        user.logOut();
+    }
+
+    /**
+     * Deletes a user according to the given RequestModel and sets this UserManager's user to null.
+     * @param request   RequestModel containing delete User information.
+     */
+    public void deleteUser(RequestModel request) {
+        DeleteUser deleteUser = new DeleteUser();
+        deleteUser.request(request);
+    }
+
+    /**
+     * Finds a user according to the given RequestModel and adds it to the friends list of the user.
+     * @param request   RequestModel containing addFriend User information.
+     */
+    public void addFriend(RequestModel request) {
+        AddFriend addFriend = new AddFriend();
+        addFriend.request(request);
+    }
+
+    /**
+     * @return  The username of the user associated with this UserManager, if said user exists (null otherwise).
+     */
+    public String getUsername() {
+        if (user == null) {
+            return null;
+        }
+        return user.getUsername();
     }
 }

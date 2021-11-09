@@ -19,18 +19,21 @@ public class MessageTest {
         ArrayList<String> interests = new ArrayList<>();
         interests.add("darkside");
         User u = new User("DarthVader", "deathstar", interests, "DarthVader#0");
-        m = new Message("Luke, I am your father", u);
+        m = new Message("1", "Luke, I am your father", u);
     }
 
     @Test(timeout = 50)
-    public void TestGetBody() {
+    public void getBodyTest() {
         assertEquals("Luke, I am your father", m.getBody());
     }
 
     @Test(timeout = 50)
-    public void TestGetAuthor() {
+    public void getAuthorTest() {
         assertEquals("Darth Vader", m.getAuthor());
     }
+
+    @Test(timeout = 50)
+    public void getIdTest() { assertEquals("1", m.getId());}
 
     @Test(timeout = 50)
     public void TestGetWrittenAT() {
@@ -46,5 +49,10 @@ public class MessageTest {
         String testDate = LocalDateTime.now().format(date);
         assertEquals(testDate, m.getLastUpdatedAt());
         assertEquals("May the force be with you", m.getBody());
+    }
+
+    @Test(timeout = 50)
+    public void TestGetID(){
+        assertEquals(m.getId(), "1");
     }
 }

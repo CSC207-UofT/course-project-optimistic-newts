@@ -1,6 +1,12 @@
 package application;
 
 import adapters.TestPresenter;
+import application.userInteractors.CreateUser;
+import application.userInteractors.LoginUser;
+import cli.CliDriver;
+import adapters.CliPresenter;
+
+import entities.User;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,38 +16,44 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class CreateUserTest {
-    CreateUser c;
+    CreateUser l;
 
-    /**
-     * Setting up a test User
-     */
-    @Before
-    public void setUp() {
-        c = new CreateUser();
+    private static class TestOutput implements OutputBoundary {
+        @Override
+        public void respond(ResponseModel response) {
+        }
     }
 
     /**
-     * Tests the getRequestModel method
+     * Setting up a test LoginUser
      */
-    @Test
-    public void testGetRequestModel() {
-
-        assertNotNull(c.getRequestModel());
+    @Before
+    public void setUp() {
+        l = new CreateUser();
     }
 
     /**
      * Tests the request method
      */
     @Test
-    public void testRequest() {
+    public void requestTest() {
         TestPresenter tp = new TestPresenter();
-        CreateUser.CreateUserRequest r = c.getRequestModel();
-        ArrayList<String> interests = new ArrayList<String>();
+        RequestModel r = new RequestModel(new CreateUserTest.TestOutput());
+        ArrayList<String> interests = new ArrayList<>();
         interests.add("Sports");
         interests.add("Music");
         interests.add("Fitness");
-        r.fillRequest(tp, "SampleUser#0", "SampleUser", "", "", interests);
-        c.request(r);
-        assertEquals("SampleUser", c.getUser().getUsername());
+        DataBase.addUser(new User("Sample User", "1234", interests, "1"));
+
+        r.fill(RequestField.USERNAME, "Sample User");
+        r.fill(RequestField.PASSWORD, "1234");
+        l.request(r);
+        assertEquals(l.getUser().getUsername(), "Sample User");
+
+        ArrayList<String> test_interests = new ArrayList<>();
+        test_interests.add("Sports");
+        test_interests.add("Music");
+        test_interests.add("Fitness");
+        assertEquals(l.getUser().getInterests(), test_interests);
     }
 }

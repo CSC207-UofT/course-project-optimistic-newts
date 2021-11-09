@@ -1,13 +1,10 @@
 package adapters;
 
-import application.CreateUser;
-import application.DataBase;
-import application.LoginUser;
-import application.RequestModel;
+import application.*;
+import application.ConversationManager;
+import application.MessageManager;
+import application.userInteractors.LoginUser;
 import application.UserManager;
-import entities.Conversation;
-import entities.Message;
-import entities.User;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,13 +14,11 @@ import java.util.Objects;
  * Controller for the command line interface implementation of the application.
  */
 public class CliController {
-    private InOut inOut;
-    private CliPresenter presenter;
-    //TODO: fix dependency on entities. Clean Architecture violation. Thinking to replace these with an instance of
-    // their associated Manager class which we are working on implementing.
-    private User currentUser;
-    private Conversation currentConversation;
-    private Message currentMessage;
+    private final InOut inOut;
+    private final CliPresenter presenter;
+    private UserManager currentUser;
+    private ConversationManager currentConversation;
+    private MessageManager currentMessage;
 
     /**
      * Create a new CliController.
@@ -115,21 +110,19 @@ public class CliController {
 
     /**
      * Logs the user out.
-     * TODO: have use case handle this and call use case in User Menu instead of this.
      */
     private void logout() {
         presenter.present("-------");
-        // need interactor for this. BAD
-        currentUser.logOut();
+        currentUser.logout();
         presenter.present(currentUser.getUsername() + " logged out");
     }
 
     /**
      * The Login Menu. Logs a user in or leads user to Create User Menu.
-     * @return Logged in User. TODO: CA violation
+     * @return UserManager containing the logged-in user.
      */
-    private User logInMenu() {
-        User user = null;
+    private UserManager logInMenu() {
+        UserManager user = null;
         while (user == null) {
             presenter.present("-------");
             presenter.present("Enter 'exit' to stop the program.");
@@ -144,7 +137,11 @@ public class CliController {
                 } else {
                     presenter.present("Password:");
                     String passwordInput = inOut.getInput();
-                    user = new UserManager().LoginUser(presenter, usernameInput, passwordInput);
+                    RequestModel loginRequest = new RequestModel(presenter);
+                    loginRequest.fill(RequestField.USERNAME, usernameInput);
+                    loginRequest.fill(RequestField.PASSWORD, passwordInput);
+                    user = new UserManager();
+                    user.login(loginRequest);
                 }
             } catch (IOException e) {
                 presenter.present("Something went wrong.");
@@ -155,10 +152,10 @@ public class CliController {
 
     /**
      * The Create User Menu. Leads a user through account creation and then logs them into their new account.
-     * @return  Logged in User. TODO: CA violation
+     * @return  UserManager containing the logged-in, new user.
      */
-    private User createUserMenu() {
-        User user = null;
+    private UserManager createUserMenu() {
+        UserManager user = null;
         while (user == null) {
             presenter.present("-------");
             presenter.present("Enter 'exit' to stop the program.");
@@ -172,6 +169,7 @@ public class CliController {
                     presenter.present("Username already in use.");
                 } else {
                     // username is unique, so we can create a new user with this username.
+                    user = new UserManager();
                     presenter.present("Enter a password:");
                     String password = inOut.getInput();
                     presenter.present("Enter your location:");
@@ -179,12 +177,18 @@ public class CliController {
                     presenter.present("Enter something you're interested in:");
                     ArrayList<String> interests = new ArrayList<>();
                     interests.add(inOut.getInput());
-                    user = new UserManager().CreateUser(presenter, username, password, location, interests);
+                    RequestModel createUserRequest = new RequestModel(presenter);
+                    createUserRequest.fill(RequestField.USERNAME, username);
+                    createUserRequest.fill(RequestField.PASSWORD, password);
+                    createUserRequest.fill(RequestField.LOCATION, location);
+                    createUserRequest.fill(RequestField.INTEREST, interests);
+                    user.createUser(createUserRequest);
                     // We will now log the new user in
                     LoginUser loginUser = new LoginUser();
-                    LoginUser.LoginUserRequest requestForm = loginUser.getRequestModel();
-                    requestForm.fillRequest(presenter, username, password);
-                    new UserManager().LoginUser(presenter, username, password);
+                    RequestModel loginRequest = new RequestModel(presenter);
+                    loginRequest.fill(RequestField.USERNAME, username);
+                    loginRequest.fill(RequestField.PASSWORD, password);
+                    user.login(loginRequest);
                 }
             } catch (IOException e) {
                 presenter.present("Something went wrong.");

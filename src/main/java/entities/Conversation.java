@@ -1,24 +1,22 @@
 package entities;
-
 import java.io.Serializable;
-import java.sql.Array;
 import java.util.ArrayList;
 
 /**
  * A class representing a conversation
  */
 public class Conversation implements Serializable {
-    private String id;
+    private final String id;
     private String title;
     private String topic;
     private String location;
-    private int locationRadius;
+    private final int locationRadius;
     private int minRating;
     private int maxSize;
     private String closingTime;
     private boolean isOpen;
-    private ArrayList<Message> messages;
-    private ArrayList<User> users;
+    private final ArrayList<Message> messages;
+    private final ArrayList<User> users;
 
     public Conversation(String id, String title,
                         String topic, String location,
@@ -177,9 +175,8 @@ public class Conversation implements Serializable {
 
     /**
      * Set the status of the conversation.
-     * @param isOpen the status to be set
      */
-    public void setIsOpen(boolean isOpen){ this.isOpen = isOpen; }
+    public void toggleIsOpen(){ this.isOpen = !this.isOpen; }
 
     /**
      * Add a message to the conversation.
@@ -195,6 +192,28 @@ public class Conversation implements Serializable {
     public boolean addUser(User user){
         if (this.users.size() < this.maxSize){
             this.users.add(user);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Returns the number of Users in a Conversation
+     * @return Number of users
+     */
+    public int getNumUsers(){
+        return users.size();
+    }
+
+    /**
+     * Remove a user from a conversation.
+     * @param user a user to be removed
+     * @return true if the user was removed
+     */
+    public boolean removeUser(User user) {
+        if (this.users.contains(user)){
+            this.users.remove(user);
             return true;
         } else {
             return false;

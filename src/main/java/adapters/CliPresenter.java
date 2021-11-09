@@ -19,7 +19,7 @@ public class CliPresenter implements OutputBoundary {
      * @param response   a response stored as a ResponseModel
      */
     @Override
-    public void response(ResponseModel response) {
+    public void respond(ResponseModel response) {
         for (Object value : response.getData().values()) {
             present(value.toString());
         }

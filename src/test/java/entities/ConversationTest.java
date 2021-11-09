@@ -17,7 +17,7 @@ public class ConversationTest {
     @Before
     public void setUp() throws Exception {
         c = new Conversation("", "Sample Conversation", "", "", 0, 0, 0, "", true,
-                new ArrayList<Message>(), new ArrayList<User>());
+                new ArrayList<>(), new ArrayList<>());
     }
 
     @Test(timeout = 50)
@@ -98,15 +98,15 @@ public class ConversationTest {
     }
 
     @Test(timeout = 50)
-    public void TestSetStatus() {
-        c.setIsOpen(false);
+    public void TestToggleStatus() {
+        c.toggleIsOpen();
         assertFalse(c.getIsOpen());
     }
 
     @Test(timeout = 50)
     public void TestAddMessage() {
         User u = new User("Joe", "pass", new ArrayList<String>(), "Joe#0");
-        Message m = new Message("Hello!", u);
+        Message m = new Message("1", "Hello!", u);
         c.addMessage(m);
         assertSame(m, c.getMessages().get(c.getMessages().size() - 1));
     }
@@ -135,5 +135,16 @@ public class ConversationTest {
         assertTrue(c.addUser(u));
     }
 
+    @Test(timeout = 50)
+    public void TestRemoveUser() {
+        User u = new User();
+        c.addUser(u);
+        assertTrue(c.removeUser(u));
+    }
 
+    @Test(timeout = 50)
+    public void TestRemoveUserNotInConversation() {
+        User u = new User();
+        assertFalse(c.removeUser(u));
+    }
 }

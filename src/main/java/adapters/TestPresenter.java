@@ -9,7 +9,7 @@ public class TestPresenter implements OutputBoundary {
      * @param response a response stored as a ResponseModel
      */
     @Override
-    public void response(ResponseModel response) {
+    public void respond(ResponseModel response) {
         ResponseModel r = response;
     }
 }

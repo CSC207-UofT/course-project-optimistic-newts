@@ -10,9 +10,4 @@ public interface InputBoundary {
      * @param request   a request stored as a RequestModel
      */
     public void request(RequestModel request);
-
-    /**
-     * @return  A request model to be filled in by caller
-     */
-    public RequestModel getRequestModel();
 }

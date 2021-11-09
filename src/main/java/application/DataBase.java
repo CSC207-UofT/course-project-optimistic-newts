@@ -32,7 +32,23 @@ public class DataBase {
         return new User();
     }
 
-    public static void deleteUser(User user) { UserList.remove(user); }
+    /**
+     *
+     * @param id ID corresponding to a user
+     * @return True if there exists a user corresponding to the required id, False otherwise
+     */
+    public static Boolean containsUserID(String id)  {
+        for (User user : UserList) {
+            if (user.getId().equals(id)) {
+                return Boolean.TRUE;
+            }
+        }
+        return Boolean.FALSE;
+    }
+
+    public static void deleteUser(String id) {
+        UserList.removeIf(user -> user.getId().equals(id));
+    }
 
     /**
      * add a Conversation to ConversationList
@@ -63,4 +79,19 @@ public class DataBase {
         }
         return new Conversation();
     }
+
+    /**
+     * Adds message to specified conversation's messagelist.
+     * @param conversationID String id of the conversation that the message is being added to.
+     * @param message Message being added.
+     */
+    public static void addMessage(String conversationID, Message message){
+        for(Conversation c : ConversationList){
+            if(Objects.equals(c.getId(), conversationID)){
+                c.addMessage(message);
+            }
+        }
+    }
+
+
 }

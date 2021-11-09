@@ -1,26 +1,39 @@
 package application;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * A data structure representing a response passed through an OutputBoundary Interface.
  */
 public class ResponseModel {
-    private final Map<String, Object> data;
+    /**
+     * A Map containing the response's data. Specific Key-Value contracts are not enforced here.
+     * See ResponseField enum for valid keys.
+     */
+    private final Map<ResponseField, Object> data;
 
     /**
-     * Construct a new ResponseModel with provided data map (string keys, object values).
-     * @param data  Response data map
+     * Construct a new empty ResponseModel.
      */
-    public ResponseModel(Map<String, Object> data) {
-        this.data = data;
+    public ResponseModel() {
+        data = new HashMap<>();
     }
 
     /**
-     * Return this ResponseModel's data map.
-     * @return  Response data array
+     * Sets the value at specified key to the specified value in this ResponseModel.
+     * @param key       Key to store value at.
+     * @param value     Value to store at given key.
      */
-    public Map<String, Object> getData() {
-        return this.data;
+    public void fill(ResponseField key, Object value) {
+        data.put(key, value);
+    }
+
+    /**
+     * @param key   Key to fetch data from.
+     * @return      Value at input key in this ResponseModel or null if key does not have any value.
+     */
+    public Object get(ResponseField key) {
+        return data.get(key);
     }
 }
