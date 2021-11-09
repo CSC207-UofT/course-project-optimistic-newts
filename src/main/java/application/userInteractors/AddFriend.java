@@ -11,15 +11,18 @@ public class AddFriend extends UserInteractor {
      * @param request   a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request) {
-        user = DataBase.getUser((String) request.get(RequestField.USERNAME));
+    public void request(RequestModel request) throws Exception {
         ResponseModel response = new ResponseModel();
+        ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
+
+        user = DataBase.getUser((String) request.get(RequestField.USERNAME));
+
         if (user.getUsername() == null) {
             // Output an error because there is no such user with the given username
-            response.fill(ResponseField.EXCEPTION, new Exception(ApplicationExceptions.NO_SUCH_USER_ERROR));
+            response.fill(ResponseField.FAILURE, new Exception(ApplicationExceptions.NO_SUCH_USER_ERROR));
         } else {
             // A User with the given username was found
-            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.friendAdded);
+            response.fill(ResponseField.SUCCESS, user.getUsername() + config.get("friendAdded"));
         }
         // send response through provided output boundary
         request.getOutput().respond(response);

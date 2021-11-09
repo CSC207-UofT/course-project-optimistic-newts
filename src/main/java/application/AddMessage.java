@@ -15,8 +15,10 @@ public class AddMessage extends ConversationInteractor {
      * @param request a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request) {
+    public void request(RequestModel request) throws Exception {
         ResponseModel response = new ResponseModel();
+        ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
+
 
         // Fetching conversation that the message is being added to and user writing message
         conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATION_ID));
@@ -26,7 +28,7 @@ public class AddMessage extends ConversationInteractor {
 
         //Checks if message is empty
         if(messageBody.isEmpty()){
-            response.fill(ResponseField.FAILURE, ResponseValues.emptyMessage);
+            response.fill(ResponseField.FAILURE, config.get("emptyMessage"));
         }
         else{
             String writeTime = ((String) request.get(RequestField.WRITE_TIME));
@@ -34,7 +36,7 @@ public class AddMessage extends ConversationInteractor {
             String messageID = ((String) request.get(RequestField.MESSAGE_ID));
             message  = new Message(messageID, messageBody, user);
             DataBase.addMessage(conversation.getId(), message);
-            response.fill(ResponseField.SUCCESS, ResponseValues.messageSent);
+            response.fill(ResponseField.SUCCESS, config.get("messageSent"));
         }
         // send response through provided output boundary
         request.getOutput().respond(response);

@@ -10,8 +10,9 @@ public class CreateUser extends UserInteractor {
 
 
     @Override
-    public void request(RequestModel request) {
+    public void request(RequestModel request) throws Exception {
         ResponseModel response = new ResponseModel();
+        ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
 
         // check that password is strong enough before creating User
         if (((String) request.get(RequestField.PASSWORD)).length() >= 6) {
@@ -24,10 +25,10 @@ public class CreateUser extends UserInteractor {
             User user = new User(username, password, interests, ID);
 
             DataBase.addUser(user);
-            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.created);
+            response.fill(ResponseField.SUCCESS, user.getUsername() + config.get("created"));
         }
         else {
-            response.fill(ResponseField.FAILURE, ResponseValues.invalidPassword);
+            response.fill(ResponseField.FAILURE, config.get("invalidPassword"));
         }
 
         // send response through provided output boundary
