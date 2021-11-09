@@ -16,12 +16,12 @@ public class CreateUser extends UserInteractor {
         // check that password is strong enough before creating User
         if (((String) request.get(RequestField.PASSWORD)).length() >= 6) {
 
-            String Username = ((String) request.get(RequestField.USERNAME));
-            String Password = (String) request.get(RequestField.PASSWORD);
-            ArrayList<String> Interests = new ArrayList<>();
-            Interests.add((String) request.get(RequestField.INTERESTS));
+            String username = ((String) request.get(RequestField.USERNAME));
+            String password = (String) request.get(RequestField.PASSWORD);
+            ArrayList<String> interests = new ArrayList<>();
+            interests.add((String) request.get(RequestField.INTERESTS));
             String ID = (String) request.get(RequestField.ID); //TODO adjust for new data access object
-            User user = new User(Username, Password, Interests, ID);
+            User user = new User(username, password, interests, ID);
 
             DataBase.addUser(user);
             response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.created);
