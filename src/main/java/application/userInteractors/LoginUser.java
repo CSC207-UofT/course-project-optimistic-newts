@@ -11,7 +11,7 @@ public class LoginUser extends UserInteractor {
      * @param request   a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request) throws Exception {
+    public void request(RequestModel request) {
         ResponseModel response = new ResponseModel();
         ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
 
