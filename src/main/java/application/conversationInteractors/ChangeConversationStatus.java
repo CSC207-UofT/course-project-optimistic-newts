@@ -18,7 +18,7 @@ public class ChangeConversationStatus extends ConversationInteractor {
 
         if (selectedConversation.getId().equals("")){
             // Output an error because there is no such conversation with the id
-            response.fill(ResponseField.ERROR, config.get("invalidConversation") + conversationId);
+            response.fill(ResponseField.FAILURE, config.get("invalidConversation") + conversationId);
         } else {
             // Change the status of the conversation
             selectedConversation.toggleIsOpen();

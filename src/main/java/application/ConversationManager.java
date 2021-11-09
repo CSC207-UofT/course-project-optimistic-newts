@@ -11,7 +11,7 @@ public class ConversationManager {
      * Creates a conversation using request
      * @param request the filled in RequestModel
      */
-    public void createConversation(RequestModel request) throws Exception {
+    public void createConversation(RequestModel request) {
         CreateConversation createConversation = new CreateConversation();
         createConversation.request(request);
     }
@@ -20,7 +20,7 @@ public class ConversationManager {
      * Changes the status of a conversation specified by request
      * @param request the filled in RequestModel
      */
-    public void changeConversationStatus(RequestModel request) throws Exception {
+    public void changeConversationStatus(RequestModel request) {
         ChangeConversationStatus changeConversationStatus = new ChangeConversationStatus();
         changeConversationStatus.request(request);
     }
@@ -29,7 +29,7 @@ public class ConversationManager {
      * Adds the user specified by request to the conversation
      * @param request the filled in RequestModel
      */
-    public void addUser(RequestModel request) throws Exception {
+    public void addUser(RequestModel request) {
         ConversationAddUser conversationAddUser = new ConversationAddUser();
         conversationAddUser.request(request);
     }
@@ -38,7 +38,7 @@ public class ConversationManager {
      * Gets the user list of a conversation and outputs it using a ResponseModel
      * @param request the filled in RequestModel
      */
-    public void getUserList(RequestModel request) throws Exception {
+    public void getUserList(RequestModel request) {
         ConversationGetUserList conversationGetUserList= new ConversationGetUserList();
         conversationGetUserList.request(request);
     }
@@ -47,7 +47,7 @@ public class ConversationManager {
      * Removes the user specified by request to the conversation
      * @param request the filled in RequestModel
      */
-    public void removeUser(RequestModel request) throws Exception {
+    public void removeUser(RequestModel request) {
         ConversationRemoveUser conversationRemoveUser = new ConversationRemoveUser();
         conversationRemoveUser.request(request);
     }

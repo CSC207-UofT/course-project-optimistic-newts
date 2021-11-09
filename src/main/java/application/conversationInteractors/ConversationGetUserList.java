@@ -3,6 +3,8 @@ package application.conversationInteractors;
 import application.*;
 import entities.Conversation;
 
+import java.util.ArrayList;
+
 public class ConversationGetUserList extends ConversationInteractor {
     private Conversation conversation;
 
@@ -23,17 +25,17 @@ public class ConversationGetUserList extends ConversationInteractor {
             // Output empty conversation message
             response.fill(ResponseField.SUCCESS, config.get("emptyConversation"));
         } else {
-            StringBuilder userList = new StringBuilder();
-            // Get the UserID
+            ArrayList<String> usernames = new ArrayList<>();
+            // Get the usernames of the users
             // TODO: Change how Conversation store users
             for (String userId: conversation.getUsers()){
-                // Retrieve username from DataBase and add it to userList
-                userList.append(DataBase.getUser(userId).getUsername()).append(", ");
+                // Retrieve a username from DataBase and add it to usernames
+                usernames.add(DataBase.getUser(userId).getUsername());
             }
-            // Get rid of the last space and comma and output users in a conversation
-            response.fill(ResponseField.SUCCESS, userList.substring(0,-2) + config.get("inConversation"));
+            // Output usernames of users in a conversation
+            response.fill(ResponseField.SUCCESS, usernames + config.get("inConversation"));
         }
-        // send response through provided output boundary
+        // Send response through provided output boundary
         request.getOutput().respond(response);
     }
 

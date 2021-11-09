@@ -11,19 +11,22 @@ public class LoginUser extends UserInteractor {
      * @param request   a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request) {
-        user = DataBase.getUser((String) request.get(RequestField.USERNAME));
+    public void request(RequestModel request) throws Exception {
         ResponseModel response = new ResponseModel();
+        ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
+
+        user = DataBase.getUser((String) request.get(RequestField.USERNAME));
+
         if (user.getUsername() == null) {
             // Output an error because there is no such user with the given username
-            response.fill(ResponseField.EXCEPTION, new Exception(ApplicationExceptions.NO_SUCH_USER_ERROR));
+            response.fill(ResponseField.FAILURE, new Exception(ApplicationExceptions.NO_SUCH_USER_ERROR));
         } else if (user.getPassword() == request.get(RequestField.PASSWORD)) {
             // Login the user
             user.logIn();
-            response.fill(ResponseField.SUCCESS, user.getUsername() + ResponseValues.loggedIn);
+            response.fill(ResponseField.SUCCESS, user.getUsername() + config.get("loggedIn"));
         } else {
             // Input password was incorrect.
-            response.fill(ResponseField.FAILURE, ResponseValues.incorrectPassword);
+            response.fill(ResponseField.FAILURE, config.get("incorrectPassword"));
         }
         // send response through provided output boundary
         request.getOutput().respond(response);
