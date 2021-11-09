@@ -8,7 +8,6 @@ public interface InputBoundary {
     /**
      * Accepts a request.
      * @param request   a request stored as a RequestModel
-     * @param config an object storing the Responses
      */
-    public void request(RequestModel request, ConfigReader config) throws Exception;
+    public void request(RequestModel request) throws Exception;
 }

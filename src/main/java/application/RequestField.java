@@ -20,4 +20,5 @@ public enum RequestField {
     USER,
     USERNAME,
     WRITE_TIME,
+    CONFIG
 }

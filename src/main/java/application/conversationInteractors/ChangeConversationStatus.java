@@ -9,11 +9,12 @@ public class ChangeConversationStatus extends ConversationInteractor {
      * @param request   a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request, ConfigReader config) throws Exception {
+    public void request(RequestModel request) throws Exception {
         ResponseModel response = new ResponseModel();
 
         String conversationId = (String) request.get(RequestField.ID);
         Conversation selectedConversation = DataBase.getConversation(conversationId);
+        ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
 
         if (selectedConversation.getId().equals("")){
             // Output an error because there is no such conversation with the id
