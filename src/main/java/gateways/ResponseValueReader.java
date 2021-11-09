@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class ResponseValueReader implements ConfigReader {
-    private HashMap<String, String> ResponseValues = new HashMap<>();
+    private final HashMap<String, String> responseValues = new HashMap<>();
 
     public ResponseValueReader() throws IOException, ParseException{
         String RESPONSE_VALUE_PATH = "configData/ResponseValues.JSON/";
@@ -27,7 +27,7 @@ public class ResponseValueReader implements ConfigReader {
             for (Object o : jsonObject.keySet()) {
                 String key = (String) o;
                 String val = (String) jsonObject.get(key);
-                this.ResponseValues.put(key, val);
+                this.responseValues.put(key, val);
             }
         }
     }
@@ -40,7 +40,7 @@ public class ResponseValueReader implements ConfigReader {
     @Override
     public String get(String key){
         try {
-            return this.ResponseValues.get(key);
+            return this.responseValues.get(key);
         } catch (Exception e){
             return null;
         }
