@@ -1,6 +1,5 @@
 package entities;
 
-import java.sql.Array;
 import java.util.ArrayList;
 
 /**
@@ -176,9 +175,8 @@ public class Conversation {
 
     /**
      * Set the status of the conversation.
-     * @param isOpen the status to be set
      */
-    public void setIsOpen(boolean isOpen){ this.isOpen = isOpen; }
+    public void toggleIsOpen(){ this.isOpen = !this.isOpen; }
 
     /**
      * Add a message to the conversation.

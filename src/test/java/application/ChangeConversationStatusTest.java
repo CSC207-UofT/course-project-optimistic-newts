@@ -2,19 +2,15 @@ package application;
 
 import application.conversationInteractors.ChangeConversationStatus;
 import entities.Conversation;
-import gateways.ResponseValueReader;
-import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 public class ChangeConversationStatusTest {
     ChangeConversationStatus c;
-    ResponseValueReader r;
 
     private static class TestOutput implements OutputBoundary {
 
@@ -27,9 +23,8 @@ public class ChangeConversationStatusTest {
      *  Setting up a test conversation
      */
     @Before
-    public void setUp() throws IOException, ParseException {
+    public void setUp() {
         c = new ChangeConversationStatus();
-        r = new ResponseValueReader();
     }
 
     /**
@@ -42,7 +37,7 @@ public class ChangeConversationStatusTest {
                 "", false, new ArrayList<>(), new ArrayList<>()));
         request.fill(RequestField.ID, "Sample Conversation");
 
-        c.request(request, r);
+        c.request(request);
 
         assertTrue(DataBase.getConversation("Sample Conversation").getIsOpen());
     }

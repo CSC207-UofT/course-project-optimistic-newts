@@ -98,14 +98,14 @@ public class ConversationTest {
     }
 
     @Test(timeout = 50)
-    public void TestSetStatus() {
-        c.setIsOpen(false);
+    public void TestToggleStatus() {
+        c.toggleIsOpen();
         assertFalse(c.getIsOpen());
     }
 
     @Test(timeout = 50)
     public void TestAddMessage() {
-        User u = new User("Joe", "pass", new ArrayList<String>(), 1);
+        User u = new User("Joe", "pass", new ArrayList<String>(), "1");
         Message m = new Message("Hello!", u);
         c.addMessage(m);
         assertSame(m, c.getMessages().get(c.getMessages().size() - 1));

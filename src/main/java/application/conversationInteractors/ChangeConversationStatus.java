@@ -21,7 +21,7 @@ public class ChangeConversationStatus extends ConversationInteractor {
             response.fill(ResponseField.ERROR, config.get("invalidConversation") + conversationId);
         } else {
             // Change the status of the conversation
-            selectedConversation.setIsOpen(!selectedConversation.getIsOpen());
+            selectedConversation.toggleIsOpen();
             if (selectedConversation.getIsOpen()) {
                 response.fill(ResponseField.SUCCESS, config.get("changedConversationStatus") +
                         conversationId + " to open");
