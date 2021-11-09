@@ -5,7 +5,7 @@ public enum RequestField {
     CLOSING_TIME,
     CONVERSATION_ID,
     ID,
-    INTERESTS,
+    INTEREST,
     IS_OPEN,
     LAST_UPDATED_TIME,
     LOCATION,
