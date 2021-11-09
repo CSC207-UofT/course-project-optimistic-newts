@@ -19,7 +19,7 @@ public class AddFriend extends UserInteractor {
 
         if (user.getUsername() == null) {
             // Output an error because there is no such user with the given username
-            response.fill(ResponseField.EXCEPTION, new Exception(ApplicationExceptions.NO_SUCH_USER_ERROR));
+            response.fill(ResponseField.FAILURE, new Exception(ApplicationExceptions.NO_SUCH_USER_ERROR));
         } else {
             // A User with the given username was found
             response.fill(ResponseField.SUCCESS, user.getUsername() + config.get("friendAdded"));

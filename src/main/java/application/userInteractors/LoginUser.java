@@ -19,7 +19,7 @@ public class LoginUser extends UserInteractor {
 
         if (user.getUsername() == null) {
             // Output an error because there is no such user with the given username
-            response.fill(ResponseField.EXCEPTION, new Exception(ApplicationExceptions.NO_SUCH_USER_ERROR));
+            response.fill(ResponseField.FAILURE, new Exception(ApplicationExceptions.NO_SUCH_USER_ERROR));
         } else if (user.getPassword() == request.get(RequestField.PASSWORD)) {
             // Login the user
             user.logIn();
