@@ -35,11 +35,14 @@ public class ResponseValueReader implements ConfigReader {
     /**
      * Return the value of the Response given key
       * @param key The key of the string
-     * @return The response string
-     * @throws Exception if no such key exists
+     * @return The response string or null if no such string exists
      */
     @Override
-    public String get(String key) throws Exception {
-        return this.ResponseValues.get(key);
+    public String get(String key){
+        try {
+            return this.ResponseValues.get(key);
+        } catch (Exception e){
+            return null;
+        }
     }
 }
