@@ -36,7 +36,7 @@ public class GetRelevantConversationsTest {
 
         request.fill(RequestField.LOCATION, "SampleLocation");
         request.fill(RequestField.LOCATION_RADIUS, 3);
-        request.fill(RequestField.INTERESTS, interests);
+        request.fill(RequestField.INTEREST, interests);
         g.request(request);
 
         assertEquals(3, g.getConversationQueue().getLocationRadius());

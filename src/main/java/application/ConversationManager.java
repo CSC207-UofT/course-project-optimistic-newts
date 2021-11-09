@@ -20,7 +20,7 @@ public class ConversationManager {
      * Changes the status of a conversation specified by request
      * @param request the filled in RequestModel
      */
-    public void changeConversationStatus(RequestModel request) {
+    public void ChangeConversationStatus(RequestModel request) {
         ChangeConversationStatus changeConversationStatus = new ChangeConversationStatus();
         changeConversationStatus.request(request);
     }

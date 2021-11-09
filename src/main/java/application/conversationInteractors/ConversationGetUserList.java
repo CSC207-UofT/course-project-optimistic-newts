@@ -14,7 +14,7 @@ public class ConversationGetUserList extends ConversationInteractor {
      * @param request a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request) throws Exception {
+    public void request(RequestModel request) {
         // Fetching the conversation from which to get the user list
         conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATION_ID));
         ResponseModel response = new ResponseModel();

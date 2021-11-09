@@ -181,7 +181,7 @@ public class CliController {
                     createUserRequest.fill(RequestField.USERNAME, username);
                     createUserRequest.fill(RequestField.PASSWORD, password);
                     createUserRequest.fill(RequestField.LOCATION, location);
-                    createUserRequest.fill(RequestField.INTERESTS, interests);
+                    createUserRequest.fill(RequestField.INTEREST, interests);
                     user.createUser(createUserRequest);
                     // We will now log the new user in
                     LoginUser loginUser = new LoginUser();

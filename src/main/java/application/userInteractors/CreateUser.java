@@ -20,7 +20,7 @@ public class CreateUser extends UserInteractor {
             String username = ((String) request.get(RequestField.USERNAME));
             String password = (String) request.get(RequestField.PASSWORD);
             ArrayList<String> interests = new ArrayList<>();
-            interests.add((String) request.get(RequestField.INTERESTS));
+            interests.add((String) request.get(RequestField.INTEREST));
             String ID = (String) request.get(RequestField.ID); //TODO adjust for new data access object
             User user = new User(username, password, interests, ID);
 

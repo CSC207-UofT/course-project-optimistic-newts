@@ -15,7 +15,7 @@ public class ConversationRemoveUser extends ConversationInteractor {
      * @param request a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request) throws Exception {
+    public void request(RequestModel request) {
         // Fetching the conversation from which we remove user
         conversation = DataBase.getConversation((String) request.get(RequestField.CONVERSATION_ID));
 
