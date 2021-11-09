@@ -1,56 +1,100 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An object representing a User of the application.
  */
-public class User {
+public class User implements Serializable {
+    /**
+     * This User's unique identifier string.
+     */
     private String id;
-    private String username;
-    private String password;
-    private String location;
-    private ArrayList<String> interests;
-    private float rating;
-    private int numRatings;
-    private boolean loginStatus;
-    private ArrayList<User> friends;
-    private ArrayList<Conversation> conversations;
 
     /**
-     *
-     * @param username The user's username.
-     * @param password The user's password.
-     * @param interests An ArrayList of the user's initial specified interests.
+     * This User's username, used for logging in and is visible to other Users.
+     */
+    private String username;
+
+    /**
+     * This User's password, used for logging in.
+     */
+    private String password;
+
+    /**
+     * This User's location, used for finding local conversations.
+     */
+    private String location;
+
+    /**
+     * A list of this user's interests.
+     */
+    private final List<String> interests;
+
+    /**
+     * This user's rating, simply an average of all ratings given to this user by others. Each user starts with one
+     * rating of 5. A rating is a double in the range of 0 to 5.
+     */
+    private double rating;
+
+    /**
+     * Total number of ratings this user has received. This is used for computing the user's rating. Is 1 initially.
+     */
+    private int numRatings;
+
+    /**
+     * True if and only if this user is currently logged in.
+     */
+    private boolean loginStatus;
+
+    /**
+     * A list of unique user identifiers corresponding to this User's friends.
+     */
+    private final List<String> friends;
+
+    /**
+     * A list of unique conversation identifiers corresponding to this User's active conversations.
+     */
+    private final List<String> conversations;
+
+    /**
+     * Create a new User with given User information.
+     * @param username  The user's username.
+     * @param password  The user's password.
+     * @param interests A List of the user's initial specified interests.
+     * @param id        The user's unique id.
      */
     public User(String username,
                 String password,
-                ArrayList<String> interests,
+                List<String> interests,
                 String id){
         this.username = username;
         this.password = password;
         this.interests = interests;
-        this.id = this.username + "#" + id;
-        this.rating = 5;
-        this.numRatings = 1;
-        this.loginStatus = false;
-        this.friends = new ArrayList<>();
-        this.conversations = new ArrayList<>();
+        this.id = id;
+        location = null;
+        rating = 5;
+        numRatings = 1;
+        loginStatus = false;
+        friends = new ArrayList<>();
+        conversations = new ArrayList<>();
     }
 
     /**
-     * Empty User constructor- primarily for testing purposes.
+     * Empty User constructor- for testing purposes.
      */
     public User() {
-        this.username = null;
-        this.password = null;
-        this.interests = new ArrayList<>();
-        this.id = null;
-        this.rating = 0;
-        this.numRatings = 0;
-        this.loginStatus = false;
-        this.friends = new ArrayList<>();
-        this.conversations = new ArrayList<>();
+        username = null;
+        password = null;
+        interests = new ArrayList<>();
+        id = null;
+        rating = 0;
+        numRatings = 0;
+        loginStatus = false;
+        friends = new ArrayList<>();
+        conversations = new ArrayList<>();
     }
 
     /**
@@ -67,6 +111,14 @@ public class User {
      */
     public String getId(){
         return id;
+    }
+
+    /**
+     * Setter method for user's ID.
+     * @param id    The new id to assign this user.
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
     /**
@@ -124,7 +176,7 @@ public class User {
      * Getter method for ArrayList of user interest.
      * @return Returns ArrayList of user interests.
      */
-    public ArrayList<String> getInterests() {
+    public List<String> getInterests() {
         return interests;
     }
 
@@ -150,7 +202,7 @@ public class User {
      * Getter method which returns the user's average rating
      * @return User's average rating
      */
-    public float getRating() {
+    public double getRating() {
         return rating/numRatings;
     }
 
@@ -183,7 +235,7 @@ public class User {
      * @param friend User to be added as friend
      */
     public void addFriend(User friend) {
-        friends.add(friend);
+        friends.add(friend.id);
     }
 
     /**
@@ -200,7 +252,7 @@ public class User {
      * Getter method which returns user's friendslist
      * @return Returns user's friendslist which is an ArrayList of users
      */
-    public ArrayList<User> getFriends(){
+    public List<String> getFriends(){
         return friends;
     }
 
@@ -209,7 +261,7 @@ public class User {
      * @param conversation Conversation to be added
      */
     public void addConversation(Conversation conversation){
-        conversations.add(conversation);
+        conversations.add(conversation.getId());
     }
 
     /**
@@ -218,16 +270,16 @@ public class User {
      * @param conversation Conversation to be removed
      */
     public void removeConversation(Conversation conversation){
-        int index = conversations.indexOf(conversation);
+        int index = conversations.indexOf(conversation.getId());
         if(index != -1)
-            conversations.remove(conversation);
+            conversations.remove(conversation.getId());
     }
 
     /**
      * Returns list of user's active conversations.
      * @return ArrayList of user's active conversations.
      */
-    public ArrayList<Conversation> getConversations(){
+    public List<String> getConversations(){
         return conversations;
     }
 

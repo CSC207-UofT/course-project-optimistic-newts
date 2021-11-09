@@ -1,7 +1,5 @@
 package entities;
 
-import entities.User;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,7 +20,8 @@ public class UserTest {
         interests.add("Sports");
         interests.add("Music");
         interests.add("Fitness");
-        u = new User("test_user", "password123", interests, 1);
+        u = new User("test_user", "password123", interests, "test_user#0");
+
         u.logIn();
     }
 

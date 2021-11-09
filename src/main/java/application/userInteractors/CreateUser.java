@@ -10,7 +10,7 @@ public class CreateUser extends UserInteractor {
 
 
     @Override
-    public void request(RequestModel request) throws Exception {
+    public void request(RequestModel request) {
         ResponseModel response = new ResponseModel();
         ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
 

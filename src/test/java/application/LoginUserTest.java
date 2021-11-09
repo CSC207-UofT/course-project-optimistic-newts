@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
 import static org.junit.Assert.assertTrue;
 
 public class LoginUserTest {
@@ -39,8 +38,7 @@ public class LoginUserTest {
         interests.add("Sports");
         interests.add("Music");
         interests.add("Fitness");
-        DataBase.addUser(new User("Sample User", "1234", interests, 1));
-
+        DataBase.addUser(new User("Sample User", "1234", interests, "1"));
         r.fill(RequestField.USERNAME, "Sample User");
         r.fill(RequestField.PASSWORD, "1234");
         l.request(r);

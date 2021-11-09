@@ -1,9 +1,10 @@
 package entities;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Message {
+public class Message implements Serializable {
     private String id;
     private String body;
     private User author;
@@ -81,7 +82,7 @@ public class Message {
      * Returns message ID.
      * @return String representing messages unique id.
      */
-    public String getID(){
+    public String getId(){
         return id;
     }
 }

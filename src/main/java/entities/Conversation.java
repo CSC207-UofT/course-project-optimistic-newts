@@ -1,22 +1,22 @@
 package entities;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * A class representing a conversation
  */
-public class Conversation {
-    private String id;
+public class Conversation implements Serializable {
+    private final String id;
     private String title;
     private String topic;
     private String location;
-    private int locationRadius;
+    private final int locationRadius;
     private int minRating;
     private int maxSize;
     private String closingTime;
     private boolean isOpen;
-    private ArrayList<Message> messages;
-    private ArrayList<User> users;
+    private final ArrayList<Message> messages;
+    private final ArrayList<User> users;
 
     public Conversation(String id, String title,
                         String topic, String location,

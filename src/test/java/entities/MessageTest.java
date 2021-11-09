@@ -18,19 +18,22 @@ public class MessageTest {
     public void setUp() throws Exception {
         ArrayList<String> interests = new ArrayList<>();
         interests.add("darkside");
-        User u = new User("Darth Vader", "deathstar", interests, "123");
+        User u = new User("DarthVader", "deathstar", interests, "DarthVader#0");
         m = new Message("1", "Luke, I am your father", u);
     }
 
     @Test(timeout = 50)
-    public void TestGetBody() {
+    public void getBodyTest() {
         assertEquals("Luke, I am your father", m.getBody());
     }
 
     @Test(timeout = 50)
-    public void TestGetAuthor() {
+    public void getAuthorTest() {
         assertEquals("Darth Vader", m.getAuthor());
     }
+
+    @Test(timeout = 50)
+    public void getIdTest() { assertEquals("1", m.getId());}
 
     @Test(timeout = 50)
     public void TestGetWrittenAT() {
@@ -50,6 +53,6 @@ public class MessageTest {
 
     @Test(timeout = 50)
     public void TestGetID(){
-        assertEquals(m.getID(), "1");
+        assertEquals(m.getId(), "1");
     }
 }
