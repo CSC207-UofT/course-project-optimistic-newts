@@ -1,6 +1,6 @@
 package application;
 
-import application.conversationInteractors.*;
+import application.conversation.*;
 
 /**
  * An object representing a ConversationManager of the application.

@@ -1,6 +1,6 @@
-package application;
+package application.conversation;
 
-import application.conversationInteractors.ConversationInteractor;
+import application.*;
 import entities.Conversation;
 import entities.Message;
 import entities.User;
@@ -15,7 +15,7 @@ public class AddMessage extends ConversationInteractor {
      * @param request a request stored as a RequestModel
      */
     @Override
-    public void request(RequestModel request) throws Exception {
+    public void request(RequestModel request) {
         ResponseModel response = new ResponseModel();
         ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
 

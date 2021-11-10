@@ -1,8 +1,8 @@
-package application.conversationInteractors;
+package application.conversation;
 
 import application.*;
-import application.userInteractors.UserInteractor;
-import entities.ConversationQueue;
+import application.user.UserInteractor;
+import application.ConversationQueue;
 import entities.User;
 
 

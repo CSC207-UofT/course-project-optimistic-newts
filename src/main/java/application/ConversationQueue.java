@@ -1,4 +1,8 @@
-package entities;
+package application;
+
+import application.sorters.ConversationSorter;
+import entities.Conversation;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
@@ -6,22 +10,32 @@ import java.util.*;
  * A Conversation Queue. A Max Priority Queue used to filter conversations by relevance to present to a user.
  */
 public class ConversationQueue implements Queue<Conversation> {
+    private final ConversationSorter sorter;
     private ArrayList<KeyedConversation> conversations;
     private int size;
-    private String location;
-    private int locationRadius; // not implemented to influence queue yet.
-    private ArrayList<String> interests;
+    private final String location;
+    private final int locationRadius; // not implemented to influence queue yet.
+    private final ArrayList<String> interests;
 
     /**
      * Initialize a new, empty ConversationQueue.
      */
-    public ConversationQueue(String location, int locationRadius, ArrayList<String> interests) {
+    public ConversationQueue(ConversationSorter sorter, String location, int locationRadius,
+                             ArrayList<String> interests) {
+        this.sorter = sorter;
         conversations = new ArrayList<>();
         conversations.add(null); // item at index 0 will never be used, due to Array representation of binary heap.
         size = 0;
         this.location = location;
         this.locationRadius = locationRadius;
         this.interests = interests;
+    }
+
+    /**
+     * @return  the ConversationSorter associated with this ConversationQueue.
+     */
+    public ConversationSorter getSorter() {
+        return sorter;
     }
 
     /**
@@ -52,7 +66,7 @@ public class ConversationQueue implements Queue<Conversation> {
      * @return  KeyedConversation with Conversation and a generated priority key
      */
     public KeyedConversation toKeyedConversation(Conversation conversation) {
-        return new KeyedConversation(conversation, interests);
+        return new KeyedConversation(conversation, this);
     }
 
     /**
@@ -99,7 +113,7 @@ public class ConversationQueue implements Queue<Conversation> {
      */
     @Override
     public Conversation[] toArray() {
-        ArrayList<KeyedConversation> temp = (ArrayList<KeyedConversation>) conversations.clone();
+        ArrayList<KeyedConversation> temp = new ArrayList<>(conversations);
         int tempSize = size;
         Conversation[] toReturn = new Conversation[size];
         int i = 0;
@@ -115,39 +129,38 @@ public class ConversationQueue implements Queue<Conversation> {
     /**
      * Returns an array containing the Conversations in this ConversationQueue- in non-increasing order. If contents
      * of this ConversationQueue will fit in provided array, then return the provided array with these elements inserted
+     * followed by null. If provided array type does not extend Conversation, then return the given array unchanged.
+     * @param a     array to fill with ConversationQueue's contents
+     * @return      sorted array
+     */
+    @Override
+    public <T> T[] toArray(T @NotNull [] a) {
+        return a;
+    }
+
+    /**
+     * Returns an array containing the Conversations in this ConversationQueue- in non-increasing order. If contents
+     * of this ConversationQueue will fit in provided array, then return the provided array with these elements inserted
      * followed by null.
      * @return  sorted array
      */
-    @Override
-    public <T> T[] toArray(T[] a) {
-        if (!(a instanceof Conversation[])) {
-            return a;
-        }
-        if (a.length == size) {
-            ArrayList<KeyedConversation> temp = (ArrayList<KeyedConversation>) conversations.clone();
+    public Conversation[] toArray(Conversation[] a) {
+        if (a.length >= size) {
+            ArrayList<KeyedConversation> temp = new ArrayList<>(conversations);
             int tempSize = size;
             int i = 0;
             while (!this.isEmpty()) {
-                a[i] = (T) poll();
+                a[i] = poll();
                 i ++;
             }
             conversations = temp;
             size = tempSize;
-            return a;
-        } else if (a.length > size) {
-            ArrayList<KeyedConversation> temp = (ArrayList<KeyedConversation>) conversations.clone();
-            int tempSize = size;
-            int i = 0;
-            while (!this.isEmpty()) {
-                a[i] = (T) poll();
-                i ++;
+            if (i != a.length) {
+                a[i] = null;
             }
-            a[i] = null;
-            conversations = temp;
-            size = tempSize;
             return a;
         } else {
-            return (T[]) toArray();
+            return toArray();
         }
     }
 

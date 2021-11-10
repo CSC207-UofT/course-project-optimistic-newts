@@ -1,6 +1,8 @@
 package entities;
+
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class representing a conversation
@@ -8,18 +10,18 @@ import java.util.ArrayList;
 public class Conversation implements Serializable {
     private final String id;
     private String title;
-    private String topic;
+    private final List<String> topics;
     private String location;
     private final int locationRadius;
     private int minRating;
     private int maxSize;
     private String closingTime;
     private boolean isOpen;
-    private final ArrayList<Message> messages;
-    private final ArrayList<User> users;
+    private final List<Message> messages;
+    private final List<User> users;
 
     public Conversation(String id, String title,
-                        String topic, String location,
+                        List<String> topics, String location,
                         int locationRadius,
                         int minRating, int maxSize,
                         String closingTime, boolean isOpen,
@@ -27,7 +29,7 @@ public class Conversation implements Serializable {
                         ArrayList<User> users) {
         this.id = id;
         this.title = title;
-        this.topic = topic;
+        this.topics = topics;
         this.location = location;
         this.locationRadius = locationRadius;
         this.minRating = minRating;
@@ -41,7 +43,7 @@ public class Conversation implements Serializable {
     public Conversation() {
         this.id = "";
         this.title = "";
-        this.topic = "";
+        this.topics = new ArrayList<>();
         this.location = "";
         this.locationRadius = 0;
         this.minRating = 0;
@@ -71,7 +73,7 @@ public class Conversation implements Serializable {
      * Return the topic of the conversation.
      * @return a string representing the topic of the conversation
      */
-    public String getTopic() { return this.topic; }
+    public List<String> getTopics() { return this.topics; }
 
     /**
      * Return the location of the conversation.
@@ -123,7 +125,7 @@ public class Conversation implements Serializable {
      * Return the messages in the conversation.
      * @return an ArrayList containing messages
      */
-    public ArrayList<Message> getMessages(){
+    public List<Message> getMessages(){
         return this.messages;
     }
 
@@ -131,7 +133,7 @@ public class Conversation implements Serializable {
      * Return the users in the conversation.
      * @return an ArrayList containing users
      */
-    public ArrayList<User> getUsers(){
+    public List<User> getUsers(){
         return this.users;
     }
 
@@ -142,11 +144,19 @@ public class Conversation implements Serializable {
     public void setTitle(String title){ this.title = title; }
 
     /**
-     * Set a topic for the conversation.
-     * @param topic the topic to be set
+     * Add a topic to this conversation.
+     * @param topic the topic to be added
      */
-    public void setTopic(String topic) {
-        this.topic = topic;
+    public void addTopic(String topic) {
+        topics.add(topic);
+    }
+
+    /**
+     * Remove a topic from this conversation, if this topic is in this conversations topics.
+     * @param topic     Topic to remove
+     */
+    public void removeTopic(String topic) {
+        topics.remove(topic);
     }
 
     /**

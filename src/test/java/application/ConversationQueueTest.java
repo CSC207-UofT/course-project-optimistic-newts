@@ -1,5 +1,7 @@
-package entities;
+package application;
 
+import application.sorters.InterestSorter;
+import entities.Conversation;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,10 +19,11 @@ public class ConversationQueueTest {
      */
     @Before
     public void setUp() {
+        InterestSorter sorter = new InterestSorter();
         ArrayList<String> interests = new ArrayList<>();
         interests.add("Hockey");
         interests.add("Math");
-        cq = new ConversationQueue("Toronto", 10, interests);
+        cq = new ConversationQueue(sorter,"Toronto", 10, interests);
     }
 
     /**
@@ -53,9 +56,9 @@ public class ConversationQueueTest {
     @Test
     public void toKeyedConversationTest() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Physics");
+        conversation1.addTopic("Physics");
         KeyedConversation keyedConversation0 = cq.toKeyedConversation(conversation0);
         Assert.assertEquals(1, keyedConversation0.getKey());
         KeyedConversation keyedConversation1 = cq.toKeyedConversation(conversation1);
@@ -68,9 +71,9 @@ public class ConversationQueueTest {
     @Test
     public void sizeTest() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Physics");
+        conversation1.addTopic("Physics");
 
         Assert.assertEquals(0, cq.size());
 
@@ -88,7 +91,7 @@ public class ConversationQueueTest {
     public void isEmptyTest() {
         Assert.assertTrue(cq.isEmpty());
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Assert.assertFalse(cq.isEmpty());
     }
@@ -99,7 +102,7 @@ public class ConversationQueueTest {
     @Test
     public void containsTest() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
 
@@ -113,10 +116,10 @@ public class ConversationQueueTest {
     @Test
     public void iteratorTest() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation0.setTopic("Toronto");
+        conversation0.addTopic("Toronto");
         cq.add(conversation1);
 
         Iterator<Conversation> iter = cq.iterator();
@@ -131,10 +134,10 @@ public class ConversationQueueTest {
     @Test
     public void toArrayTest() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation0.setTopic("Toronto");
+        conversation0.addTopic("Toronto");
         cq.add(conversation1);
 
         Conversation[] expected = new Conversation[]{conversation0, conversation1};
@@ -147,10 +150,10 @@ public class ConversationQueueTest {
     @Test
     public void toArrayTestTooSmall() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation0.setTopic("Toronto");
+        conversation0.addTopic("Toronto");
         cq.add(conversation1);
 
         Conversation[] input = new Conversation[1];
@@ -165,10 +168,10 @@ public class ConversationQueueTest {
     @Test
     public void toArrayTestSameSize() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation0.setTopic("Toronto");
+        conversation0.addTopic("Toronto");
         cq.add(conversation1);
 
         Conversation[] input = new Conversation[2];
@@ -183,10 +186,10 @@ public class ConversationQueueTest {
     @Test
     public void toArrayTestLarger() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation0.setTopic("Toronto");
+        conversation0.addTopic("Toronto");
         cq.add(conversation1);
 
         Conversation[] input = new Conversation[3];
@@ -201,13 +204,13 @@ public class ConversationQueueTest {
     @Test
     public void removeTestFirst() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Math");
+        conversation1.addTopic("Math");
         cq.add(conversation1);
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Toronto");
+        conversation2.addTopic("Toronto");
         cq.add(conversation2);
 
         Assert.assertTrue(cq.remove(conversation0));
@@ -221,13 +224,13 @@ public class ConversationQueueTest {
     @Test
     public void removeTestLast() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Math");
+        conversation1.addTopic("Math");
         cq.add(conversation1);
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Toronto");
+        conversation2.addTopic("Toronto");
         cq.add(conversation2);
 
         Assert.assertTrue(cq.remove(conversation2));
@@ -241,19 +244,19 @@ public class ConversationQueueTest {
     @Test
     public void removeTestMiddle() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Math");
+        conversation1.addTopic("Math");
         cq.add(conversation1);
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Toronto");
+        conversation2.addTopic("Toronto");
         cq.add(conversation2);
         Conversation conversation3 = new Conversation();
-        conversation3.setTopic("Golf");
+        conversation3.addTopic("Golf");
         cq.add(conversation3);
         Conversation conversation4 = new Conversation();
-        conversation4.setTopic("Hockey");
+        conversation4.addTopic("Hockey");
         cq.add(conversation4);
 
         Assert.assertTrue(cq.remove(conversation1));
@@ -267,16 +270,16 @@ public class ConversationQueueTest {
     @Test
     public void containsAllTestFalse() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Math");
+        conversation1.addTopic("Math");
         cq.add(conversation1);
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Toronto");
+        conversation2.addTopic("Toronto");
         cq.add(conversation2);
         Conversation conversation3 = new Conversation();
-        conversation3.setTopic("Fish");
+        conversation3.addTopic("Fish");
 
         Conversation[] compare = new Conversation[]{conversation0, conversation1, conversation2, conversation3};
         Assert.assertFalse(cq.containsAll(List.of(compare)));
@@ -288,13 +291,13 @@ public class ConversationQueueTest {
     @Test
     public void containsAllTestTrue() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Math");
+        conversation1.addTopic("Math");
         cq.add(conversation1);
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Toronto");
+        conversation2.addTopic("Toronto");
         cq.add(conversation2);
 
         Conversation[] compare = new Conversation[]{conversation0, conversation1, conversation2};
@@ -307,14 +310,14 @@ public class ConversationQueueTest {
     @Test
     public void addAllTest() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Math");
+        conversation1.addTopic("Math");
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Toronto");
+        conversation2.addTopic("Toronto");
         Conversation conversation3 = new Conversation();
-        conversation3.setTopic("Fish");
+        conversation3.addTopic("Fish");
         Conversation[] toAdd = new Conversation[]{conversation1, conversation2, conversation3};
 
         Assert.assertTrue(cq.addAll(List.of(toAdd)));
@@ -328,16 +331,16 @@ public class ConversationQueueTest {
     @Test
     public void removeAllTest() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Math");
+        conversation1.addTopic("Math");
         cq.add(conversation1);
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Toronto");
+        conversation2.addTopic("Toronto");
         cq.add(conversation2);
         Conversation conversation3 = new Conversation();
-        conversation3.setTopic("Fish");
+        conversation3.addTopic("Fish");
         cq.add(conversation3);
         Conversation[] toRemove = new Conversation[]{conversation1, conversation2, conversation3};
         Conversation[] expected = new Conversation[]{conversation0};
@@ -353,16 +356,16 @@ public class ConversationQueueTest {
     @Test
     public void retainAllTest() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Math");
+        conversation1.addTopic("Math");
         cq.add(conversation1);
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Toronto");
+        conversation2.addTopic("Toronto");
         cq.add(conversation2);
         Conversation conversation3 = new Conversation();
-        conversation3.setTopic("Fish");
+        conversation3.addTopic("Fish");
         cq.add(conversation3);
         Conversation[] toKeep = new Conversation[]{conversation1, conversation2};
         Conversation[] expected = new Conversation[]{conversation1, conversation2};
@@ -377,13 +380,13 @@ public class ConversationQueueTest {
     @Test
     public void clearTest() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Math");
+        conversation1.addTopic("Math");
         cq.add(conversation1);
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Toronto");
+        conversation2.addTopic("Toronto");
         cq.add(conversation2);
         cq.clear();
 
@@ -397,13 +400,13 @@ public class ConversationQueueTest {
     @Test
     public void removeTest() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Toronto");
+        conversation1.addTopic("Toronto");
         cq.add(conversation1);
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Math");
+        conversation2.addTopic("Math");
         cq.add(conversation2);
 
         Assert.assertEquals(conversation0, cq.remove());
@@ -434,13 +437,13 @@ public class ConversationQueueTest {
     @Test
     public void elementTestNonEmpty() {
         Conversation conversation0 = new Conversation();
-        conversation0.setTopic("Hockey");
+        conversation0.addTopic("Hockey");
         cq.add(conversation0);
         Conversation conversation1 = new Conversation();
-        conversation1.setTopic("Toronto");
+        conversation1.addTopic("Toronto");
         cq.add(conversation1);
         Conversation conversation2 = new Conversation();
-        conversation2.setTopic("Math");
+        conversation2.addTopic("Math");
         cq.add(conversation2);
 
         Conversation[] expected = new Conversation[]{conversation0, conversation2, conversation1};

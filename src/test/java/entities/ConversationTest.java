@@ -16,7 +16,7 @@ public class ConversationTest {
 
     @Before
     public void setUp() throws Exception {
-        c = new Conversation("", "Sample Conversation", "", "", 0, 0, 0, "", true,
+        c = new Conversation("", "Sample Conversation", List.of(""), "", 0, 0, 0, "", true,
                 new ArrayList<>(), new ArrayList<>());
     }
 
@@ -29,7 +29,7 @@ public class ConversationTest {
     }
 
     @Test(timeout = 50)
-    public void TestGetTopic() { assertEquals("", c.getTopic()); }
+    public void TestGetTopic() { assertEquals("", c.getTopics().get(0)); }
 
     @Test(timeout = 50)
     public void TestGetLocation() {

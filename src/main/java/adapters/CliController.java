@@ -3,7 +3,7 @@ package adapters;
 import application.*;
 import application.ConversationManager;
 import application.MessageManager;
-import application.userInteractors.LoginUser;
+import application.user.LoginUser;
 import application.UserManager;
 
 import java.io.IOException;

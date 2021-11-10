@@ -2,7 +2,7 @@ package application;
 
 
 import adapters.TestPresenter;
-import application.conversationInteractors.GetRelevantConversations;
+import application.conversation.GetRelevantConversations;
 import org.junit.Before;
 import org.junit.Test;
 

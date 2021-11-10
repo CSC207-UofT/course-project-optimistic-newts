@@ -1,4 +1,4 @@
-package application.conversationInteractors;
+package application.conversation;
 import application.InputBoundary;
 import entities.Conversation;
 

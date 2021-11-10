@@ -1,7 +1,7 @@
 package application;
 import entities.User;
 
-import application.userInteractors.*;
+import application.user.*;
 
 /**
  * An object representing an UserManager of the application.

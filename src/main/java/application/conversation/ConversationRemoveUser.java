@@ -1,4 +1,4 @@
-package application.conversationInteractors;
+package application.conversation;
 
 import application.*;
 import entities.Conversation;

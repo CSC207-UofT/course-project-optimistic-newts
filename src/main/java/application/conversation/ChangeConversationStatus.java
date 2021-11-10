@@ -1,9 +1,7 @@
-package application.conversationInteractors;
+package application.conversation;
 
 import application.*;
 import entities.Conversation;
-
-import java.io.IOException;
 
 public class ChangeConversationStatus extends ConversationInteractor {
     /**

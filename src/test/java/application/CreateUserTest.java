@@ -1,10 +1,7 @@
 package application;
 
 import adapters.TestPresenter;
-import application.userInteractors.CreateUser;
-import application.userInteractors.LoginUser;
-import cli.CliDriver;
-import adapters.CliPresenter;
+import application.user.CreateUser;
 
 import entities.User;
 import org.junit.Before;
