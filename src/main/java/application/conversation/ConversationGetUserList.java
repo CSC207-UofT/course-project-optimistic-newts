@@ -2,6 +2,7 @@ package application.conversation;
 
 import application.*;
 import entities.Conversation;
+import entities.User;
 
 import java.util.ArrayList;
 
@@ -28,9 +29,9 @@ public class ConversationGetUserList extends ConversationInteractor {
             ArrayList<String> usernames = new ArrayList<>();
             // Get the usernames of the users
             // TODO: Change how Conversation store users
-            for (String userId: conversation.getUsers()){
+            for (User user: conversation.getUsers()){
                 // Retrieve a username from DataBase and add it to usernames
-                usernames.add(DataBase.getUser(userId).getUsername());
+                usernames.add(DataBase.getUser(user.getUsername()).getUsername());
             }
             // Output usernames of users in a conversation
             response.fill(ResponseField.SUCCESS, usernames + config.get("inConversation"));

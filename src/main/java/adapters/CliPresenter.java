@@ -20,9 +20,7 @@ public class CliPresenter implements OutputBoundary {
      */
     @Override
     public void respond(ResponseModel response) {
-        for (Object value : response.getData().values()) {
-            present(value.toString());
-        }
+
     }
 
     /**

@@ -8,10 +8,10 @@ import entities.User;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
-import java.util.ArrayList;
 
 public class ConversationAddUserTest{
     ConversationAddUser cau;
@@ -39,8 +39,8 @@ public class ConversationAddUserTest{
         interests.add("Sports");
         interests.add("Music");
         interests.add("Fitness");
-        DataBase.addUser(new User("Sample User", "1234", interests, "1"));
-        DataBase.addConversation(new Conversation("1", "Sample Conversation", "", "",
+        DataBase.addUser(new User("Sample User", "1234", interests, 1));
+        DataBase.addConversation(new Conversation("1", "Sample Conversation", interests, "",
                 0, 0, 1, "", true,
                 new ArrayList<Message>(), new ArrayList<User>()));
         r.fill(RequestField.USERNAME, "Sample User");

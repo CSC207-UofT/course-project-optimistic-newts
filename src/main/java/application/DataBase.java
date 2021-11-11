@@ -35,17 +35,17 @@ public class DataBase {
      * @param id ID corresponding to a user
      * @return True if there exists a user corresponding to the required id, False otherwise
      */
-    public static Boolean containsUserID(String id)  {
+    public static Boolean containsUserID(int id)  {
         for (User user : UserList) {
-            if (user.getId().equals(id)) {
+            if (user.getId() == id) {
                 return Boolean.TRUE;
             }
         }
         return Boolean.FALSE;
     }
 
-    public static void deleteUser(String id) {
-        UserList.removeIf(user -> user.getId().equals(id));
+    public static void deleteUser(int id) {
+        UserList.removeIf(user -> user.getId() == id);
     }
 
     /**
@@ -61,7 +61,7 @@ public class DataBase {
      * @return  returns ConversationList
      */
     public static ArrayList<Conversation> getConversationList(){
-        return (ArrayList<Conversation>) ConversationList.clone();
+        return new ArrayList<>(ConversationList);
     }
 
     /**

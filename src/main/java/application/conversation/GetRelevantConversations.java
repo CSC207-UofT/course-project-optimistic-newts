@@ -1,6 +1,7 @@
 package application.conversation;
 
 import application.*;
+import application.sorters.InterestSorter;
 import application.user.UserInteractor;
 import application.ConversationQueue;
 import entities.User;
@@ -23,7 +24,8 @@ public class GetRelevantConversations extends UserInteractor {
         user = DataBase.getUser((String) request.get(RequestField.USERNAME));
 
         // Create a ConversationQueue with desired settings
-        conversationQueue = new ConversationQueue((String) request.get(RequestField.LOCATION),
+        InterestSorter sorter = new InterestSorter();
+        conversationQueue = new ConversationQueue(sorter, (String) request.get(RequestField.LOCATION),
                 (int) request.get(RequestField.LOCATION_RADIUS),
                 (ArrayList<String>) request.get(RequestField.INTEREST));
         ResponseModel response = new ResponseModel();

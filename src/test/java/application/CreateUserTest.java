@@ -2,7 +2,6 @@ package application;
 
 import adapters.TestPresenter;
 import application.user.CreateUser;
-
 import entities.User;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +9,6 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class CreateUserTest {
     CreateUser l;
@@ -40,7 +38,7 @@ public class CreateUserTest {
         interests.add("Sports");
         interests.add("Music");
         interests.add("Fitness");
-        DataBase.addUser(new User("Sample User", "1234", interests, "1"));
+        DataBase.addUser(new User("Sample User", "1234", interests, 1));
 
         r.fill(RequestField.USERNAME, "Sample User");
         r.fill(RequestField.PASSWORD, "1234");

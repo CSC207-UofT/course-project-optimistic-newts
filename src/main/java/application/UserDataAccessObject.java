@@ -22,7 +22,7 @@ public interface UserDataAccessObject extends DataAccessObject<User>{
      * @throws Exception    If no User exists with given id.
      */
     @Override
-    User get(String id) throws Exception;
+    User get(int id) throws Exception;
 
     /**
      * Update the corresponding User in the attached data store to match the provided User.
@@ -46,6 +46,6 @@ public interface UserDataAccessObject extends DataAccessObject<User>{
      * @return      True iff deletion was successful.
      */
     @Override
-    boolean delete(String id);
+    boolean delete(int id);
 }
 

@@ -1,17 +1,16 @@
 package entities;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * An object representing a User of the application.
  */
-public class User implements Serializable {
+public class User {
     /**
-     * This User's unique identifier string.
+     * This User's unique identifier.
      */
-    private String id;
+    private int id;
 
     /**
      * This User's username, used for logging in and is visible to other Users.
@@ -52,7 +51,7 @@ public class User implements Serializable {
     /**
      * A list of unique user identifiers corresponding to this User's friends.
      */
-    private final List<String> friends;
+    private final List<Integer> friends;
 
     /**
      * A list of unique conversation identifiers corresponding to this User's active conversations.
@@ -69,7 +68,7 @@ public class User implements Serializable {
     public User(String username,
                 String password,
                 List<String> interests,
-                String id){
+                int id){
         this.username = username;
         this.password = password;
         this.interests = interests;
@@ -89,7 +88,7 @@ public class User implements Serializable {
         username = null;
         password = null;
         interests = new ArrayList<>();
-        id = null;
+        id = 0;
         rating = 0;
         numRatings = 0;
         loginStatus = false;
@@ -109,7 +108,7 @@ public class User implements Serializable {
      * Getter method for user's ID.
      * @return Returns user ID.
      */
-    public String getId(){
+    public int getId(){
         return id;
     }
 
@@ -117,7 +116,7 @@ public class User implements Serializable {
      * Setter method for user's ID.
      * @param id    The new id to assign this user.
      */
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -243,7 +242,7 @@ public class User implements Serializable {
      * @param friend User to be removed
      */
     public void removeFriend(User friend){
-        int index = friends.indexOf(friend);
+        int index = friends.indexOf(friend.getId());
         if (index != -1)
             friends.remove(index);
     }
@@ -252,7 +251,7 @@ public class User implements Serializable {
      * Getter method which returns user's friendslist
      * @return Returns user's friendslist which is an ArrayList of users
      */
-    public List<String> getFriends(){
+    public List<Integer> getFriends(){
         return friends;
     }
 
