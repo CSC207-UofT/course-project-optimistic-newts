@@ -22,7 +22,8 @@ public class CreateConversation extends ConversationInteractor {
         if (((String) request.get(RequestField.ID)).length() != 0){
             String id = (String) request.get(RequestField.ID);
             String title = (String) request.get(RequestField.TITLE);
-            String topic = (String) request.get(RequestField.TOPIC);
+            ArrayList<String> topics = new ArrayList<>();
+            topics.add((String) request.get(RequestField.TOPIC));
             String location = (String) request.get(RequestField.LOCATION);
             int locationRadius = (int) request.get(RequestField.LOCATION_RADIUS);
             int minRating = (int) request.get(RequestField.MIN_RATING);
@@ -30,7 +31,7 @@ public class CreateConversation extends ConversationInteractor {
             String closingTime = (String) request.get(RequestField.CLOSING_TIME);
             boolean isOpen = (boolean) request.get(RequestField.IS_OPEN);
 
-            this.conversation = new Conversation(id, title, topic, location,
+            this.conversation = new Conversation(id, title, topics, location,
                     locationRadius, minRating, maxSize, closingTime, isOpen,
                     new ArrayList<>(), new ArrayList<>());
             DataBase.addConversation(this.conversation);

@@ -13,7 +13,7 @@ public class DeleteUser extends UserInteractor {
         ResponseModel response = new ResponseModel();
         ConfigReader config = (ConfigReader) request.get(RequestField.CONFIG);
 
-        String id = (String) request.get(RequestField.ID);
+        int id = (int) request.get(RequestField.ID);
 
         if (DataBase.containsUserID(id)) {
             DataBase.deleteUser(id);

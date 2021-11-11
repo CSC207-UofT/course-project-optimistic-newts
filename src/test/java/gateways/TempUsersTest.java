@@ -1,6 +1,5 @@
 package gateways;
 
-import entities.EntityExceptions;
 import entities.User;
 import org.junit.Assert;
 import org.junit.Before;
@@ -27,18 +26,12 @@ public class TempUsersTest {
     public void insertRetrieveTest() {
         User user = new User();
         user.setUsername("testuser");
-        try {
-            user.setPassword("password");
-        } catch (EntityExceptions entityExceptions) {
-            entityExceptions.printStackTrace();
-        }
+        user.setPassword("password");
         user.setLocation("Toronto");
-        int idNum = 0;
-        String id = "testuser#" + idNum;
+        int id = 0;
         user.setId(id);
         while (!tempUsers.insert(user)) {
-            idNum++;
-            id = "testuser#" + idNum;
+            id++;
             user.setId(id);
         }
         try {
@@ -56,22 +49,16 @@ public class TempUsersTest {
     public void insertDeleteTest() {
         User user = new User();
         user.setUsername("testuser");
-        try {
-            user.setPassword("password");
-        } catch (EntityExceptions entityExceptions) {
-            entityExceptions.printStackTrace();
-        }
+        user.setPassword("password");
         user.setLocation("Toronto");
-        int idNum = 0;
-        String id = "testuser#" + idNum;
+        int id = 0;
         user.setId(id);
         while (!tempUsers.insert(user)) {
-            idNum++;
-            id = "testuser#" + idNum;
+            id++;
             user.setId(id);
         }
         Assert.assertTrue(tempUsers.delete(id));
-        String finalId = id;
+        int finalId = id;
         Assert.assertThrows(Exception.class, () -> tempUsers.get(finalId));
     }
 
@@ -90,18 +77,13 @@ public class TempUsersTest {
     public void updateTest() {
         User user = new User();
         user.setUsername("testuser");
-        try {
-            user.setPassword("password");
-        } catch (EntityExceptions entityExceptions) {
-            entityExceptions.printStackTrace();
-        }
+        user.setPassword("password");
         user.setLocation("Toronto");
         int idNum = 0;
-        String id = "testuser#" + idNum;
+        int id = idNum;
         user.setId(id);
         while (!tempUsers.insert(user)) {
             idNum++;
-            id = "testuser#" + idNum;
             user.setId(id);
         }
         user.setLocation("New York");

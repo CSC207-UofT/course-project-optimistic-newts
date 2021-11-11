@@ -18,7 +18,7 @@ public class MessageTest {
     public void setUp() throws Exception {
         ArrayList<String> interests = new ArrayList<>();
         interests.add("darkside");
-        User u = new User("DarthVader", "deathstar", interests, "DarthVader#0");
+        User u = new User("DarthVader", "deathstar", interests, 0);
         m = new Message("1", "Luke, I am your father", u);
     }
 

@@ -33,7 +33,7 @@ public class ChangeConversationStatusTest {
     @Test
     public void testRequest() throws Exception {
         RequestModel request = new RequestModel(new TestOutput());
-        DataBase.addConversation(new Conversation("Sample Conversation", "", "", "", 0, 0, 0,
+        DataBase.addConversation(new Conversation("Sample Conversation", "", new ArrayList<>(), "", 0, 0, 0,
                 "", false, new ArrayList<>(), new ArrayList<>()));
         request.fill(RequestField.ID, "Sample Conversation");
 

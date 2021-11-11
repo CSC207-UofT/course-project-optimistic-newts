@@ -18,7 +18,7 @@ public class TempUsers implements UserDataAccessObject {
         List<String> interests = new ArrayList<>();
         interests.add("Bikes");
         interests.add("Programming");
-        User user = new User("Spencer", "password", interests, "Spencer#0");
+        User user = new User("Spencer", "password", interests, 0);
         TempUsers tempUsers = new TempUsers();
         tempUsers.insert(user);
     }
@@ -56,7 +56,7 @@ public class TempUsers implements UserDataAccessObject {
      * @throws Exception    If no User exists with given id.
      */
     @Override
-    public User get(String id) throws Exception {
+    public User get(int id) throws Exception {
         FileInputStream fileInput = new FileInputStream(usersPath + id + ".ser");
         ObjectInputStream objectInput = new ObjectInputStream(fileInput);
         User userFromStore = (User) objectInput.readObject();
@@ -103,7 +103,7 @@ public class TempUsers implements UserDataAccessObject {
      * @return      True iff deletion was successful.
      */
     @Override
-    public boolean delete(String id) {
+    public boolean delete(int id) {
         File file = new File(usersPath + id + ".ser");
         return file.delete();
     }
