@@ -1,6 +1,6 @@
 package application;
 
-import application.conversationInteractors.ChangeConversationStatus;
+import application.conversation.ChangeConversationStatus;
 import entities.Conversation;
 import org.junit.Before;
 import org.junit.Test;

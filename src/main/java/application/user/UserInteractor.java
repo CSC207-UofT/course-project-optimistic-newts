@@ -1,4 +1,4 @@
-package application.userInteractors;
+package application.user;
 import application.InputBoundary;
 import entities.User;
 

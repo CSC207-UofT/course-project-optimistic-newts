@@ -1,13 +1,11 @@
 package application;
 
 import entities.Conversation;
-import entities.ConversationQueue;
 import entities.Message;
 import entities.User;
 
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Optional;
 
 public class DataBase {
 

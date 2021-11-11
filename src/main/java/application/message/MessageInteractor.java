@@ -1,4 +1,4 @@
-package application.messageInteractor;
+package application.message;
 import application.InputBoundary;
 import entities.Message;
 
